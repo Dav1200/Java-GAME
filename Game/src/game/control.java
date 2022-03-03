@@ -43,7 +43,7 @@ public class control implements KeyListener {
         }   else if(code == KeyEvent.VK_A)
             Dav.add(3);
         if(code== KeyEvent.VK_W){
-            player.jump(8);
+            player.jump(10);
         }
 
         if (Dav.contains(1) && Dav.contains(2)) {
@@ -59,6 +59,8 @@ public class control implements KeyListener {
 
         player.setLinearVelocity(new Vec2(0,0));
         int code = e.getKeyCode();
+
+
         if (code == KeyEvent.VK_D) {
             player.stopWalking();
            // player.setLinearVelocity(new Vec2(0, 0));

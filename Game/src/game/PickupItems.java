@@ -19,8 +19,5 @@ public class PickupItems extends DynamicBody {
         addImage(image);
     }
 
-    public void coin(){
-
-    }
 
 }

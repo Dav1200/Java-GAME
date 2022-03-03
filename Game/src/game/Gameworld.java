@@ -12,8 +12,6 @@ public class Gameworld extends World {
 
     private Player player;
     private platforms plat;
-    private Collision c;
-
 
     public Gameworld() {
         plat = new platforms(this);

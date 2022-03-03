@@ -29,6 +29,7 @@ public class Collision implements CollisionListener {
         }
         if(player.getScore() == 2){
             System.out.println("Won");
+
         }
 
     }

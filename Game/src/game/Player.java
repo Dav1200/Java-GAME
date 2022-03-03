@@ -12,7 +12,7 @@ public class Player extends Walker {
             1.37f, 0.62f,
             0.75f, 1.69f);
 
-    private static final BodyImage Playerimg = new BodyImage("PlayerImages/Stable.png",4f);
+    private static final BodyImage Playerimg = new BodyImage("PlayerImages/jungle.gif",6f);
     private int Lives;
     private int Score;
 
@@ -21,7 +21,7 @@ public class Player extends Walker {
         super(world,player);
         addImage(Playerimg);
         Lives = 3;
-        Score=0;
+        Score = 0;
 
     }
 
