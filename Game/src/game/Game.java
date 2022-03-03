@@ -13,9 +13,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 
-
 public class Game {
-
 
 
     public Game() {
@@ -25,17 +23,18 @@ public class Game {
 
 
         //2. view
-        Gameview view = new Gameview(world, 800, 600);
+        Gameview view = new Gameview(world, 800, 600, world.getPlayer());
 
 
         view.addMouseListener(new Mousecontroller(view));
         view.addKeyListener(new control(world.getPlayer()));
+        Collision pickup = new Collision(world.getPlayer(), world.getPlat(), this);
+        world.getPlayer().addCollisionListener(pickup);
 
 
-
-
-        final JFrame frame = new JFrame("City Game");
+        final JFrame frame = new JFrame("Dav Game");
         frame.add(view);
+
 
         // enable the frame to quit the application
         // when the x button is pressed

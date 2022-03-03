@@ -1,5 +1,7 @@
 package game;
 
+import org.jbox2d.common.Vec2;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.security.Key;
@@ -7,12 +9,12 @@ import java.util.ArrayList;
 
 public class control implements KeyListener {
 
-    private static final float speed =4;
+    private static final float speed = 4;
     private Player player;
     boolean one = false;
-   boolean two = false;
-    ArrayList<Integer>Dav = new ArrayList<>();
-    ArrayList<Integer>Dav2 = new ArrayList<>();
+    boolean two = false;
+    ArrayList<Integer> Dav = new ArrayList<>();
+
 
     public control(Player player) {
         this.player = player;
@@ -23,61 +25,55 @@ public class control implements KeyListener {
         int code = e.getKeyCode();
 
         if (code == KeyEvent.VK_D) {
-            System.out.println("hi");
+
+
             player.walk(speed);
-
-
         } else if (code == KeyEvent.VK_A) {
             player.walk(-speed);
 
-
         }
 
-
-        if(code == KeyEvent.VK_SHIFT){
+        if (code == KeyEvent.VK_SHIFT) {
             Dav.add(1);
 
-
         }
-         if(code == KeyEvent.VK_SPACE){
+        if (code == KeyEvent.VK_D) {
             Dav.add(2);
 
-
-
+        }   else if(code == KeyEvent.VK_A)
+            Dav.add(3);
+        if(code== KeyEvent.VK_W){
+            player.jump(8);
         }
 
-        if(Dav.contains(1)&&Dav.contains(2)){
-            player.jump(10);
-        }
-
-        else if(code == KeyEvent.VK_SPACE){
-            player.jump(4);
-        }
-
+        if (Dav.contains(1) && Dav.contains(2)) {
+            player.walk(speed*2);
+        } else if (Dav.contains(1) && Dav.contains(3)) {
+            player.walk(-speed*2);
 
         }
-
-
-
-
-
+    }
     @Override
     public void keyReleased(KeyEvent e) {
+        Dav.removeAll(Dav);
+
+        player.setLinearVelocity(new Vec2(0,0));
         int code = e.getKeyCode();
         if (code == KeyEvent.VK_D) {
             player.stopWalking();
+           // player.setLinearVelocity(new Vec2(0, 0));
 
         } else if (code == KeyEvent.VK_A) {
             player.stopWalking();
-        }
-        else if(code == KeyEvent.VK_SHIFT){
-            Dav.removeAll(Dav);
+           // player.setLinearVelocity(new Vec2(0, 0));
+        } else if (code == KeyEvent.VK_SHIFT) {
+            //Dav.removeAll(Dav);
+
+        } else if (code == KeyEvent.VK_SPACE) {
+            //Dav.removeAll(Dav);
 
         }
-        else if(code == KeyEvent.VK_SPACE){
-            Dav.removeAll(Dav);
-
-    }}
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {

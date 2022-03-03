@@ -11,20 +11,53 @@ public class platforms extends StaticBody {
 
     public platforms(World w) {
         super(w);
-        ground();
-
+        platforms(-17f,-14.7f);
+        multiplat(5);
+        DeathPlatform();
 
     }
-
 
     //ground
-    public void ground(){
-        StaticBody ground = new StaticBody(this.getWorld(),new BoxShape(3,0.3f));
-        ground.setPosition(new Vec2(-17f, -14.7f));
-        ground.setFillColor(Color.lightGray);
-        //ground.addImage(grounds);
+    public void platforms(Float x, Float y){
+        StaticBody ground = new StaticBody(this.getWorld(),new BoxShape(2,0.3f));
+        ground.setPosition(new Vec2(x, y));
+        ground.addImage(grounds);
+        ground.setAlwaysOutline(true);
+
+
+    }
+
+    public void multiplat(int t){
+        for(int i = 0; i<t;i++){
+            if(i == 4){
+                StaticBody ground = new StaticBody(this.getWorld(),new BoxShape(6,0.3f));
+                ground.setPosition(new Vec2(15, -0.7f));
+
+                ground.addImage(grounds).setOffset(new Vec2(-1,0));
+                ground.addImage(grounds).setOffset(new Vec2(-5,0));
+                ground.addImage(grounds).setOffset(new Vec2(3,0));
+
+            }
+            platforms(-17f+i*4.5f,-14.7f+i*3.5f);
+
+
+        }
+
+
+
+        }
+
+        public void DeathPlatform(){
+            StaticBody ground = new StaticBody(this.getWorld(),new BoxShape(25,0.3f));
+            ground.setPosition(new Vec2(0, -20f));
+
+        }
+        public void getplat(){
+
+        }
+
 
     }
 
 
-}
+
