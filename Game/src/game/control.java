@@ -52,6 +52,11 @@ public class control implements KeyListener {
             player.walk(-speed*2);
 
         }
+
+        if(code== KeyEvent.VK_SPACE){
+            player.shoot();
+        }
+
     }
     @Override
     public void keyReleased(KeyEvent e) {
