@@ -24,12 +24,14 @@ public class Game {
 
         //2. view
         Gameview view = new Gameview(world, 800, 600, world.getPlayer());
-
+        track t = new track(view,world.getPlayer());
 
         view.addMouseListener(new Mousecontroller(view));
-        view.addKeyListener(new control(world.getPlayer()));
-        Collision pickup = new Collision(world.getPlayer(), world.getPlat(), this);
+        view.addKeyListener(new control(world.getPlayer(),t));
+        Collision pickup = new Collision(world.getPlayer(), world.getPlat());
         world.getPlayer().addCollisionListener(pickup);
+
+        world.addStepListener(t);
 
 
         final JFrame frame = new JFrame("Dav Game");

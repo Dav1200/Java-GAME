@@ -6,23 +6,31 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.security.Key;
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class control implements KeyListener {
 
     private static final float speed = 4;
     private Player player;
+    private track t;
     boolean one = false;
     boolean two = false;
+
     ArrayList<Integer> Dav = new ArrayList<>();
 
 
-    public control(Player player) {
+
+    public control(Player player, track t) {
         this.player = player;
+        this.t = t;
+
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
+        //System.out.println(player.second);
 
         if (code == KeyEvent.VK_D) {
 
@@ -30,6 +38,7 @@ public class control implements KeyListener {
             player.walk(speed);
         } else if (code == KeyEvent.VK_A) {
             player.walk(-speed);
+
 
         }
 
@@ -54,25 +63,33 @@ public class control implements KeyListener {
         }
 
         if(code== KeyEvent.VK_SPACE){
+            if(t.bulletseconds == 60){
             player.shoot();
+            t.bulletseconds = 0;
+
+
+
+
         }
 
-    }
+    }}
     @Override
     public void keyReleased(KeyEvent e) {
         Dav.removeAll(Dav);
 
-        player.setLinearVelocity(new Vec2(0,0));
+        //player.setLinearVelocity(new Vec2(0,0));
         int code = e.getKeyCode();
 
 
         if (code == KeyEvent.VK_D) {
             player.stopWalking();
-           // player.setLinearVelocity(new Vec2(0, 0));
+
+            player.setLinearVelocity(new Vec2(0, 0));
 
         } else if (code == KeyEvent.VK_A) {
             player.stopWalking();
-           // player.setLinearVelocity(new Vec2(0, 0));
+
+            player.setLinearVelocity(new Vec2(0, 0));
         } else if (code == KeyEvent.VK_SHIFT) {
             //Dav.removeAll(Dav);
 

@@ -3,6 +3,8 @@ package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
+import java.util.Timer;
+
 public class Player extends Walker {
 
     private static final Shape player = new PolygonShape(
@@ -13,9 +15,13 @@ public class Player extends Walker {
             0.75f, 1.69f);
 
     private static final BodyImage Playerimg = new BodyImage("PlayerImages/stable.png", 4f);
+    private static final BodyImage bulletimgl = new BodyImage("PlayerImages/bulletl.png", 1f);
+    private static final BodyImage bulletimgr = new BodyImage("PlayerImages/bullets.png", 1f);
+    private static final BodyImage Playerimgl = new BodyImage("PlayerImages/stablel.png", 4f);
     private int Lives;
     private int Score;
     private String facing;
+
 
     //constructor
     public Player(World world) {
@@ -23,6 +29,8 @@ public class Player extends Walker {
         addImage(Playerimg);
         Lives = 3;
         Score = 0;
+        facing = "none";
+
 
     }
 
@@ -36,12 +44,18 @@ public class Player extends Walker {
 
     public void walk(float speed) {
         if (speed < 0) {
+            this.removeAllImages();
+            this.addImage(Playerimgl);
             facing = "left";
             this.startWalking(speed);
 
-        } else
+
+        } else {
+            this.removeAllImages();
+            this.addImage(Playerimg);
             facing = "right";
             this.startWalking(speed);
+        }
 
 
     }
@@ -49,16 +63,29 @@ public class Player extends Walker {
     public void shoot() {
 
         DynamicBody bullet = new DynamicBody(this.getWorld(), new CircleShape(0.2f));
+
+        //bullet.addImage(bulletimg);
         if (this.facing.equals("left")) {
+            bullet.removeAllImages();
+            bullet.addImage(bulletimgl);
             bullet.setPosition(new Vec2(this.getPosition().x - 0.5f, this.getPosition().y));
             bullet.setLinearVelocity(new Vec2(-20, 2));
-        } else{
+        } else {
+            bullet.removeAllImages();
+            bullet.addImage(bulletimgr);
             bullet.setPosition(new Vec2(this.getPosition().x + 0.5f, this.getPosition().y));
+
             bullet.setLinearVelocity(new Vec2(20, 2));
+
 
         }
 
 
+    }
+
+    public void reset() {
+
+        this.setPosition(new Vec2(-17, -6));
     }
 
     public int getScore() {

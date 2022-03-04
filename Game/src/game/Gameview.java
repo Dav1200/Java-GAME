@@ -11,9 +11,12 @@ public class Gameview extends UserView {
     private Image background;
     private Image Hearts;
     private Player player;
+    protected int sec = 0;
+
     public Gameview(World w, int width, int height,Player player) {
         super(w, width, height);
         this.player = player;
+
         background = new ImageIcon("Platformimg/background0.png").getImage();
         Hearts = new ImageIcon("Platformimg/ground.png").getImage();
     }
@@ -28,8 +31,10 @@ public class Gameview extends UserView {
         g.scale(2,2);
         g.drawString("Lives:"+ player.getLives(), 10,30);
         g.drawString("Score:"+ player.getScore(), 10,50);
+       // System.out.println(this.track.getSeconds());
+        g.drawString("Time:"+ sec,10,70);
+
 
     }
-
 
 }
