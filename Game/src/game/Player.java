@@ -21,16 +21,16 @@ public class Player extends Walker {
     private int Lives;
     private int Score;
     private String facing;
+    private AttachedImage playerimg;
 
 
     //constructor
     public Player(World world) {
         super(world, player);
-        addImage(Playerimg);
+         playerimg = addImage(Playerimg);
         Lives = 3;
         Score = 0;
-        facing = "none";
-
+        facing = "right";
 
     }
 
@@ -43,23 +43,22 @@ public class Player extends Walker {
     }
 
     public void walk(float speed) {
-        if (speed < 0) {
-            this.removeAllImages();
-            this.addImage(Playerimgl);
+        super.startWalking(speed);
+        if (speed < 0 && facing.equals("right")) {
+            playerimg.flipHorizontal();
+           // this.removeAllImages();
+           // this.addImage(Playerimgl);
             facing = "left";
-            this.startWalking(speed);
+            //this.startWalking(speed);
 
-
-        } else {
-            this.removeAllImages();
-            this.addImage(Playerimg);
+        } else if (speed > 0 && facing.equals("left")) {
+            playerimg.flipHorizontal();
+            // this.removeAllImages();
+            // this.addImage(Playerimgl);
             facing = "right";
-            this.startWalking(speed);
+           // this.startWalking(speed);
         }
-
-
     }
-
     public void shoot() {
 
         DynamicBody bullet = new DynamicBody(this.getWorld(), new CircleShape(0.2f));

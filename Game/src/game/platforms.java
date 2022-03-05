@@ -14,17 +14,13 @@ public class platforms extends StaticBody {
         platforms(-17f, -14.7f);
         multiplat(5);
         DeathPlatform();
-
     }
-
     //ground
     public void platforms(Float x, Float y) {
         StaticBody ground = new StaticBody(this.getWorld(), new BoxShape(2, 0.3f));
         ground.setPosition(new Vec2(x, y));
         ground.addImage(grounds);
         ground.setAlwaysOutline(true);
-
-
     }
 
     public void multiplat(int t) {

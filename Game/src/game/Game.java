@@ -16,6 +16,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class Game {
 
 
+
     public Game() {
 
         //make game world
@@ -24,18 +25,20 @@ public class Game {
 
         //2. view
         Gameview view = new Gameview(world, 800, 600, world.getPlayer());
-        track t = new track(view,world.getPlayer());
+        track t = new track(view,world.getPlayer(),world.getE());
+
 
         view.addMouseListener(new Mousecontroller(view));
         view.addKeyListener(new control(world.getPlayer(),t));
         Collision pickup = new Collision(world.getPlayer(), world.getPlat());
         world.getPlayer().addCollisionListener(pickup);
+        System.out.println(world.getPlayer().getScore());
 
         world.addStepListener(t);
 
-
         final JFrame frame = new JFrame("Dav Game");
         frame.add(view);
+
 
 
         // enable the frame to quit the application

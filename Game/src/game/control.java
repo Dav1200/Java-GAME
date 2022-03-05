@@ -18,12 +18,9 @@ public class control implements KeyListener {
 
     ArrayList<Integer> Dav = new ArrayList<>();
 
-
-
     public control(Player player, track t) {
         this.player = player;
         this.t = t;
-
 
     }
 
@@ -38,7 +35,6 @@ public class control implements KeyListener {
             player.walk(speed);
         } else if (code == KeyEvent.VK_A) {
             player.walk(-speed);
-
 
         }
 
@@ -67,9 +63,6 @@ public class control implements KeyListener {
             player.shoot();
             t.bulletseconds = 0;
 
-
-
-
         }
 
     }}
@@ -79,7 +72,6 @@ public class control implements KeyListener {
 
         //player.setLinearVelocity(new Vec2(0,0));
         int code = e.getKeyCode();
-
 
         if (code == KeyEvent.VK_D) {
             player.stopWalking();
@@ -91,6 +83,7 @@ public class control implements KeyListener {
 
             player.setLinearVelocity(new Vec2(0, 0));
         } else if (code == KeyEvent.VK_SHIFT) {
+
             //Dav.removeAll(Dav);
 
         } else if (code == KeyEvent.VK_SPACE) {
@@ -98,7 +91,6 @@ public class control implements KeyListener {
 
         }
     }
-
     @Override
     public void keyTyped(KeyEvent e) {
     }
