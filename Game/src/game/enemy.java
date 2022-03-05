@@ -5,9 +5,12 @@ import city.cs.engine.*;
 public class enemy extends Walker {
 
     private final static Shape enemy = new BoxShape(1,2);
+    protected float Smallenemylives =5;
+
 
     public enemy(World world) {
         super(world,enemy);
+
 
 
     }
@@ -21,4 +24,13 @@ public class enemy extends Walker {
         }
 
     }
+
+    public float getSmallenemylives() {
+        return Smallenemylives;
+    }
+
+    public void setSmallenemylives(float smallenemylives) {
+        this.Smallenemylives = smallenemylives;
+    }
+
 }

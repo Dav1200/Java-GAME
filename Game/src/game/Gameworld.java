@@ -18,14 +18,17 @@ public class Gameworld extends World {
 
     public Gameworld() {
         plat = new platforms(this);
-        player = new Player(this);
+
+
         e = new enemy(this);
+        player = new Player(this);
         e.setPosition(new Vec2(18.5f,0));
         player.setPosition(new Vec2(-17,2));
         PickupItems p = new PickupItems(this);
         p.setPosition(new Vec2(0,0));
         PickupItems p2 = new PickupItems(this);
-        p2.setPosition(new Vec2(5,5));
+        p2.setPosition(new Vec2(-5,0));
+
 
     }
 

@@ -9,6 +9,7 @@ import javax.swing.*;
 public class Collision implements CollisionListener {
     private Player player;
     private platforms plat;
+
     //private Game game;
 
     public Collision(Player player, platforms plat) {
@@ -16,6 +17,13 @@ public class Collision implements CollisionListener {
         this.plat = plat;
         //this.game = g;
     }
+
+    public Collision(Player player) {
+        this.player = player;
+
+    }
+
+
 
 
     @Override
@@ -30,6 +38,13 @@ public class Collision implements CollisionListener {
         if (collisionEvent.getOtherBody() instanceof PickupItems) {
             collisionEvent.getOtherBody().destroy();
             player.setScore(player.getScore() + 1);
+
+        }
+
+        if(collisionEvent.getOtherBody() instanceof  enemy){
+
+            player.setLives(player.getLives()-1);
+            player.setPosition(new Vec2(-17, -6));
         }
 
     }

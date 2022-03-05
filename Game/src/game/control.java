@@ -26,6 +26,10 @@ public class control implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+
+        if(player.getLives()>=1){
+
+
         int code = e.getKeyCode();
         //System.out.println(player.second);
 
@@ -65,7 +69,7 @@ public class control implements KeyListener {
 
         }
 
-    }}
+    }}}
     @Override
     public void keyReleased(KeyEvent e) {
         Dav.removeAll(Dav);

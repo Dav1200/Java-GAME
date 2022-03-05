@@ -1,30 +1,23 @@
 package game;
 
-import city.cs.engine.*;
-import city.cs.engine.Shape;
-import org.jbox2d.common.Vec2;
+import city.cs.engine.CollisionEvent;
+import city.cs.engine.StepEvent;
+import city.cs.engine.StepListener;
 
 import javax.swing.JFrame;
-
 import java.awt.*;
-import java.awt.event.MouseListener;
-import java.io.IOException;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class Game {
 
 
-
     public Game() {
-
-        //make game world
         Gameworld world = new Gameworld();
+        //make game world
 
 
         //2. view
-        Gameview view = new Gameview(world, 800, 600, world.getPlayer());
+        Gameview view = new Gameview(world, 800, 600, world.getPlayer(),world.getE());
         track t = new track(view,world.getPlayer(),world.getE());
 
 
@@ -32,7 +25,6 @@ public class Game {
         view.addKeyListener(new control(world.getPlayer(),t));
         Collision pickup = new Collision(world.getPlayer(), world.getPlat());
         world.getPlayer().addCollisionListener(pickup);
-        System.out.println(world.getPlayer().getScore());
 
         world.addStepListener(t);
 
@@ -51,15 +43,21 @@ public class Game {
         frame.pack();
         frame.setVisible(true);
 
-
+        System.out.println(world.getPlayer().getLives());
         world.start();
+
 
     }
 
+
     public static void main(String[] args) {
 
+        //menushow dav = new menushow();
 
         new Game();
+       // new Game().menu();
+
+
 
     }
 }
