@@ -11,16 +11,19 @@ import java.util.Timer;
 public class control implements KeyListener {
 
     private static final float speed = 4;
-    private Player player;
-    private track t;
+    protected Player player;
+    protected track t;
     boolean one = false;
     boolean two = false;
+    private enemy enemy;
 
     ArrayList<Integer> Dav = new ArrayList<>();
 
-    public control(Player player, track t) {
+    public control(Player player, track t,enemy enemy) {
         this.player = player;
         this.t = t;
+        this.enemy = enemy;
+
 
     }
 
@@ -52,21 +55,19 @@ public class control implements KeyListener {
         }   else if(code == KeyEvent.VK_A)
             Dav.add(3);
         if(code== KeyEvent.VK_W){
-            player.jump(10);
+            player.jump(16);
         }
 
         if (Dav.contains(1) && Dav.contains(2)) {
             player.walk(speed*2);
         } else if (Dav.contains(1) && Dav.contains(3)) {
             player.walk(-speed*2);
-
         }
-
         if(code== KeyEvent.VK_SPACE){
             if(t.bulletseconds == 60){
             player.shoot();
-            t.bulletseconds = 0;
 
+            t.bulletseconds = 0;
         }
 
     }}}

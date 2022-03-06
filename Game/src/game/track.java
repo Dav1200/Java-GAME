@@ -1,3 +1,4 @@
+
 package game;
 
 import city.cs.engine.*;
@@ -13,13 +14,14 @@ public class track implements StepListener {
     private Gameview view;
     private Player player;
     private enemy en;
-
-
     private int count;
     private int seconds = 0;
     protected int bulletseconds;
     protected float enemyX;
     protected float enemyY;
+    protected float pX;
+    protected float pY;
+    private int ecount;
 
     public track(Gameview view, Player player,enemy en) {
         this.player = player;
@@ -28,6 +30,7 @@ public class track implements StepListener {
         count = 0;
         seconds = 0;
         bulletseconds = 0;
+        ecount = 0;
     }
 
     public void preStep(StepEvent e) {
@@ -35,6 +38,7 @@ public class track implements StepListener {
 
     public void postStep(StepEvent e) {
         count++;
+        ecount++;
         //view.setCentre(player.getPosition());
         //view.setZoom(student.getBooks()+5);
         seconds = count / 60;
@@ -52,12 +56,25 @@ public class track implements StepListener {
         if (player.getPosition().y < -15) {
             player.reset();
         }
-
+        en.enemywalk(enemyX,enemyY);
         //Enemy Function to update position
         enemyX = en.getPosition().x;
         enemyY = en.getPosition().y;
-        en.enemywalk(enemyX,enemyY);
+        en.x = en.getPosition().x;
+        en.y = en.getPosition().y;
+        pX = player.getPosition().x;
+        pY = player.getPosition().y;
 
+        if(ecount == 90){
+            en.shootplayer(new Vec2(pX,pY));
+
+          ecount = 0;}
+
+        en.x = enemyX;
+        en.y = enemyY;
+
+    //
+//
     }
 
 }

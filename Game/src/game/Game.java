@@ -11,6 +11,7 @@ import java.awt.*;
 public class Game {
 
 
+
     public Game() {
         Gameworld world = new Gameworld();
         //make game world
@@ -22,13 +23,15 @@ public class Game {
 
 
         view.addMouseListener(new Mousecontroller(view));
-        view.addKeyListener(new control(world.getPlayer(),t));
+        view.addKeyListener(new control(world.getPlayer(),t,world.getE()));
+
         Collision pickup = new Collision(world.getPlayer(), world.getPlat());
         world.getPlayer().addCollisionListener(pickup);
 
         world.addStepListener(t);
-
+        world.addStepListener(view);
         final JFrame frame = new JFrame("Dav Game");
+        view.setGridResolution(1);
         frame.add(view);
 
 
@@ -41,9 +44,10 @@ public class Game {
         frame.setResizable(false);
 
         frame.pack();
+
         frame.setVisible(true);
 
-        System.out.println(world.getPlayer().getLives());
+
         world.start();
 
 

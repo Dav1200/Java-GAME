@@ -19,7 +19,7 @@ public class Player extends Walker {
     private static final BodyImage bulletimgr = new BodyImage("PlayerImages/bullets.png", 1f);
     private static final BodyImage Playerimgl = new BodyImage("PlayerImages/stablel.png", 4f);
 
-    private int Lives;
+    private float Lives;
     private int Score;
     private String facing;
     private AttachedImage playerimg;
@@ -27,22 +27,28 @@ public class Player extends Walker {
 
 
 
+
+
     //constructor
     public Player(World world) {
         super(world, player);
+
          playerimg = addImage(Playerimg);
         Lives = 3;
+
         Score = 0;
         facing = "right";
+        this.setGravityScale(2);
+
 
 
     }
 
-    public int getLives() {
+    public float getLives() {
         return Lives;
     }
 
-    public void setLives(int Lives) {
+    public void setLives(float Lives) {
         this.Lives = Lives;
     }
 
@@ -62,12 +68,15 @@ public class Player extends Walker {
             facing = "right";
            // this.startWalking(speed);
         }
+
     }
     public void shoot() {
 
         DynamicBody bullet = new DynamicBody(this.getWorld(), new CircleShape(0.2f));
         BulletCollision pickups = new BulletCollision(this);
         bullet.addCollisionListener(pickups);
+       // bullet.setGravityScale(0);
+
 
 
         //bullet.addImage(bulletimg);
@@ -86,8 +95,6 @@ public class Player extends Walker {
 
 
         }
-
-
     }
 
     public void reset() {

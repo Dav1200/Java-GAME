@@ -20,11 +20,7 @@ public class Collision implements CollisionListener {
 
     public Collision(Player player) {
         this.player = player;
-
     }
-
-
-
 
     @Override
     public void collide(CollisionEvent collisionEvent) {
@@ -47,9 +43,16 @@ public class Collision implements CollisionListener {
             player.setPosition(new Vec2(-17, -6));
         }
 
+        }
+
+
+
+
+
+
     }
 
     ;
-}
+
 
 

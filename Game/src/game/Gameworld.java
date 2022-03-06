@@ -13,22 +13,24 @@ public class Gameworld extends World {
     private Player player;
     private platforms plat;
     private enemy e;
-
+    //protected enemy ee;
+    private track t;
+    private PlatformCollision platcollision;
 
 
     public Gameworld() {
         plat = new platforms(this);
 
 
-        e = new enemy(this);
+        e = new enemy(this,plat);
         player = new Player(this);
         e.setPosition(new Vec2(18.5f,0));
         player.setPosition(new Vec2(-17,2));
+
         PickupItems p = new PickupItems(this);
         p.setPosition(new Vec2(0,0));
         PickupItems p2 = new PickupItems(this);
         p2.setPosition(new Vec2(-5,0));
-
 
     }
 
@@ -40,6 +42,7 @@ public class Gameworld extends World {
 
     public enemy getE() {
         return e;
+
     }
 
     public void setE(enemy e) {

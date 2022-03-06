@@ -13,6 +13,7 @@ public class platforms extends StaticBody {
         super(w);
         platforms(-17f, -14.7f);
         multiplat(5);
+        platforms(47f,10f);
         DeathPlatform();
     }
     //ground
@@ -35,6 +36,8 @@ public class platforms extends StaticBody {
             }
             platforms(-17f + i * 4.5f, -14.7f + i * 3.5f);
         }
+
+
 
     }
 
