@@ -60,10 +60,12 @@ public class track implements StepListener {
         //Enemy Function to update position
         enemyX = en.getPosition().x;
         enemyY = en.getPosition().y;
+
         en.x = en.getPosition().x;
         en.y = en.getPosition().y;
         pX = player.getPosition().x;
         pY = player.getPosition().y;
+
 
         if(ecount == 90){
             en.shootplayer(new Vec2(pX,pY));

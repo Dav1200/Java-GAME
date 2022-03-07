@@ -28,7 +28,7 @@ public class Gameworld extends World {
         player.setPosition(new Vec2(-17,2));
 
         PickupItems p = new PickupItems(this);
-        p.setPosition(new Vec2(0,0));
+        p.setPosition(new Vec2(0,2));
         PickupItems p2 = new PickupItems(this);
         p2.setPosition(new Vec2(-5,0));
 

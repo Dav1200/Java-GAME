@@ -2,12 +2,13 @@ package game;
 
 
 import city.cs.engine.*;
+import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
-public class PickupItems extends DynamicBody {
+public class PickupItems extends StaticBody {
 
     private static final Shape booksShape = new CircleShape(1);
 
@@ -16,6 +17,10 @@ public class PickupItems extends DynamicBody {
 
     public  PickupItems(World w) {
         super(w,booksShape);
+        //setGravityScale(0);
+        //this.applyForce(new Vec2(1,1));
+       // setLinearVelocity(new Vec2(0,0));
+
         addImage(image);
     }
 

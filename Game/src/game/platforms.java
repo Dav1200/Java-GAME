@@ -15,10 +15,18 @@ public class platforms extends StaticBody {
         multiplat(5);
         platforms(47f,10f);
         DeathPlatform();
+        platformss(47f,-10f);
     }
     //ground
     public void platforms(Float x, Float y) {
         StaticBody ground = new StaticBody(this.getWorld(), new BoxShape(2, 0.3f));
+        ground.setPosition(new Vec2(x, y));
+        ground.addImage(grounds);
+        ground.setAlwaysOutline(true);
+    }
+
+    public void platformss(Float x, Float y) {
+        StaticBody ground = new StaticBody(this.getWorld(), new BoxShape(15, 0.5f));
         ground.setPosition(new Vec2(x, y));
         ground.addImage(grounds);
         ground.setAlwaysOutline(true);

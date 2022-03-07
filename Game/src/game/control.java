@@ -29,7 +29,7 @@ public class control implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+//player only able to move if conditions met.
         if(player.getLives()>=1){
 
 
@@ -55,7 +55,7 @@ public class control implements KeyListener {
         }   else if(code == KeyEvent.VK_A)
             Dav.add(3);
         if(code== KeyEvent.VK_W){
-            player.jump(16);
+            player.jump(14);
         }
 
         if (Dav.contains(1) && Dav.contains(2)) {
@@ -81,18 +81,21 @@ public class control implements KeyListener {
         if (code == KeyEvent.VK_D) {
             player.stopWalking();
 
-            player.setLinearVelocity(new Vec2(0, 0));
+            //player.setLinearVelocity(new Vec2(0, 0));
 
         } else if (code == KeyEvent.VK_A) {
             player.stopWalking();
 
-            player.setLinearVelocity(new Vec2(0, 0));
+            //player.setLinearVelocity(new Vec2(0, 0));
         } else if (code == KeyEvent.VK_SHIFT) {
 
             //Dav.removeAll(Dav);
 
-        } else if (code == KeyEvent.VK_SPACE) {
-            //Dav.removeAll(Dav);
+        } if (code == KeyEvent.VK_SPACE) {
+            //player.setGravityScale(3);
+
+            //use for double jump
+           // player.setLinearVelocity(new Vec2(0,10));
 
         }
     }
