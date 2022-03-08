@@ -5,7 +5,7 @@ import org.jbox2d.common.Vec2;
 
 import java.util.Timer;
 
-public class Player extends Walker {
+public class Player extends Walker implements StepListener {
 
     private static final Shape player = new PolygonShape(
             -0.57f, 0.63f,
@@ -30,12 +30,12 @@ public class Player extends Walker {
 
 
     //constructor
-    public Player(World world) {
+    public Player(World world,enemy en) {
         super(world, player);
-
+        this.en = en;
          playerimg = addImage(Playerimg);
         Lives = 3;
-
+    setGravityScale(5);
         Score = 0;
         facing = "right";
         this.setGravityScale(2);
@@ -98,9 +98,14 @@ public class Player extends Walker {
     }
 
     public void reset() {
-
+        if(en.stage == 1){
         this.setPosition(new Vec2(-17, -6));
     }
+        if(en.stage == 2){
+            this.setPosition(new Vec2(47,10));
+        }
+    }
+
 
     public int getScore() {
         return Score;
@@ -108,5 +113,20 @@ public class Player extends Walker {
 
     public void setScore(int score) {
         Score = score;
+    }
+
+    @Override
+    public void preStep(StepEvent stepEvent) {
+
+
+    }
+
+    @Override
+    public void postStep(StepEvent stepEvent) {
+       // System.out.println(en.stage);
+        if (this.getPosition().y < -15) {
+            this.reset();
+        }
+
     }
 }

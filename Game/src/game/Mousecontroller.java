@@ -31,6 +31,7 @@ public class Mousecontroller implements MouseListener {
     public void mouseEntered(MouseEvent e) {
         view.requestFocus();
 
+
     }
 
     @Override

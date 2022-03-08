@@ -53,9 +53,7 @@ public class track implements StepListener {
         // System.out.println(bulletseconds);
         // System.out.println(bulletseconds/60);
         //System.out.println(player.getPosition());
-        if (player.getPosition().y < -15) {
-            player.reset();
-        }
+
         en.enemywalk(enemyX,enemyY);
         //Enemy Function to update position
         enemyX = en.getPosition().x;

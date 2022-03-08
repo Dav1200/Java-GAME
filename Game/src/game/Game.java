@@ -31,6 +31,7 @@ public class Game {
         world.addStepListener(t);
         world.addStepListener(view);
         world.addStepListener(world.getE());
+        world.addStepListener(world.getPlayer());
 
         final JFrame frame = new JFrame("Dav Game");
         view.setGridResolution(1);

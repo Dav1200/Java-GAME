@@ -23,7 +23,7 @@ public class Gameworld extends World {
 
 
         e = new enemy(this,plat);
-        player = new Player(this);
+        player = new Player(this,e);
         e.setPosition(new Vec2(18.5f,0));
         player.setPosition(new Vec2(-17,2));
 

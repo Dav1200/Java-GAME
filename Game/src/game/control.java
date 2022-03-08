@@ -30,6 +30,7 @@ public class control implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 //player only able to move if conditions met.
+        player.setGravityScale(5);
         if(player.getLives()>=1){
 
 
@@ -55,7 +56,7 @@ public class control implements KeyListener {
         }   else if(code == KeyEvent.VK_A)
             Dav.add(3);
         if(code== KeyEvent.VK_W){
-            player.jump(14);
+            player.jump(20);
         }
 
         if (Dav.contains(1) && Dav.contains(2)) {

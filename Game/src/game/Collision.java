@@ -40,7 +40,11 @@ public class Collision implements CollisionListener {
         if(collisionEvent.getOtherBody() instanceof  enemy){
 
             player.setLives(player.getLives()-1);
-            player.setPosition(new Vec2(-17, -6));
+            if(((enemy) collisionEvent.getOtherBody()).stage== 1){
+            player.setPosition(new Vec2(-17, -6));}
+            if(((enemy) collisionEvent.getOtherBody()).stage == 2){
+                player.setPosition(new Vec2(47,10));
+            }
         }
 
         }
