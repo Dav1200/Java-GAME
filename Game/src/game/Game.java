@@ -3,6 +3,7 @@ package game;
 import city.cs.engine.CollisionEvent;
 import city.cs.engine.StepEvent;
 import city.cs.engine.StepListener;
+import city.cs.engine.World;
 
 import javax.swing.JFrame;
 import java.awt.*;
@@ -19,23 +20,32 @@ public class Game {
 
         //2. view
         Gameview view = new Gameview(world, 800, 600, world.getPlayer(),world.getE());
+
         track t = new track(view,world.getPlayer(),world.getE());
 
 
-        view.addMouseListener(new Mousecontroller(view));
+
+        Mousecontroller dav = new Mousecontroller(view);
+        view.addMouseListener(dav);
+
         view.addKeyListener(new control(world.getPlayer(),t,world.getE()));
 
         Collision pickup = new Collision(world.getPlayer(), world.getPlat());
         world.getPlayer().addCollisionListener(pickup);
+
+        //
+        //world.getPlayer().addCollisionListener(dav);
 
         world.addStepListener(t);
         world.addStepListener(view);
         world.addStepListener(world.getE());
         world.addStepListener(world.getPlayer());
 
+
         final JFrame frame = new JFrame("Dav Game");
-        view.setGridResolution(1);
+        //view.setGridResolution(1);
         frame.add(view);
+
 
 
 

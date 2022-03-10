@@ -6,6 +6,9 @@ import org.jbox2d.common.Vec2;
 public class enemy extends Walker implements StepListener {
 
     private final static Shape enemy = new BoxShape(1, 2);
+    private static final BodyImage enemyimg= new BodyImage("enemy/idle2.png", 5f);
+    private static final BodyImage bullets = new BodyImage("enemy/Bullet.png", 1f);
+
     //private final static Shape enemyy = new BoxShape(1,2);
     // private final static Shape enemyy = new BoxShape(1,2);
     protected int Smallenemylives = 5;
@@ -13,7 +16,7 @@ public class enemy extends Walker implements StepListener {
     protected float y;
     private int counter;
     //protected DynamicBody bullet;
-    private platforms plat;
+    protected platforms plat;
     protected int stage;
     protected boolean move;
 
@@ -29,6 +32,10 @@ public class enemy extends Walker implements StepListener {
     private int respawn;
 
 
+    public platforms getPlat() {
+        return plat;
+    }
+
     public enemy(World world, platforms plat) {
         super(world, enemy);
 
@@ -36,6 +43,8 @@ public class enemy extends Walker implements StepListener {
         respawn = 2;
         stage = 1;
         move = false;
+        addImage(enemyimg);
+
 
     }
 
@@ -53,13 +62,13 @@ if(stage ==2){
 
     if(move == false){
     setRespawn(2);
-    setPosition(new Vec2(47,-8));
+    setPosition(new Vec2(60,5));
 
     System.out.println(getPosition());}
     move = true;
-    if (x < 42) {
+    if (x < 51) {
         this.startWalking(3);
-    } else if (x > 52) {
+    } else if (x > 68) {
         this.startWalking(-3);
     }
 
@@ -83,6 +92,7 @@ if(stage ==2){
     public void shootplayer(Vec2 t) {
         //when bullet hits player.
         DynamicBody bullet = new DynamicBody(this.getWorld(), new CircleShape(0.2f));
+        bullet.addImage(bullets);
         EnemyhitCollision pickups = new EnemyhitCollision(this);
 
 

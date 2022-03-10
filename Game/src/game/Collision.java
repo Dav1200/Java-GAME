@@ -33,9 +33,10 @@ public class Collision implements CollisionListener {
         */
         if (collisionEvent.getOtherBody() instanceof PickupItems) {
             collisionEvent.getOtherBody().destroy();
-            player.setScore(player.getScore() + 1);
+            player.doublegun = true;
 
         }
+
 
         if(collisionEvent.getOtherBody() instanceof  enemy){
 

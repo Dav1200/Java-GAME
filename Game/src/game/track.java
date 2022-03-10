@@ -23,6 +23,7 @@ public class track implements StepListener {
     protected float pY;
     private int ecount;
 
+
     public track(Gameview view, Player player,enemy en) {
         this.player = player;
         this.view = view;
@@ -31,6 +32,7 @@ public class track implements StepListener {
         seconds = 0;
         bulletseconds = 0;
         ecount = 0;
+
     }
 
     public void preStep(StepEvent e) {
@@ -44,9 +46,12 @@ public class track implements StepListener {
         seconds = count / 60;
 
         //Bullet timing so the bullet isnt shot repeatedly
+
         bulletseconds++;
         view.sec = seconds;
         //bullet track
+
+
         if (bulletseconds >= 60) {
             bulletseconds = 60;
         }

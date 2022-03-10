@@ -13,7 +13,7 @@ public class PickupItems extends StaticBody {
     private static final Shape booksShape = new CircleShape(1);
 
     private static final BodyImage image =
-            new BodyImage("item/coiin.png", 2f);
+            new BodyImage("item/icon1.png", 2.5f);
 
     public  PickupItems(World w) {
         super(w,booksShape);

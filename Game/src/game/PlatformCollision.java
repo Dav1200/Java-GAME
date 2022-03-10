@@ -25,8 +25,10 @@ public class PlatformCollision implements CollisionListener {
 
     @Override
     public void collide(CollisionEvent collisionEvent) {
+
         //System.out.println("hi");
         collisionEvent.getReportingBody().setPosition(new Vec2(1000,1000));
+
 
 
 

@@ -7,15 +7,19 @@ import java.awt.*;
 
 public class platforms extends StaticBody {
 
-    private static final BodyImage grounds = new BodyImage("Platformimg/ground.png", 1);
+    private static final BodyImage grounds = new BodyImage("Platformimg/woodtile.png", 1);
+
 
     public platforms(World w) {
         super(w);
         platforms(-17f, -14.7f);
         multiplat(5);
-        platforms(47f,10f);
+        //platforms(47f,10f);
         DeathPlatform();
-        platformss(47f,-10f);
+        //Stage 2 platforms
+       // platformss(47f,-10f);
+        stage2platforms(10,40,-14.7f);
+        stage2platforms(10,60,0);
     }
     //ground
     public void platforms(Float x, Float y) {
@@ -53,6 +57,10 @@ public class platforms extends StaticBody {
         StaticBody ground = new StaticBody(this.getWorld(), new BoxShape(25, 0.3f));
         ground.setPosition(new Vec2(0, -20f));
 
+    }
+    public void stage2platforms(float width,float x,float y){
+        StaticBody stage2platform = new StaticBody(this.getWorld(),new BoxShape(width,0.3f));
+        stage2platform.setPosition(new Vec2(x,y));
     }
 
 
