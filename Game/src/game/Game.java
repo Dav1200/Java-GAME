@@ -23,7 +23,7 @@ public class Game {
 
         track t = new track(view,world.getPlayer(),world.getE());
 
-
+        //RegeneratePlayercollision c = new RegeneratePlayercollision(world.getPlayer());
 
         Mousecontroller dav = new Mousecontroller(view);
         view.addMouseListener(dav);
@@ -40,6 +40,7 @@ public class Game {
         world.addStepListener(view);
         world.addStepListener(world.getE());
         world.addStepListener(world.getPlayer());
+
 
 
         final JFrame frame = new JFrame("Dav Game");
@@ -62,6 +63,7 @@ public class Game {
 
 
         world.start();
+
 
 
     }

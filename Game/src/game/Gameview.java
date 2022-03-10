@@ -24,6 +24,7 @@ public class Gameview extends UserView implements StepListener {
     private int tick;
     private Point2D.Float points;
     private String face;
+
     public Gameview(World w, int width, int height, Player player, enemy e) {
         super(w, width, height);
         this.player = player;
@@ -51,7 +52,8 @@ public class Gameview extends UserView implements StepListener {
         tick = e.getSmallenemylives() + 7;
 //
         g.drawImage(emptyh, px - 70, pycoverted - 50, 100, 20, this);
-        g.drawImage(fullh, px - 70, pycoverted - 50, 100, 20, this);
+        g.drawImage(fullh, px - 70, pycoverted - 50, player.getLivess(), 20, this);
+
 
         // g.scale(0.2f,0.2f);
         //g.drawImage(Hearts,0,10,this);
@@ -86,12 +88,13 @@ public class Gameview extends UserView implements StepListener {
 
         //System.out.println(Math.round(pxcoverted.x));
         //System.out.println(pxcoverted);
-        if(face.equals("left")){
-            px +=35;
+        if (face.equals("left")) {
+            px += 35;
         }
 
+}
 
-    }
+
 
     @Override
     public void postStep(StepEvent stepEvent) {
@@ -99,8 +102,6 @@ public class Gameview extends UserView implements StepListener {
             setView(new Vec2(60, 0), this.getZoom());
             player.setPosition(new Vec2(48, 13));
             set = true;
-
-
 
 
         }

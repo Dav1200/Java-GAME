@@ -16,8 +16,7 @@ public class Gameworld extends World {
 
     public Gameworld() {
         plat = new platforms(this);
-        a = new RegeneratePlat(this,2,47f,10f);
-        a.setName("Regen");
+
 
 
 
@@ -25,7 +24,8 @@ public class Gameworld extends World {
         player = new Player(this,e);
         e.setPosition(new Vec2(18.5f,0));
         player.setPosition(new Vec2(-17,2));
-
+        a = new RegeneratePlat(this,2,47f,10f,player);
+        a.setName("Regen");
 
         PickupItems p = new PickupItems(this);
         p.setPosition(new Vec2(0,2));

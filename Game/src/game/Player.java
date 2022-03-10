@@ -15,7 +15,13 @@ public class Player extends Walker implements StepListener {
     private static final BodyImage bulletimgr = new BodyImage("PlayerImages/shot.png", 0.5f);
     private static final BodyImage Playerimgl = new BodyImage("PlayerImages/stablel.png", 4f);
 
-    private float Lives;
+    private int Lives;
+
+    public int getLivess() {
+        return Lives*10;
+    }
+
+    private int Livess;
     private int Score;
 
     public String getFacing() {
@@ -35,6 +41,10 @@ public class Player extends Walker implements StepListener {
 
 
 
+    private int Lives2;
+
+
+
     //constructor
     public Player(World world,enemy en) {
         super(world, player);
@@ -42,7 +52,7 @@ public class Player extends Walker implements StepListener {
         this.en = en;
          playerimg = addImage(Playerimg);
 
-        Lives = 3;
+        Lives = 10;
          setGravityScale(5);
         Score = 0;
         facing = "right";
@@ -55,11 +65,11 @@ public class Player extends Walker implements StepListener {
 
     }
 
-    public float getLives() {
+    public int getLives() {
         return Lives;
     }
 
-    public void setLives(float Lives) {
+    public void setLives(int Lives) {
         this.Lives = Lives;
     }
 
@@ -166,12 +176,12 @@ public class Player extends Walker implements StepListener {
 
     public void reset() {
         if(en.stage == 1){
-            this.setLives(this.getLives()-0.5f);
+            this.setLives(this.getLives()-1);
         this.setPosition(new Vec2(-17, -6));
     }
         if(en.stage == 2){
             this.setPosition(new Vec2(47,10));
-            this.setLives(this.getLives()-0.5f);
+            this.setLives(this.getLives()-1);
         }
     }
 
@@ -187,6 +197,10 @@ public class Player extends Walker implements StepListener {
     @Override
     public void preStep(StepEvent stepEvent) {
         timer++;
+        if(getLives() < 0){
+            setLives(0);
+
+        }
 
 
     }
@@ -202,12 +216,11 @@ public class Player extends Walker implements StepListener {
 
             timer = 120;
         }
+       // System.out.println(world.isRunning());
 
-        if(getLives() < 0){
+        if(getLives() == 0){
             world.stop();
         }
-
-
 
         //System.out.println(timer);
     }

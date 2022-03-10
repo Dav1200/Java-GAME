@@ -27,7 +27,7 @@ public class EnemyhitCollision implements CollisionListener {
     @Override
     public void collide(CollisionEvent collisionEvent) {
         if (collisionEvent.getOtherBody() instanceof Player) {
-            ((Player) collisionEvent.getOtherBody()).setLives(((Player) collisionEvent.getOtherBody()).getLives()-0.1f);
+            ((Player) collisionEvent.getOtherBody()).setLives(((Player) collisionEvent.getOtherBody()).getLives()-1);
             collisionEvent.getReportingBody().setPosition(new Vec2(1000,1000));
 
         }
