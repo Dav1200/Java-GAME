@@ -28,8 +28,8 @@ public class track implements StepListener {
         this.player = player;
         this.view = view;
         this.en = en;
-        count = 0;
-        seconds = 0;
+        count = 1;
+        seconds = 1;
         bulletseconds = 0;
         ecount = 0;
 
@@ -44,7 +44,7 @@ public class track implements StepListener {
         //view.setCentre(player.getPosition());
         //view.setZoom(student.getBooks()+5);
         seconds = count / 60;
-
+       // System.out.println(coun/seconds);
         //Bullet timing so the bullet isnt shot repeatedly
 
         bulletseconds++;

@@ -34,7 +34,7 @@ public class Gameworld extends World {
 
 
         player.getBackpack().additem(new Doublegun(getPlayer()));
-       // player.getBackpack().additem(new Doublegun());
+       player.getBackpack().additem(new Doublejump(getPlayer()));
 
     }
 

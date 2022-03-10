@@ -13,7 +13,7 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
     private int use;
     private int healsteps;
 
-    public RegeneratePlayercollision(Player p,RegeneratePlat regen) {
+    public RegeneratePlayercollision(Player p, RegeneratePlat regen) {
         this.regen = regen;
         this.p = p;
         onplatform = false;
@@ -30,10 +30,10 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
 
     @Override
     public void collide(CollisionEvent collisionEvent) {
-        if(use >=1) {
+        if (use >= 1) {
             if (collisionEvent.getOtherBody() instanceof Player) {
                 onplatform = true;
-                use --;
+                use--;
 
             }
         }
@@ -42,22 +42,23 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
     @Override
     public void preStep(StepEvent stepEvent) {
 
-        if(regen.player.getPosition().y > 8){
-        if(regen.player.getLives()< 10) {
-            if (onplatform) {
-                count++;
-                if (count % 120 == 0 && healsteps != 0) {
-                    regen.player.setLives(regen.player.getLives() + 1);
-                    count =0;
-                    healsteps --;
-                }
+        if (regen.player.getPosition().y > 8) {
+            if (regen.player.getLives() < 10) {
+                if (onplatform) {
+                    count++;
+                    if (count % 120 == 0 && healsteps != 0) {
+                        regen.player.setLives(regen.player.getLives() + 1);
+                        count = 0;
+                        healsteps--;
+                    }
                  /*if (count == 203 ) {
                     onplatform = false;
                     if(count == )
 
                 }*/
+                }
             }
-        }}
+        }
 
 
     }

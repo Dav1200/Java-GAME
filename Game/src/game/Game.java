@@ -27,8 +27,8 @@ public class Game {
 
         Mousecontroller dav = new Mousecontroller(view);
         view.addMouseListener(dav);
-
-        view.addKeyListener(new control(world.getPlayer(),t,world.getE()));
+        control move = new control(world.getPlayer(),t,world.getE());
+        view.addKeyListener(move);
 
         Collision pickup = new Collision(world.getPlayer(), world.getPlat());
         world.getPlayer().addCollisionListener(pickup);
@@ -40,7 +40,7 @@ public class Game {
         world.addStepListener(view);
         world.addStepListener(world.getE());
         world.addStepListener(world.getPlayer());
-
+        world.addStepListener(move);
 
 
         final JFrame frame = new JFrame("Dav Game");

@@ -1,5 +1,7 @@
 package game;
 
+import city.cs.engine.StepEvent;
+import city.cs.engine.StepListener;
 import org.jbox2d.common.Vec2;
 
 import java.awt.event.KeyEvent;
@@ -8,7 +10,7 @@ import java.security.Key;
 import java.util.ArrayList;
 import java.util.Timer;
 
-public class control implements KeyListener {
+public class control implements KeyListener, StepListener {
 
     private static final float speed = 4;
     protected Player player;
@@ -16,13 +18,17 @@ public class control implements KeyListener {
     boolean one = false;
     boolean two = false;
     private enemy enemy;
+    protected int jumpcount;
+    private  boolean active;
 
     ArrayList<Integer> Dav = new ArrayList<>();
+    ArrayList<Integer>Dav2 = new ArrayList<>();
 
     public control(Player player, track t, enemy enemy) {
         this.player = player;
         this.t = t;
         this.enemy = enemy;
+        active = false;
 
 
     }
@@ -38,10 +44,11 @@ public class control implements KeyListener {
             //System.out.println(player.second);
 
             if (code == KeyEvent.VK_D) {
-
+                jumpcount = 0;
 
                 player.walk(speed);
             } else if (code == KeyEvent.VK_A) {
+                jumpcount = 0;
                 player.walk(-speed);
 
             }
@@ -53,10 +60,23 @@ public class control implements KeyListener {
             if (code == KeyEvent.VK_D) {
                 Dav.add(2);
 
+
             } else if (code == KeyEvent.VK_A)
                 Dav.add(3);
+
+
             if (code == KeyEvent.VK_W) {
                 player.jump(20);
+                active = true;
+                if(jumpcount >10 ){
+                    player.setLinearVelocity(new Vec2(0,20));
+
+
+                }
+jumpcount = 0;
+
+                //player.getBackpack().getitem().function();
+
             }
 
             if (Dav.contains(1) && Dav.contains(2)) {
@@ -67,6 +87,8 @@ public class control implements KeyListener {
             if (code == KeyEvent.VK_SPACE) {
                 if (t.bulletseconds == 60) {
                     player.shoot();
+                   // player.setLinearVelocity(new Vec2(0,20));
+
 
                     t.bulletseconds = 0;
                 }
@@ -90,14 +112,18 @@ public class control implements KeyListener {
 
         if (code == KeyEvent.VK_D) {
             player.stopWalking();
+            jumpcount=0;
 
             //player.setLinearVelocity(new Vec2(0, 0));
 
         } else if (code == KeyEvent.VK_A) {
             player.stopWalking();
+            jumpcount = 0;
 
             //player.setLinearVelocity(new Vec2(0, 0));
-        } else if (code == KeyEvent.VK_SHIFT) {
+        } else if (code == KeyEvent.VK_W) {
+            active  =false;
+            jumpcount =0;
 
             //Dav.removeAll(Dav);
 
@@ -106,7 +132,7 @@ public class control implements KeyListener {
             //player.setGravityScale(3);
 
             //use for double jump
-            // player.setLinearVelocity(new Vec2(0,10));
+            // ;
 
         }
     }
@@ -115,4 +141,22 @@ public class control implements KeyListener {
     public void keyTyped(KeyEvent e) {
     }
 
+    @Override
+    public void preStep(StepEvent stepEvent) {
+
+
+
+        System.out.println(jumpcount);
+        if(active){
+            jumpcount++;
+        if(jumpcount >20){
+            jumpcount=20;
+
+        }
+    }}
+
+    @Override
+    public void postStep(StepEvent stepEvent) {
+
+    }
 }

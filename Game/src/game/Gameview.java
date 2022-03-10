@@ -25,10 +25,12 @@ public class Gameview extends UserView implements StepListener {
     private Point2D.Float points;
     private String face;
 
+
     public Gameview(World w, int width, int height, Player player, enemy e) {
         super(w, width, height);
         this.player = player;
         this.e = e;
+
         set = false;
 
 
@@ -42,8 +44,9 @@ public class Gameview extends UserView implements StepListener {
 
     @Override
     protected void paintBackground(Graphics2D g) {
-
         g.drawImage(background, 0, 0, this);
+
+
 
     }
 

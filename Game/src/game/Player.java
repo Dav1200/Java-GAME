@@ -38,9 +38,7 @@ public class Player extends Walker implements StepListener {
     protected int bulletcount;
     private int delay;
     private World world;
-
-
-
+    protected int jumpcount;
     private int Lives2;
 
 
@@ -62,6 +60,7 @@ public class Player extends Walker implements StepListener {
         bulletcount = 2;
         delay =0;
         doublegun =false;
+        jumpcount =0;
 
     }
 
@@ -77,6 +76,7 @@ public class Player extends Walker implements StepListener {
         super.startWalking(speed);
         if (speed < 0 && facing.equals("right")) {
             playerimg.flipHorizontal();
+
            // this.removeAllImages();
            // this.addImage(Playerimgl);
             facing = "left";
@@ -180,7 +180,7 @@ public class Player extends Walker implements StepListener {
         this.setPosition(new Vec2(-17, -6));
     }
         if(en.stage == 2){
-            this.setPosition(new Vec2(47,10));
+            this.setPosition(new Vec2(47,13));
             this.setLives(this.getLives()-1);
         }
     }
@@ -197,6 +197,7 @@ public class Player extends Walker implements StepListener {
     @Override
     public void preStep(StepEvent stepEvent) {
         timer++;
+        jumpcount ++;
         if(getLives() < 0){
             setLives(0);
 
