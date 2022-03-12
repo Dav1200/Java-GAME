@@ -10,14 +10,12 @@ public class Doublejump extends BackpackItem{
 
     @Override
     public String getType() {
-        return "DoubleJump Active";
+        return "Single Shot";
     }
 
     @Override
     public void function() {
-        /*if(player.jumpcount > 60) {
-            player.setLinearVelocity(new Vec2(0, 20));
-            player.jumpcount =0;
-        }*/
+        System.out.println("hi");
+        }
     }
-}
+

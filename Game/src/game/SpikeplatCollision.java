@@ -6,8 +6,8 @@ import city.cs.engine.StepEvent;
 import city.cs.engine.StepListener;
 import org.jbox2d.common.Vec2;
 
-public class RegeneratePlayercollision implements CollisionListener, StepListener {
-    private RegeneratePlat regen;
+public class SpikeplatCollision implements CollisionListener, StepListener {
+    private Spikeplat spike;
     private Player p;
     private boolean onplatform;
     private int count;
@@ -16,8 +16,8 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
 
 
     private int teleport;;
-    public RegeneratePlayercollision(Player p, RegeneratePlat regen) {
-        this.regen = regen;
+    public SpikeplatCollision(Player p, Spikeplat spike) {
+        this.spike = spike;
         this.p = p;
         onplatform = false;
         use = 1;
@@ -28,7 +28,7 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
 
     }
 
-    public RegeneratePlayercollision() {
+    public SpikeplatCollision() {
         onplatform = false;
 
     }
@@ -38,7 +38,7 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
         if (use >= 1) {
             if (collisionEvent.getOtherBody() instanceof Player) {
                 onplatform = true;
-                regen.player.moves = false;
+                //spike.player.moves = false;
                 use--;
 
             }
@@ -48,12 +48,11 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
     @Override
     public void preStep(StepEvent stepEvent) {
 
-        if (regen.player.getPosition().y > 8  && regen.player.getPosition().x > 40 && regen.player.getPosition().x < 53) {
-            if (regen.player.getLives() < 10) {
+        if (spike.player.getPosition().y > -2 && spike.player.getPosition().y < 3 && spike.player.getPosition().x >50 && spike.player.getPosition().x < 70) {
                 if (onplatform) {
                     count++;
-                    if (count % 30 == 0 && healsteps != 0) {
-                        regen.player.setLives(regen.player.getLives() + 1);
+                    if (count % 60 == 0 && healsteps != 0) {
+                        spike.player.setLives(spike.player.getLives() - 1);
                         count = 0;
                         healsteps--;
                     }
@@ -63,7 +62,7 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
 
                 }*/
                 }
-            }
+
         }
 
 
@@ -71,22 +70,18 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
 
     @Override
     public void postStep(StepEvent stepEvent) {
-
+        /*
         if(teleport != 0){
-        if(regen.player.getLives() == 10 && onplatform){
-            regen.player.setPosition(new Vec2(43,-14));
-            regen.player.moves = true;
-            teleport--;
-            onplatform = false;
-            regen.removeAllCollisionListeners();
-            regen.w.getA().destroy();
-            regen.Dav.destroy();
-            regen.removeAllImages();
-            regen.hearts.destroy();
-
+            if(regen.player.getLives() == 10 && onplatform){
+                regen.player.setPosition(new Vec2(46,-14));
+                regen.player.moves = true;
+                teleport--;
+                regen.w.getA().destroy();
+                regen.Dav.destroy();
+                regen.removeAllImages();
+            }
         }
-        }
-
+*/
     }
 }
 

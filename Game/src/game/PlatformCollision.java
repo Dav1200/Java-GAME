@@ -17,20 +17,30 @@ public class PlatformCollision implements CollisionListener {
     //private Game game;
 
 
-    public PlatformCollision(platforms plat) {
+    public PlatformCollision(platforms plat,enemy en) {
+        this.en = en;
         this.plat = plat;
 
+
+    }
+
+    public PlatformCollision() {
 
     }
 
     @Override
     public void collide(CollisionEvent collisionEvent) {
 
-        //System.out.println("hi");
         collisionEvent.getReportingBody().setPosition(new Vec2(1000,1000));
+
+
+   //
+
+    }
+
 
 
 
 
     }
-}
+

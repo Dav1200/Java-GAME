@@ -41,7 +41,7 @@ public class enemy extends Walker implements StepListener {
 
         this.plat = plat;
         respawn = 2;
-        stage = 1;
+        stage = 0;
         move = false;
         addImage(enemyimg);
 
@@ -98,7 +98,7 @@ if(stage ==2){
 
         //when the bullet hits platform
 
-        PlatformCollision platcollision = new PlatformCollision(plat);
+        PlatformCollision platcollision = new PlatformCollision(plat,this);
         bullet.addCollisionListener(platcollision);
 
 

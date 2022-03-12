@@ -4,22 +4,28 @@ import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
 import java.awt.*;
+import java.awt.Shape;
 
 public class platforms extends StaticBody {
 
     private static final BodyImage grounds = new BodyImage("Platformimg/woodtile.png", 1);
+    private PlatformCollision dav;
 
 
     public platforms(World w) {
         super(w);
+      // dav = new PlatformCollision(this);
         platforms(-17f, -14.7f);
         multiplat(5);
         //platforms(47f,10f);
         DeathPlatform();
         //Stage 2 platforms
        // platformss(47f,-10f);
+
+
         stage2platforms(10,40,-14.7f);
-        stage2platforms(10,60,0);
+        //stage2platforms(10,60,0);
+        tutorialplat();
     }
     //ground
     public void platforms(Float x, Float y) {
@@ -45,6 +51,7 @@ public class platforms extends StaticBody {
                ground.addImage(grounds).setOffset(new Vec2(-1, 0));
                ground.addImage(grounds).setOffset(new Vec2(-5, 0));
                ground.addImage(grounds).setOffset(new Vec2(3, 0));
+
             }
             platforms(-17f + i * 4.5f, -14.7f + i * 3.5f);
         }
@@ -63,6 +70,27 @@ public class platforms extends StaticBody {
         stage2platform.setPosition(new Vec2(x,y));
     }
 
+    public void tutorialplat(){
+        StaticBody tutorial = new StaticBody(this.getWorld(),new BoxShape(30,0.4f));
+       // tutorial.addCollisionListener(dav);
+        tutorial.setPosition(new Vec2( -60,-15f));
+        BoxShape a = new BoxShape(0.5f,40);
+
+        StaticBody wall1 = new StaticBody(this.getWorld(),new BoxShape(0.5f,40));
+        StaticBody wall2 = new StaticBody(this.getWorld(),new BoxShape(0.5f,40));
+        /*
+        DynamicBody wa = new DynamicBody(this.getWorld());
+        wa.setPosition(new Vec2(-60,50));
+
+        SolidFixture d = new SolidFixture(wa,a);
+        d.setRestitution(1.1f);
+*/
+
+
+        wall1.setPosition(new Vec2(-80,0));
+        wall2.setPosition(new Vec2(-40,0));
+
+    }
 
 
 }

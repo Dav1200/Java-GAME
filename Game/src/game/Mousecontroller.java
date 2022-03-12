@@ -16,7 +16,8 @@ public class Mousecontroller implements MouseListener {
 
     }
 
-    public Mousecontroller(Gameview v){
+    public Mousecontroller(Gameview v, Player p){
+        this.p = p;
         this.view = v;
 
     }
@@ -42,6 +43,7 @@ public class Mousecontroller implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         view.requestFocus();
+        //
 
 
 

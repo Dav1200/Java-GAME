@@ -15,6 +15,7 @@ public class Game {
 
     public Game() {
         Gameworld world = new Gameworld();
+
         //make game world
 
 
@@ -25,13 +26,14 @@ public class Game {
 
         //RegeneratePlayercollision c = new RegeneratePlayercollision(world.getPlayer());
 
-        Mousecontroller dav = new Mousecontroller(view);
+        Mousecontroller dav = new Mousecontroller(view,world.getPlayer());
         view.addMouseListener(dav);
         control move = new control(world.getPlayer(),t,world.getE());
         view.addKeyListener(move);
 
         Collision pickup = new Collision(world.getPlayer(), world.getPlat());
         world.getPlayer().addCollisionListener(pickup);
+
 
         //
         //world.getPlayer().addCollisionListener(dav);
@@ -44,7 +46,7 @@ public class Game {
 
 
         final JFrame frame = new JFrame("Dav Game");
-        //view.setGridResolution(1);
+        view.setGridResolution(1);
         frame.add(view);
 
 
@@ -74,6 +76,8 @@ public class Game {
         //menushow dav = new menushow();
 
         new Game();
+
+
        // new Game().menu();
 
 

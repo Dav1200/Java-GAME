@@ -8,5 +8,6 @@ public class ghostlyfixture extends GhostlyFixture {
 
     public ghostlyfixture(Body body, Shape shape) {
         super(body, shape);
+        this.setDensity(5);
     }
 }

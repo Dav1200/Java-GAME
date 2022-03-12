@@ -61,6 +61,11 @@ public class BulletCollision implements CollisionListener {
 
         }
 
+        if(collisionEvent.getOtherBody() != player){
+            collisionEvent.getReportingBody().destroy();
+        }
+
+
 
 
 

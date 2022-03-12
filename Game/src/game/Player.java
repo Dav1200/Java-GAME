@@ -11,6 +11,7 @@ public class Player extends Walker implements StepListener {
             -2.21f,0.59f, -1.48f,-2.05f, 0.07f,-2.08f, 1.17f,-0.32f, -0.11f,1.45f);
 
     private static final BodyImage Playerimg = new BodyImage("PlayerImages/gif.gif", 5f);
+    protected static final BodyImage Playerimgj = new BodyImage("PlayerImages/jump.gif", 5f);
     private static final BodyImage bulletimgl = new BodyImage("PlayerImages/shotl.png", 0.5f);
     private static final BodyImage bulletimgr = new BodyImage("PlayerImages/shot.png", 0.5f);
     private static final BodyImage Playerimgl = new BodyImage("PlayerImages/stablel.png", 4f);
@@ -23,6 +24,7 @@ public class Player extends Walker implements StepListener {
 
     private int Livess;
     private int Score;
+    private platforms plat;
 
     public String getFacing() {
         return facing;
@@ -31,7 +33,7 @@ public class Player extends Walker implements StepListener {
     private String facing;
     protected boolean doublegun;
     private AttachedImage playerimg;
-    private AttachedImage bulletimgrr;
+    protected AttachedImage jump;
     protected enemy en;
     private Backpack backpack;
     protected int timer;
@@ -40,16 +42,20 @@ public class Player extends Walker implements StepListener {
     private World world;
     protected int jumpcount;
     private int Lives2;
+    protected boolean moves;
+    protected  boolean tutorial;
 
 
 
     //constructor
-    public Player(World world,enemy en) {
+    public Player(World world,enemy en,platforms plat) {
         super(world, player);
         this.world = world;
         this.en = en;
+        this.plat = plat;
          playerimg = addImage(Playerimg);
-
+        tutorial = true;
+        moves = true;
         Lives = 10;
          setGravityScale(5);
         Score = 0;
@@ -94,11 +100,16 @@ public class Player extends Walker implements StepListener {
     }
     public void shoot() {
 
+        //bullet b = new bullet(this.getWorld(),this);
+
 
         DynamicBody bullet = new DynamicBody(this.getWorld(), new CircleShape(0.2f));
        // bulletimgrr = bullet.addImage(bulletimgr);
         BulletCollision pickups = new BulletCollision(this);
         bullet.addCollisionListener(pickups);
+
+
+
        // bullet.setGravityScale(0);
         //bullet.addImage(bulletimg);
         if (this.facing.equals("left")) {
@@ -122,19 +133,11 @@ public class Player extends Walker implements StepListener {
     }
 
     public void doubleshoot() {
-
-
-
-
     if(bulletcount >0){
         //PlatformCollision platcollision = new PlatformCollision(en.plat);
 
         DynamicBody bullet1 = new DynamicBody(this.getWorld(), new CircleShape(0.2f));
         DynamicBody bullet2 = new DynamicBody(this.getWorld(), new CircleShape(0.2f));
-
-
-
-
         bulletcount -=2;
         BulletCollision pickups = new BulletCollision(this);
         bullet1.addCollisionListener(pickups);
@@ -180,7 +183,7 @@ public class Player extends Walker implements StepListener {
         this.setPosition(new Vec2(-17, -6));
     }
         if(en.stage == 2){
-            this.setPosition(new Vec2(47,13));
+            this.setPosition(new Vec2(47,-11));
             this.setLives(this.getLives()-1);
         }
     }
@@ -196,6 +199,9 @@ public class Player extends Walker implements StepListener {
 
     @Override
     public void preStep(StepEvent stepEvent) {
+        if(en.stage == 1){
+            tutorial =false;
+        }
         timer++;
         jumpcount ++;
         if(getLives() < 0){

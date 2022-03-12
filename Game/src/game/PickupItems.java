@@ -19,7 +19,7 @@ public class PickupItems extends StaticBody {
         super(w,booksShape);
         //setGravityScale(0);
         //this.applyForce(new Vec2(1,1));
-       // setLinearVelocity(new Vec2(0,0));
+       //setLinearVelocity(new Vec2(0,0));
 
         addImage(image);
     }
