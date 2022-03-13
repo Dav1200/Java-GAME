@@ -8,7 +8,7 @@ public class item extends BackpackItem{
 
     @Override
     public String getType() {
-            return "hi";}
+            return "None";}
 
     @Override
     public void function() {
