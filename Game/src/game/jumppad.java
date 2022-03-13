@@ -16,8 +16,8 @@ public class jumppad extends platforms implements StepListener {
         SolidFixture leftl = new SolidFixture(Trampoline,leftleg);
         SolidFixture rightl = new SolidFixture(Trampoline,rightleg);
         SolidFixture topbase = new SolidFixture(Trampoline,top);
-        topbase.setRestitution(1.5f);
-        topbase.setFriction(10);
+        //topbase.setRestitution(1.5f);
+        //topbase.setFriction(10);
 
         Trampoline.addCollisionListener(trampolineCollision);
         Trampoline.setPosition(new Vec2(47,-13));

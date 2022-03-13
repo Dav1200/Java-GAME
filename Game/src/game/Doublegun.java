@@ -8,7 +8,10 @@ public class Doublegun extends BackpackItem{
 
     @Override
     public String getType() {
-        return "DoubleGun";
+        if(player.doublegun){
+        return "DoubleGun";}
+
+    return "Empty";
     }
 
     @Override

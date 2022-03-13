@@ -15,13 +15,20 @@ public class PickupItems extends StaticBody {
     private static final BodyImage image =
             new BodyImage("item/icon1.png", 2.5f);
 
+
+
+    protected AttachedImage images;
+
     public  PickupItems(World w) {
+
         super(w,booksShape);
         //setGravityScale(0);
         //this.applyForce(new Vec2(1,1));
        //setLinearVelocity(new Vec2(0,0));
 
-        addImage(image);
+        images = addImage(image);
+
+        //addImage(image);
     }
 
 

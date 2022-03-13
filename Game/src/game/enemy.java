@@ -7,6 +7,7 @@ public class enemy extends Walker implements StepListener {
 
     private final static Shape enemy = new BoxShape(1, 2);
     private static final BodyImage enemyimg= new BodyImage("enemy/idle2.png", 5f);
+    private static final BodyImage enemyimgg= new BodyImage("enemy/enemygif.gif", 6f);
     private static final BodyImage bullets = new BodyImage("enemy/Bullet.png", 1f);
 
     //private final static Shape enemyy = new BoxShape(1,2);
@@ -19,6 +20,8 @@ public class enemy extends Walker implements StepListener {
     protected platforms plat;
     protected int stage;
     protected boolean move;
+    private AttachedImage simage;
+    private AttachedImage fimage ;
 
 
     public int getRespawn() {
@@ -38,13 +41,12 @@ public class enemy extends Walker implements StepListener {
 
     public enemy(World world, platforms plat) {
         super(world, enemy);
-
+        fimage = addImage(enemyimg);
+        //;
         this.plat = plat;
         respawn = 2;
         stage = 0;
         move = false;
-        addImage(enemyimg);
-
 
     }
 
@@ -53,14 +55,19 @@ public class enemy extends Walker implements StepListener {
         if (stage == 1) {
             if (x < 10) {
                 this.startWalking(3);
-            } else if (x > 18) {
+                fimage.flipHorizontal();
+            } else if (x > 17) {
                 this.startWalking(-3);
+                fimage.flipHorizontal();
             }
         }
 
 if(stage ==2){
 
     if(move == false){
+        removeAttachedImage(fimage);
+        simage = addImage(enemyimgg);
+        simage.flipHorizontal();
     setRespawn(2);
     setPosition(new Vec2(60,5));
 
@@ -68,8 +75,10 @@ if(stage ==2){
     move = true;
     if (x < 51) {
         this.startWalking(3);
+        simage.flipHorizontal();
     } else if (x > 68) {
         this.startWalking(-3);
+        simage.flipHorizontal();
     }
 
 }

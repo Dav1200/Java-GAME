@@ -70,6 +70,11 @@ public class platforms extends StaticBody {
         stage2platform.setPosition(new Vec2(x,y));
     }
 
+    public void border(float width,float height,float x,float y){
+        StaticBody stage2platform = new StaticBody(this.getWorld(),new BoxShape(width,height));
+        stage2platform.setPosition(new Vec2(x,y));
+    }
+
     public void tutorialplat(){
         StaticBody tutorial = new StaticBody(this.getWorld(),new BoxShape(30,0.4f));
        // tutorial.addCollisionListener(dav);
@@ -78,6 +83,9 @@ public class platforms extends StaticBody {
 
         StaticBody wall1 = new StaticBody(this.getWorld(),new BoxShape(0.5f,40));
         StaticBody wall2 = new StaticBody(this.getWorld(),new BoxShape(0.5f,40));
+
+
+
         /*
         DynamicBody wa = new DynamicBody(this.getWorld());
         wa.setPosition(new Vec2(-60,50));

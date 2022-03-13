@@ -3,7 +3,7 @@ package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
-public class Spikeplat extends StaticBody {
+public class Spikeplat extends platforms {
 
     private static final BodyImage grounds = new BodyImage("Platformimg/Spikes.png", 2.5f);
     private static final BodyImage hp = new BodyImage("Platformimg/hp.png", 2.5f);

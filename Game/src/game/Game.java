@@ -1,34 +1,31 @@
 package game;
 
-import city.cs.engine.CollisionEvent;
-import city.cs.engine.StepEvent;
-import city.cs.engine.StepListener;
-import city.cs.engine.World;
-
 import javax.swing.JFrame;
-import java.awt.*;
 
 
 public class Game {
 
 
-
     public Game() {
         Gameworld world = new Gameworld();
+
+        if (world.getPlayer().getLives() == 9) {
+
+        }
 
         //make game world
 
 
         //2. view
-        Gameview view = new Gameview(world, 800, 600, world.getPlayer(),world.getE());
+        Gameview view = new Gameview(world, 800, 600, world.getPlayer(), world.getE());
 
-        track t = new track(view,world.getPlayer(),world.getE());
+        EnemySteplistener t = new EnemySteplistener(view, world.getPlayer(), world.getE());
 
         //RegeneratePlayercollision c = new RegeneratePlayercollision(world.getPlayer());
 
-        Mousecontroller dav = new Mousecontroller(view,world.getPlayer());
+        Mousecontroller dav = new Mousecontroller(view, world.getPlayer());
         view.addMouseListener(dav);
-        control move = new control(world.getPlayer(),t,world.getE());
+        control move = new control(world.getPlayer(), t, world.getE());
         view.addKeyListener(move);
 
         Collision pickup = new Collision(world.getPlayer(), world.getPlat());
@@ -50,8 +47,6 @@ public class Game {
         frame.add(view);
 
 
-
-
         // enable the frame to quit the application
         // when the x button is pressed
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,7 +62,6 @@ public class Game {
         world.start();
 
 
-
     }
 
 
@@ -78,8 +72,7 @@ public class Game {
         new Game();
 
 
-       // new Game().menu();
-
+        // new Game().menu();
 
 
     }

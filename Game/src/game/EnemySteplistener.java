@@ -1,16 +1,11 @@
 
 package game;
 
-import city.cs.engine.*;
-
 import city.cs.engine.StepEvent;
 import city.cs.engine.StepListener;
 import org.jbox2d.common.Vec2;
 
-import java.awt.*;
-import java.awt.geom.Point2D;
-
-public class track implements StepListener {
+public class EnemySteplistener implements StepListener {
     private Gameview view;
     private Player player;
     private enemy en;
@@ -22,9 +17,9 @@ public class track implements StepListener {
     protected float pX;
     protected float pY;
     private int ecount;
+    private enemy g;
 
-
-    public track(Gameview view, Player player,enemy en) {
+    public EnemySteplistener(Gameview view, Player player, enemy en) {
         this.player = player;
         this.view = view;
         this.en = en;
@@ -32,6 +27,9 @@ public class track implements StepListener {
         seconds = 1;
         bulletseconds = 0;
         ecount = 0;
+        g = new enemy(this.en.getWorld(), en.getPlat());
+        g.setPosition(new Vec2(-60,0));
+
 
     }
 
@@ -49,7 +47,7 @@ public class track implements StepListener {
 
         bulletseconds++;
         view.sec = seconds;
-        //bullet track
+        //bullet EnemySteplistener
 
 
         if (bulletseconds >= 60) {
@@ -70,9 +68,9 @@ public class track implements StepListener {
         pY = player.getPosition().y;
 
 
-        if(ecount == 90){
+        if(ecount == 50){
             en.shootplayer(new Vec2(pX,pY));
-
+            g.shootplayer(new Vec2(pX,pY));
           ecount = 0;}
 
         en.x = enemyX;

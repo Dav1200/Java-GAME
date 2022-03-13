@@ -52,7 +52,7 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
             if (regen.player.getLives() < 10) {
                 if (onplatform) {
                     count++;
-                    if (count % 30 == 0 && healsteps != 0) {
+                    if (count % 60 == 0 && healsteps != 0) {
                         regen.player.setLives(regen.player.getLives() + 1);
                         count = 0;
                         healsteps--;

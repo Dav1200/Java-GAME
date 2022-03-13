@@ -67,6 +67,10 @@ public class BulletCollision implements CollisionListener {
 
 
 
+        if (collisionEvent.getOtherBody() instanceof enemy) {
+
+        }
+
 
 
 

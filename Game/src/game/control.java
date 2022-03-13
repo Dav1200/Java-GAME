@@ -6,15 +6,13 @@ import org.jbox2d.common.Vec2;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.security.Key;
 import java.util.ArrayList;
-import java.util.Timer;
 
 public class control implements KeyListener, StepListener {
 
     private static final float speed = 4;
     protected Player player;
-    protected track t;
+    protected EnemySteplistener t;
     boolean one = false;
     boolean two = false;
     private enemy enemy;
@@ -25,7 +23,7 @@ public class control implements KeyListener, StepListener {
     ArrayList<Integer> Dav = new ArrayList<>();
     ArrayList<Integer> Dav2 = new ArrayList<>();
 
-    public control(Player player, track t, enemy enemy) {
+    public control(Player player, EnemySteplistener t, enemy enemy) {
         this.player = player;
         this.t = t;
         this.enemy = enemy;
@@ -69,7 +67,7 @@ public class control implements KeyListener, StepListener {
 
 
                 if (code == KeyEvent.VK_W) {
-                    player.jump(20);
+                    player.jump(23);
 
                     active = true;
                     if (jumpcount > 13) {
@@ -83,13 +81,14 @@ public class control implements KeyListener, StepListener {
                     //player.getBackpack().getitem().function();
 
                 }
-              // if(player.tutorial){
+              if(player.tutorial){
 
                 if(code == KeyEvent.VK_G){
                     enemy.stage++;
                     //player.tutorial = false;
-               // }
+                }
             }
+
 
                 if (Dav.contains(1) && Dav.contains(2)) {
                     player.walk(speed * 2);
@@ -108,6 +107,7 @@ public class control implements KeyListener, StepListener {
                 if (code == KeyEvent.VK_Q) {
                     player.getBackpack().toggle();
                 } else if (code == KeyEvent.VK_R) {
+
                     player.getBackpack().getitem().function();
                 }
             }

@@ -17,27 +17,34 @@ public class Gameworld extends World {
     private jumppad jumppad;
     private static final BodyImage grounds = new BodyImage("Platformimg/regen.png", 2);
 
+    public PickupItems getP() {
+        return p;
+    }
+
+    private PickupItems p;
     public Gameworld() {
         plat = new platforms(this);
 
         e = new enemy(this,plat);
+
         player = new Player(this,e,plat);
-        e.setPosition(new Vec2(18.5f,0));
+
+        e.setPosition(new Vec2(17.5f,0));
         player.setPosition(new Vec2(-17,2));
         a = new RegeneratePlat(this,3.5f,47f,10f,player);
         Lava = new Spikeplat(this,10,60,0,player);
         jumppad = new jumppad(this);
 
         a.setName("Regen");
-
-        PickupItems p = new PickupItems(this);
-        p.setPosition(new Vec2(0,2));
+            Border border = new Border(this);
+         p = new PickupItems(this);
+        p.setPosition(new Vec2(-5,0));
        // PickupItems p2 = new PickupItems(this);
         //p2.setPosition(new Vec2(-5,0));
 
 
         player.getBackpack().additem(new Doublegun(getPlayer()));
-        player.getBackpack().additem(new Doublejump(getPlayer()));
+        player.getBackpack().additem(new item(getPlayer()));
 
     }
 
