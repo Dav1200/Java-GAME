@@ -152,7 +152,7 @@ public class Gameview extends UserView implements StepListener {
             player.setLives(999);
         }
 
-        if (e.stage == 1 && !setstage1) {
+        if (e.stage == 1 && !setstage1 ) {
             setView(new Vec2(0, 0), this.getZoom());
             player.setPosition(new Vec2(-17, -14));
             setstage1 = true;
@@ -160,25 +160,29 @@ public class Gameview extends UserView implements StepListener {
         }
 
 
-        if (e.stage == 2 && !set) {
-            setView(new Vec2(60, 0), this.getZoom());
-            e.setRespawn(2);
-            player.setPosition(new Vec2(48, 13));
-            set = true;
+            if (e.stage == 2 && !set && player.getScore() == 1) {
+
+                setView(new Vec2(60, 0), this.getZoom());
+                e.setRespawn(2);
+                player.setPosition(new Vec2(48, 13));
+                set = true;
+
 
 
         }
 
-        if(e.stage == 2 && e.getRespawn() == 0){
+        if(e.stage == 2 && e.getRespawn() == 0 && player.getScore() == 2){
             e.stage = 3;
 
         }
 
-        if(e.stage == 3 && !setStage3 ){
+        if(e.stage == 3 && !setStage3  && player.getScore() == 2){
             setView(new Vec2(120, 0), this.getZoom());
 
             setStage3 = true;
         }
+
+
         //this.points = worldToView(new Vec2((e.getPosition().x),(e.getPosition().y-50)));
         //this.ex = (int)points.x;
         // this.ey = (int)points.y;

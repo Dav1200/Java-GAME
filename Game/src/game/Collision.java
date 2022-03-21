@@ -9,12 +9,14 @@ import javax.swing.*;
 public class Collision implements CollisionListener {
     private Player player;
     private platforms plat;
+    private enemy en;
 
     //private Game game;
 
-    public Collision(Player player, platforms plat) {
+    public Collision(Player player, platforms plat,enemy en) {
         this.player = player;
         this.plat = plat;
+        this.en  = en;
         //this.game = g;
     }
 
@@ -36,6 +38,13 @@ public class Collision implements CollisionListener {
             player.doublegun = true;
 
         }
+        if(collisionEvent.getOtherBody() instanceof Coin){
+            collisionEvent.getOtherBody().destroy();
+            player.setScore(player.getScore()+1);
+            player.coinpick = true;
+
+
+        }
 
 
         if(collisionEvent.getOtherBody() instanceof  enemy){
@@ -47,6 +56,8 @@ public class Collision implements CollisionListener {
                 player.setPosition(new Vec2(47,10));
             }
         }
+
+
 
         }
 

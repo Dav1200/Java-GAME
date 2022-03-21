@@ -22,6 +22,7 @@ public class enemy extends Walker implements StepListener {
     protected boolean move;
     private AttachedImage simage;
     private AttachedImage fimage ;
+    protected boolean enemydef;
 
 
     public int getRespawn() {
@@ -47,6 +48,7 @@ public class enemy extends Walker implements StepListener {
         respawn = 2;
         stage = 0;
         move = false;
+        enemydef =false;
 
     }
 
@@ -67,7 +69,7 @@ if(stage ==2){
     if(move == false){
         removeAttachedImage(fimage);
         simage = addImage(enemyimgg);
-        simage.flipHorizontal();
+
     setRespawn(2);
     setPosition(new Vec2(60,5));
 
@@ -100,6 +102,7 @@ if(stage ==2){
 
     public void shootplayer(Vec2 t) {
         //when bullet hits player.
+
         DynamicBody bullet = new DynamicBody(this.getWorld(), new CircleShape(0.2f));
         bullet.addImage(bullets);
         EnemyhitCollision pickups = new EnemyhitCollision(this);
@@ -107,7 +110,7 @@ if(stage ==2){
 
         //when the bullet hits platform
 
-        PlatformCollision platcollision = new PlatformCollision(plat,this);
+        EnemybulletCol platcollision = new EnemybulletCol(plat,this);
         bullet.addCollisionListener(platcollision);
 
 
@@ -131,6 +134,10 @@ if(stage ==2){
 
     @Override
     public void preStep(StepEvent stepEvent) {
+        if(getRespawn() == 0){
+            enemydef = true;
+
+        }
 
     }
 

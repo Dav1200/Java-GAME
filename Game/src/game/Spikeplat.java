@@ -7,6 +7,9 @@ public class Spikeplat extends platforms {
 
     private static final BodyImage grounds = new BodyImage("Platformimg/Spikes.png", 2.5f);
     private static final BodyImage hp = new BodyImage("Platformimg/hp.png", 2.5f);
+    protected static final BodyImage safe = new BodyImage("Platformimg/safe.png", 2.5f);
+
+
     protected StaticBody spikeplat;
     protected Gameworld w;
 
@@ -15,11 +18,13 @@ public class Spikeplat extends platforms {
     }
 
     protected Player player;
+    private enemy e;
 
 
-    public Spikeplat(Gameworld w, float width, float x, float y, Player player) {
+    public Spikeplat(Gameworld w, float width, float x, float y, Player player,enemy e) {
         super(w);
         this.w = w;
+        this.e = e;
         this.player = player;
         //addImage(hp).setOffset(new Vec2(49.5f,12));
         spikeplat = new StaticBody(this.getWorld(),new BoxShape(width,0.3f));
@@ -32,8 +37,12 @@ public class Spikeplat extends platforms {
 
 
 
-        SpikeplatCollision dav = new SpikeplatCollision(player,this);
+
+        SpikeplatCollision dav = new SpikeplatCollision(player,this,e);
+
+
         spikeplat.addCollisionListener(dav);
+
         getWorld().addStepListener(dav);
 
     }

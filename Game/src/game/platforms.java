@@ -3,18 +3,15 @@ package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
-import java.awt.*;
-import java.awt.Shape;
-
 public class platforms extends StaticBody {
 
     private static final BodyImage grounds = new BodyImage("Platformimg/woodtile.png", 1);
-    private PlatformCollision dav;
+    private EnemybulletCol dav;
 
 
     public platforms(World w) {
         super(w);
-      // dav = new PlatformCollision(this);
+      // dav = new EnemybulletCol(this);
         platforms(-17f, -14.7f);
         multiplat(5);
         //platforms(47f,10f);
@@ -22,7 +19,8 @@ public class platforms extends StaticBody {
         //Stage 2 platforms
        // platformss(47f,-10f);
 
-
+        platforms(17f,5f);
+        platforms(77f,-10f);
         stage2platforms(10,40,-14.7f);
         //stage2platforms(10,60,0);
         tutorialplat();

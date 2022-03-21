@@ -29,7 +29,7 @@ public class Player extends Walker implements StepListener {
     public String getFacing() {
         return facing;
     }
-
+    protected boolean coinpick;
     private String facing;
     protected boolean doublegun;
     private AttachedImage playerimg;
@@ -67,6 +67,7 @@ public class Player extends Walker implements StepListener {
         delay =0;
         doublegun =false;
         jumpcount =0;
+        coinpick = false;
 
     }
 
@@ -106,6 +107,7 @@ public class Player extends Walker implements StepListener {
         DynamicBody bullet = new DynamicBody(this.getWorld(), new CircleShape(0.2f));
        // bulletimgrr = bullet.addImage(bulletimgr);
         BulletCollision pickups = new BulletCollision(this);
+
         bullet.addCollisionListener(pickups);
 
 
@@ -134,7 +136,7 @@ public class Player extends Walker implements StepListener {
 
     public void doubleshoot() {
     if(bulletcount >0){
-        //PlatformCollision platcollision = new PlatformCollision(en.plat);
+        //EnemybulletCol platcollision = new EnemybulletCol(en.plat);
 
         DynamicBody bullet1 = new DynamicBody(this.getWorld(), new CircleShape(0.2f));
         DynamicBody bullet2 = new DynamicBody(this.getWorld(), new CircleShape(0.2f));

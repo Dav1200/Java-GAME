@@ -23,9 +23,6 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
         use = 1;
         healsteps = 10;
         teleport =1;
-
-
-
     }
 
     public RegeneratePlayercollision() {

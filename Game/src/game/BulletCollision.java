@@ -4,12 +4,15 @@ import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
 import javax.swing.*;
-
-public class BulletCollision implements CollisionListener {
+// make two boolean variable which are set to false in the begining of the stage and when coin is collected and the enemy is defeted the varibles are set to true and if the variables are
+//set to true then stage can be changed when stage is changed these boolean variable are set to false again. 
+public class BulletCollision implements CollisionListener{
     private Player player;
     private enemy en;
     private platforms plat;
     protected int count;
+    private boolean coincollected;
+    private boolean enemydefl;
 
 
     //private Game game;
@@ -17,6 +20,8 @@ public class BulletCollision implements CollisionListener {
     public BulletCollision(Player player) {
         this.player = player;
         count =0;
+        coincollected = false;
+        enemydefl = false;
 
     }
 
@@ -26,10 +31,7 @@ public class BulletCollision implements CollisionListener {
 
     }
 
-    public BulletCollision(enemy en) {
-        this.en = en;
 
-    }
 
     @Override
     public void collide(CollisionEvent collisionEvent) {
@@ -52,14 +54,22 @@ public class BulletCollision implements CollisionListener {
 
             }
             if (((enemy) collisionEvent.getOtherBody()).getRespawn() == 0) {
+
+                if (((enemy) collisionEvent.getOtherBody()).stage == 1) {
+
+
+                    collisionEvent.getOtherBody().setPosition(new Vec2(1000,1000));
+                }
                 if (((enemy) collisionEvent.getOtherBody()).stage == 2) {
                     collisionEvent.getOtherBody().destroy();
                 }
-                ((enemy) collisionEvent.getOtherBody()).stage++;
+
 
             }
 
+
         }
+
 
         if(collisionEvent.getOtherBody() != player){
             collisionEvent.getReportingBody().destroy();
@@ -75,6 +85,7 @@ public class BulletCollision implements CollisionListener {
 
 
     }
+
 
 
 }

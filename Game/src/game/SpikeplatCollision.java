@@ -13,12 +13,13 @@ public class SpikeplatCollision implements CollisionListener, StepListener {
     private int count;
     private int use;
     private int healsteps;
-
+    private enemy e;
 
     private int teleport;;
-    public SpikeplatCollision(Player p, Spikeplat spike) {
+    public SpikeplatCollision(Player p, Spikeplat spike,enemy e) {
         this.spike = spike;
         this.p = p;
+        this.e = e;
         onplatform = false;
         use = 1;
         healsteps = 10;
@@ -47,6 +48,9 @@ public class SpikeplatCollision implements CollisionListener, StepListener {
 
     @Override
     public void preStep(StepEvent stepEvent) {
+        if(e.stage == 2 && e.getRespawn() ==0){
+            spike.spikeplat.removeAllImages();
+        }
 
         if (spike.player.getPosition().y > -2 && spike.player.getPosition().y < 3 && spike.player.getPosition().x >50 && spike.player.getPosition().x < 70) {
                 if (onplatform) {
@@ -70,7 +74,9 @@ public class SpikeplatCollision implements CollisionListener, StepListener {
 
     @Override
     public void postStep(StepEvent stepEvent) {
+
         /*
+
         if(teleport != 0){
             if(regen.player.getLives() == 10 && onplatform){
                 regen.player.setPosition(new Vec2(46,-14));

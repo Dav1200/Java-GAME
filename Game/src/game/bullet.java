@@ -9,6 +9,7 @@ public class bullet {
     private DynamicBody bullet;
     private World w;
     private Player p;
+
     public bullet(World w,Player p){
         this.w = w;
         this.p = p;
