@@ -79,5 +79,8 @@ public class EnemySteplistener implements StepListener {
     //
 //
     }
+    public void updateStudent(enemy e){
+        this.en = e;
+    }
 
 }

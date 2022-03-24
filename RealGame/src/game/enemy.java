@@ -46,7 +46,7 @@ public class enemy extends Walker implements StepListener {
         //;
         this.plat = plat;
         respawn = 2;
-        stage = 0;
+        stage = 1;
         move = false;
         enemydef =false;
 

@@ -10,7 +10,7 @@ public class RegeneratePlat extends StaticBody {
     //private static final Shape hpp = new PolygonShape(
             //-1.374f,1.072f, -1.358f,0.176f, -0.028f,-1.409f, 1.536f,0.065f, 1.057f,1.172f);
     protected StaticBody Dav;
-    protected Gameworld w;
+    protected Gamelevel w;
 
     public int getPlayer() {
         return player.getLives();
@@ -22,7 +22,7 @@ public class RegeneratePlat extends StaticBody {
     protected StaticBody hearts;
 
 
-    public RegeneratePlat(Gameworld w, float width, float x, float y,Player player) {
+    public RegeneratePlat(Gamelevel w, float width, float x, float y, Player player) {
         super(w);
         this.w = w;
         this.player = player;

@@ -84,7 +84,7 @@ public class Gameview extends UserView implements StepListener {
     @Override
     protected void paintForeground(Graphics2D g) {
         tick = e.getSmallenemylives() + 7;
-
+/*
         if (e.stage == 0) {
             g.scale(1.5f, 1.5f);
             g.drawString("Tap W = Jump", 10, 20);
@@ -99,12 +99,12 @@ public class Gameview extends UserView implements StepListener {
             g.drawString("Toy Enemy is provided To Test your Skills", 200, 60);
 
         }
+*/
 
-        if (e.stage > 0&& e.stage < 3) {
             g.drawImage(emptyh, px - 70, pycoverted - 50, 100, 20, this);
             g.drawImage(fullh, px - 69, pycoverted - 50, player.getLivess(), 20, this);
-        }
-        if (e.stage > 0&& e.stage < 3) {
+
+       // if (e.stage > 0&& e.stage < 3) {
 
             // g.scale(0.2f,0.2f);
             //g.drawImage(Hearts,0,10,this);
@@ -119,19 +119,22 @@ public class Gameview extends UserView implements StepListener {
             g.drawString("enemy" + e.getRespawn(), 10, 90);
 
             // g.drawString("Time:" + sec, 10, 70);
-        }
-        if (e.stage > 0 && e.stage < 3) {
+       // }
+       // if (e.stage > 0 && e.stage < 3) {
             g.setColor(Color.red);
             g.fillRect(467, 20, 50, 10);
             g.setColor(Color.green);
             g.fillRect(467, 20, e.getSmallenemylivess(), 10);
-        }
+     //   }
+         /*
         if(e.stage  ==3){
             g.scale(3,3);
             g.drawString("Game over",100,100);
             g.drawString("Thanks For playing",86,110);
 
         }
+        */
+
         //System.out.println(ex);
 
 
@@ -165,14 +168,14 @@ public class Gameview extends UserView implements StepListener {
     @Override
     public void postStep(StepEvent stepEvent) {
 
-        if (e.stage == 0 && !setstage0) {
+      /*  if (e.stage == 0 && !setstage0) {
             setView(new Vec2(-60, 0), this.getZoom());
             player.setPosition(new Vec2(-70, -13));
             setstage0 = true;
             intro.play();
             intro.loop();
             player.setLives(999);
-        }
+        }*/
 
         if (e.stage == 1 && !setstage1 ) {
             intro.stop();
@@ -197,15 +200,15 @@ public class Gameview extends UserView implements StepListener {
         }
 
         if(e.stage == 2 && e.getRespawn() == 0 && player.getScore() == 2){
-            e.stage = 3;
+
 
         }
 
-        if(e.stage == 3 && !setStage3  && player.getScore() == 2){
-            setView(new Vec2(120, 0), this.getZoom());
+        //if(e.stage == 3 && !setStage3  && player.getScore() == 2){
+           // setView(new Vec2(120, 0), this.getZoom());
 
-            setStage3 = true;
-        }
+           // setStage3 = true;
+     //   }
 
 
         //this.points = worldToView(new Vec2((e.getPosition().x),(e.getPosition().y-50)));
@@ -215,5 +218,12 @@ public class Gameview extends UserView implements StepListener {
         // System.out.println(ex);
 
 
+    }
+    public void updateStudent(Player player){
+        this.player = player;
+    }
+
+    public void enemy(enemy e){
+        this.e = e;
     }
 }

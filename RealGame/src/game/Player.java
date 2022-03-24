@@ -52,6 +52,15 @@ public class Player extends Walker implements StepListener {
     }
     protected boolean coinpick;
     private String facing;
+
+    public boolean isDoublegun() {
+        return doublegun;
+    }
+
+    public void setDoublegun(boolean doublegun) {
+        this.doublegun = doublegun;
+    }
+
     protected boolean doublegun;
     private AttachedImage playerimg;
     protected AttachedImage jump;

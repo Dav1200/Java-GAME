@@ -171,4 +171,8 @@ public class control implements KeyListener, StepListener {
     public void postStep(StepEvent stepEvent) {
         //System.out.println(jumpcount);
     }
+
+    public void updateStudent(Player player){
+        this.player = player;
+    }
 }

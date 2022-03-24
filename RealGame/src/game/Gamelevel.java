@@ -6,7 +6,7 @@ import city.cs.engine.StepListener;
 import city.cs.engine.World;
 import org.jbox2d.common.Vec2;
 
-public class Gameworld extends World implements StepListener {
+public abstract class Gamelevel extends World implements StepListener {
 
     private Player player;
     private platforms plat;
@@ -19,37 +19,25 @@ public class Gameworld extends World implements StepListener {
     private PickupItems p;
     private Coin coin;
     private Coin coin2;
+    private Game game;
 
-    public Gameworld() {
-        plat = new platforms(this);
+
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Gamelevel(Game game) {
+        this.game = game;
+
+
 
         e = new enemy(this, plat);
-
         player = new Player(this, e, plat);
-
-        e.setPosition(new Vec2(17.5f, 0));
-        player.setPosition(new Vec2(-17, 2));
-        a = new RegeneratePlat(this, 4f, 47f, 10f, player);
-        Lava = new Spikeplat(this, 10, 60, 0, player,e);
-        jumppad = new jumppad(this);
-
-        a.setName("Regen");
-        Border border = new Border(this);
-        p = new PickupItems(this);
-        p.setPosition(new Vec2(-5, 0));
-
-        coin = new Coin(this);
-        coin.setPosition(new Vec2(17, 6.5f));
-        coin2 = new Coin(this);
-        coin2.setPosition(new Vec2(77,-8.5f));
-
-
-        // PickupItems p2 = new PickupItems(this);
-        //p2.setPosition(new Vec2(-5,0));
-
-
         player.getBackpack().additem(new Doublegun(getPlayer()));
         player.getBackpack().additem(new item(getPlayer()));
+
+
 
     }
 
@@ -80,13 +68,16 @@ public class Gameworld extends World implements StepListener {
         return p;
     }
 
+    public Gamelevel getWorld(){
+        return this;
+    }
+    public abstract boolean isComplete();
+
     @Override
     public void preStep(StepEvent stepEvent) {
-        if(player.coinpick && e.enemydef){
-            player.coinpick =false;
-            e.enemydef = false;
-            e.stage++;
-        }
+
+
+
 
     }
 

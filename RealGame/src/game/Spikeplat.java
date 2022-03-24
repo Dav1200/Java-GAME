@@ -11,7 +11,7 @@ public class Spikeplat extends platforms {
 
 
     protected StaticBody spikeplat;
-    protected Gameworld w;
+    protected Gamelevel w;
 
     public int getPlayer() {
         return player.getLives();
@@ -21,7 +21,7 @@ public class Spikeplat extends platforms {
     private enemy e;
 
 
-    public Spikeplat(Gameworld w, float width, float x, float y, Player player,enemy e) {
+    public Spikeplat(Gamelevel w, float width, float x, float y, Player player, enemy e) {
         super(w);
         this.w = w;
         this.e = e;

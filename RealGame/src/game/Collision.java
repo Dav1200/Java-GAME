@@ -10,14 +10,15 @@ public class Collision implements CollisionListener {
     private Player player;
     private platforms plat;
     private enemy en;
+private Gamelevel gamelevel;
+    private Game game;
 
-    //private Game game;
-
-    public Collision(Player player, platforms plat,enemy en) {
+    public Collision(Player player, platforms plat,enemy en,Game game,Gamelevel gamelevel) {
         this.player = player;
         this.plat = plat;
         this.en  = en;
-        //this.game = g;
+        this.game = game;
+        this.gamelevel =gamelevel;
     }
 
     public Collision(Player player) {
@@ -35,15 +36,22 @@ public class Collision implements CollisionListener {
         */
         if (collisionEvent.getOtherBody() instanceof PickupItems) {
             collisionEvent.getOtherBody().destroy();
+
             player.doublegun = true;
 
         }
         if(collisionEvent.getOtherBody() instanceof Coin){
             collisionEvent.getOtherBody().destroy();
             player.setScore(player.getScore()+1);
+            System.out.println(gamelevel.isComplete());
             player.coinpick = true;
 
 
+        }
+
+        if(collisionEvent.getOtherBody()  instanceof Coin && gamelevel.isComplete()){
+            System.out.println("hi");
+            game.goToNextLevel();
         }
 
 
