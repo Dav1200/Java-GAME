@@ -26,7 +26,7 @@ public class Backpack {
             currentItem = 0;
 
 
-        System.out.println(getitem().getType());
+
     }
 
 }

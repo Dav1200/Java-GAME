@@ -50,6 +50,7 @@ public class SpikeplatCollision implements CollisionListener, StepListener {
     public void preStep(StepEvent stepEvent) {
         if(e.stage == 2 && e.getRespawn() ==0){
             spike.spikeplat.removeAllImages();
+            spike.removeAllCollisionListeners();
         }
 
         if (spike.player.getPosition().y > -2 && spike.player.getPosition().y < 3 && spike.player.getPosition().x >50 && spike.player.getPosition().x < 70) {

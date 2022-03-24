@@ -3,18 +3,39 @@ package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
-import java.util.Timer;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
 
 public class Player extends Walker implements StepListener {
 
     private static final Shape player = new PolygonShape(
             -2.21f,0.59f, -1.48f,-2.05f, 0.07f,-2.08f, 1.17f,-0.32f, -0.11f,1.45f);
 
-    private static final BodyImage Playerimg = new BodyImage("PlayerImages/gif.gif", 5f);
+    private static final BodyImage Playerimg = new BodyImage("PlayerImages/gif2.gif", 5f);
     protected static final BodyImage Playerimgj = new BodyImage("PlayerImages/jump.gif", 5f);
     private static final BodyImage bulletimgl = new BodyImage("PlayerImages/shotl.png", 0.5f);
     private static final BodyImage bulletimgr = new BodyImage("PlayerImages/shot.png", 0.5f);
     private static final BodyImage Playerimgl = new BodyImage("PlayerImages/stablel.png", 4f);
+
+
+
+    private static SoundClip shot;
+    static{
+        try {
+            shot = new SoundClip("Sound/shot.wav");
+
+            // Open an audio input stream
+            // stage1.loop();                              // Set it to continous playback (looping)
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            //code in here will deal with any errors
+            //that might occur while loading/playing sound
+            System.out.println(e);
+        }
+    }
 
     private int Lives;
 
@@ -78,7 +99,9 @@ public class Player extends Walker implements StepListener {
     public void setLives(int Lives) {
         this.Lives = Lives;
     }
-
+public void play(){
+        shot.play();
+}
     public void walk(float speed) {
         super.startWalking(speed);
         if (speed < 0 && facing.equals("right")) {
@@ -103,7 +126,7 @@ public class Player extends Walker implements StepListener {
 
         //bullet b = new bullet(this.getWorld(),this);
 
-
+        shot.play();
         DynamicBody bullet = new DynamicBody(this.getWorld(), new CircleShape(0.2f));
        // bulletimgrr = bullet.addImage(bulletimgr);
         BulletCollision pickups = new BulletCollision(this);
@@ -135,7 +158,17 @@ public class Player extends Walker implements StepListener {
     }
 
     public void doubleshoot() {
+
+
     if(bulletcount >0){
+        ActionListener actionListener = new actionlistener(this);
+
+        shot.play();
+
+        Timer t = new Timer(190,actionListener);
+        t.setRepeats(false);
+        t.start();
+
         //EnemybulletCol platcollision = new EnemybulletCol(en.plat);
 
         DynamicBody bullet1 = new DynamicBody(this.getWorld(), new CircleShape(0.2f));

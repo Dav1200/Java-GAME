@@ -1,10 +1,14 @@
 package game;
 
+import city.cs.engine.SoundClip;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
+import java.io.IOException;
 
 
 public class Game {
-
 
     public Game() {
         Gameworld world = new Gameworld();
@@ -12,6 +16,8 @@ public class Game {
         if (world.getPlayer().getLives() == 9) {
 
         }
+
+
 
         //make game world
 
@@ -44,7 +50,7 @@ public class Game {
 
 
         final JFrame frame = new JFrame("Dav Game");
-        view.setGridResolution(1);
+      //  view.setGridResolution(1);
         frame.add(view);
 
 

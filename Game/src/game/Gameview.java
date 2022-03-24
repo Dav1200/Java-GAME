@@ -3,11 +3,29 @@ package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.io.IOException;
 
 public class Gameview extends UserView implements StepListener {
+    private static SoundClip stage1,intro;
+    static{
+        try {
+            stage1 = new SoundClip("Sound/stage1.wav");
+            intro = new SoundClip("Sound/intro.wav");
+            stage1.setVolume(0.2);
+            intro.setVolume(0.2);
+            // Open an audio input stream
+           // stage1.loop();                              // Set it to continous playback (looping)
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            //code in here will deal with any errors
+            //that might occur while loading/playing sound
+            System.out.println(e);
+        }
+    }
     private Image background;
     private Image backgroundt;
     private Image Hearts;
@@ -52,7 +70,9 @@ public class Gameview extends UserView implements StepListener {
         if (e.stage == 0) {
             g.drawImage(backgroundt,0,0,this);
         } else if(e.stage == 1 || e.stage ==2){
-            g.drawImage(background, 0, 0, this);}
+            g.drawImage(background, 0, 0, this);
+
+       }
         else if(e.stage == 3){
             g.drawImage(backgroundt,0,0,this);
 
@@ -149,19 +169,24 @@ public class Gameview extends UserView implements StepListener {
             setView(new Vec2(-60, 0), this.getZoom());
             player.setPosition(new Vec2(-70, -13));
             setstage0 = true;
+            intro.play();
+            intro.loop();
             player.setLives(999);
         }
 
         if (e.stage == 1 && !setstage1 ) {
+            intro.stop();
             setView(new Vec2(0, 0), this.getZoom());
             player.setPosition(new Vec2(-17, -14));
             setstage1 = true;
+            stage1.play();
+            stage1.loop();
             player.setLives(10);
         }
 
 
             if (e.stage == 2 && !set && player.getScore() == 1) {
-
+                stage1.stop();
                 setView(new Vec2(60, 0), this.getZoom());
                 e.setRespawn(2);
                 player.setPosition(new Vec2(48, 13));

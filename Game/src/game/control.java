@@ -76,7 +76,7 @@ public class control implements KeyListener, StepListener {
 
 
                     }
-                    jumpcount = -10;
+                    jumpcount = 0;
 
                     //player.getBackpack().getitem().function();
 
