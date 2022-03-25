@@ -36,6 +36,8 @@ public abstract class Gamelevel extends World implements StepListener {
         player = new Player(this, e, plat);
         player.getBackpack().additem(new Doublegun(getPlayer()));
         player.getBackpack().additem(new item(getPlayer()));
+        Collision pickup = new Collision(player, plat, e,game,this);
+        player.addCollisionListener(pickup);
 
 
 

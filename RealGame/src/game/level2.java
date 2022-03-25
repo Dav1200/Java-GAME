@@ -26,8 +26,6 @@ public class level2 extends Gamelevel implements StepListener {
 
         getE().setPosition(new Vec2(17.5f, 1));
         EnemySteplistener t = new EnemySteplistener(v, getPlayer(), getE());
-      getE().enemywalk(t.enemyX,t.enemyY);
-        t.updateStudent(getE());
 
         this.getWorld().addStepListener(t);
 

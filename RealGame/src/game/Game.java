@@ -26,7 +26,7 @@ public class Game {
 
 
         //2. view
-         view = new Gameview(world, 800, 600, world.getPlayer(), world.getE());
+         view = new Gameview(world, 800, 600, world.getPlayer(), world.getE(),world);
 
         t = new EnemySteplistener(view, world.getPlayer(), world.getE());
 
@@ -37,8 +37,7 @@ public class Game {
         move = new control(world.getPlayer(), t, world.getE());
         view.addKeyListener(move);
 
-        Collision pickup = new Collision(world.getPlayer(), world.getPlat(), world.getE(),this,world);
-        world.getPlayer().addCollisionListener(pickup);
+
 
 
         //
@@ -79,6 +78,7 @@ public class Game {
             world.stop();
             //create the new (appropriate) level
             Player preplayer = world.getPlayer();
+           // EnemySteplistener pt = t;
             //level now refers to new level
             world = new level2(this,view);
             world.getPlayer().setLives(preplayer.getLives());
@@ -100,6 +100,8 @@ public class Game {
             world.addStepListener(world.getPlayer());
             world.addStepListener(move);
             world.addStepListener(world);
+            world.getE().enemywalk(t.enemyX,t.enemyY);
+            t.updateStudent(world.getE());
 
 
             //start the simulation in the new level

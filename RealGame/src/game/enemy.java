@@ -21,6 +21,11 @@ public class enemy extends Walker implements StepListener {
     protected int stage;
     protected boolean move;
     private AttachedImage simage;
+
+    public AttachedImage getFimage() {
+        return fimage;
+    }
+
     private AttachedImage fimage ;
     protected boolean enemydef;
 

@@ -47,11 +47,14 @@ public class Gameview extends UserView implements StepListener {
     private Point2D.Float points;
     private String face;
     private boolean setStage3;
+    private Gamelevel gamelevel;
+    private boolean level2;
 
-    public Gameview(World w, int width, int height, Player player, enemy e) {
+    public Gameview(World w, int width, int height, Player player, enemy e,Gamelevel gamelevel) {
         super(w, width, height);
         this.player = player;
         this.e = e;
+        this.gamelevel = gamelevel;
         setstage0 = false;
         set = false;
         setstage1 = false;
@@ -61,23 +64,33 @@ public class Gameview extends UserView implements StepListener {
         Hearts = new ImageIcon("enemy/maxh.png").getImage();
         fullh = new ImageIcon("playerimages/fullh.png").getImage();
         emptyh = new ImageIcon("playerimages/emptyhh.png").getImage();
-
+        level2 = false;
 
     }
 
     @Override
     protected void paintBackground(Graphics2D g) {
+
+        if(level2)
+        {
+            g.scale(0.5,0.5);
+        }
+
         if (e.stage == 0) {
             g.drawImage(backgroundt,0,0,this);
         } else if(e.stage == 1 || e.stage ==2){
             g.drawImage(background, 0, 0, this);
 
+
        }
-        else if(e.stage == 3){
+
+               else if(e.stage == 3){
             g.drawImage(backgroundt,0,0,this);
 
 
         }
+
+
         //g.scale(0.5f,0.5f);
     }
 
@@ -160,6 +173,10 @@ public class Gameview extends UserView implements StepListener {
         //System.out.println(pxcoverted);
         if (face.equals("left")) {
             px += 35;
+        }
+        if(gamelevel instanceof level2)
+        {
+            level2 =true;
         }
 
     }
