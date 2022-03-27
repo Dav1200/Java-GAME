@@ -17,17 +17,23 @@ public class level2 extends Gamelevel implements StepListener {
     private PickupItems p;
     private Coin coin;
     private Coin coin2;
+    private level2platforms level2p;
 
     public level2(Game game,Gameview v) {
 
         super(game);
 
-        plat = new platforms(this);
+        level2p = new level2platforms(this.getWorld());
+        this.getPlayer().setPosition(new Vec2(-26,-25));
 
-        getE().setPosition(new Vec2(17.5f, 1));
+        //
+        getE().setPosition(new Vec2(17.5f, 0));
         EnemySteplistener t = new EnemySteplistener(v, getPlayer(), getE());
-
         this.getWorld().addStepListener(t);
+        getE().enemywalk(t.enemyX,t.enemyY);
+        t.updateStudent(getE());
+
+        //might use or might make new enemy
 
     }
 

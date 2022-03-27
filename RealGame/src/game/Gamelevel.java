@@ -35,7 +35,10 @@ public abstract class Gamelevel extends World implements StepListener {
         e = new enemy(this, plat);
         player = new Player(this, e, plat);
         player.getBackpack().additem(new Doublegun(getPlayer()));
-        player.getBackpack().additem(new item(getPlayer()));
+        if(this instanceof level2) {
+
+            player.getBackpack().additem(new Grenade(getPlayer()));}
+
         Collision pickup = new Collision(player, plat, e,game,this);
         player.addCollisionListener(pickup);
 
@@ -56,6 +59,9 @@ public abstract class Gamelevel extends World implements StepListener {
     public enemy getE() {
         return e;
 
+    }
+    public Gamelevel getGamelevel(){
+        return this;
     }
 
     public RegeneratePlat getA() {

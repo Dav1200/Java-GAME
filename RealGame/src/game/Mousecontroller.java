@@ -1,5 +1,7 @@
 package game;
 
+import city.cs.engine.StepEvent;
+import city.cs.engine.StepListener;
 import org.jbox2d.common.Vec2;
 
 import java.awt.event.MouseEvent;
@@ -10,6 +12,7 @@ public class Mousecontroller implements MouseListener {
 
     private Gameview view;
     private Player p;
+    private Vec2 pp;
 
     public Mousecontroller(Player p){
         this.p = p;
@@ -25,6 +28,9 @@ public class Mousecontroller implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        System.out.println(e.getPoint());
+        pp = view.viewToWorld(e.getPoint());
+        p.mousepos = pp;
 
 
 
@@ -32,6 +38,7 @@ public class Mousecontroller implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+
 
     }
 
@@ -43,6 +50,9 @@ public class Mousecontroller implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         view.requestFocus();
+
+
+
         //
 
 
@@ -53,4 +63,9 @@ public class Mousecontroller implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
+    public void updateStudent(Player player){
+        this.p = player;
+    }
+
 }

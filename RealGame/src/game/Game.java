@@ -1,5 +1,7 @@
 package game;
 
+import org.jbox2d.common.Vec2;
+
 import javax.swing.JFrame;
 
 
@@ -12,6 +14,7 @@ public class Game {
     private Gameview view;
 
     private control move;
+    private Mousecontroller dav;
 
     private  EnemySteplistener t;
     public Game() {
@@ -32,7 +35,7 @@ public class Game {
 
         //RegeneratePlayercollision c = new RegeneratePlayercollision(world.getPlayer());
 
-        Mousecontroller dav = new Mousecontroller(view, world.getPlayer());
+         dav = new Mousecontroller(view, world.getPlayer());
         view.addMouseListener(dav);
         move = new control(world.getPlayer(), t, world.getE());
         view.addKeyListener(move);
@@ -49,6 +52,7 @@ public class Game {
         world.addStepListener(world.getPlayer());
         world.addStepListener(move);
         world.addStepListener(world);
+
 
 
         final JFrame frame = new JFrame("Dav Game");
@@ -81,17 +85,27 @@ public class Game {
            // EnemySteplistener pt = t;
             //level now refers to new level
             world = new level2(this,view);
+
+            System.out.println(view.getZoom());
             world.getPlayer().setLives(preplayer.getLives());
             world.getPlayer().setScore(preplayer.getScore());
             world.getPlayer().setDoublegun(preplayer.doublegun);
+            world.getPlayer().setGrenadepicked(preplayer.grendadeshoot);
+
 
             //change the view to look into new level
             view.setWorld(world);
+            //view.setZoom(12);
+            view.setView(new Vec2(0,9),12);
+
+
             //change the controller to control the
             //student in the new world
             view.updateStudent(world.getPlayer());
             move.updateStudent(world.getPlayer());
+            dav.updateStudent(world.getPlayer());
             view.enemy(world.getE());
+
 
 
             world.addStepListener(t);
@@ -100,8 +114,7 @@ public class Game {
             world.addStepListener(world.getPlayer());
             world.addStepListener(move);
             world.addStepListener(world);
-            world.getE().enemywalk(t.enemyX,t.enemyY);
-            t.updateStudent(world.getE());
+
 
 
             //start the simulation in the new level

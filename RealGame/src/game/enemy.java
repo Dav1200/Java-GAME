@@ -50,7 +50,7 @@ public class enemy extends Walker implements StepListener {
         fimage = addImage(enemyimg);
         //;
         this.plat = plat;
-        respawn = 2;
+        respawn = 0;
         stage = 1;
         move = false;
         enemydef =false;

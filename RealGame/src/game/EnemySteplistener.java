@@ -27,8 +27,8 @@ public class EnemySteplistener implements StepListener {
         seconds = 1;
         bulletseconds = 0;
         ecount = 0;
-        g = new enemy(this.en.getWorld(), en.getPlat());
-        g.setPosition(new Vec2(-60,0));
+       // g = new enemy(this.en.getWorld(), en.getPlat());
+        //g.setPosition(new Vec2(-60,0));
 
 
     }
@@ -70,7 +70,7 @@ public class EnemySteplistener implements StepListener {
 
         if(ecount == 50){
             en.shootplayer(new Vec2(pX,pY));
-            g.shootplayer(new Vec2(pX,pY));
+            //g.shootplayer(new Vec2(pX,pY));
           ecount = 0;}
 
         en.x = enemyX;

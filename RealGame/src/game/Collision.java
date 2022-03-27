@@ -4,8 +4,6 @@ import city.cs.engine.CollisionEvent;
 import city.cs.engine.CollisionListener;
 import org.jbox2d.common.Vec2;
 
-import javax.swing.*;
-
 public class Collision implements CollisionListener {
     private Player player;
     private platforms plat;
@@ -46,6 +44,12 @@ private Gamelevel gamelevel;
             System.out.println(gamelevel.isComplete());
             player.coinpick = true;
 
+
+        }
+
+        if(collisionEvent.getOtherBody() instanceof grenadepickup){
+            collisionEvent.getOtherBody().destroy();
+            player.setGrenadepicked(true);
 
         }
 

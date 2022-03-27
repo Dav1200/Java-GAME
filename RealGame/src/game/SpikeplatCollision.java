@@ -14,6 +14,7 @@ public class SpikeplatCollision implements CollisionListener, StepListener {
     private int use;
     private int healsteps;
     private enemy e;
+    private boolean n;
 
     private int teleport;;
     public SpikeplatCollision(Player p, Spikeplat spike,enemy e) {
@@ -24,6 +25,7 @@ public class SpikeplatCollision implements CollisionListener, StepListener {
         use = 1;
         healsteps = 10;
         teleport =1;
+        n = true;
 
 
 
@@ -48,11 +50,18 @@ public class SpikeplatCollision implements CollisionListener, StepListener {
 
     @Override
     public void preStep(StepEvent stepEvent) {
-        if(e.stage == 2 && e.getRespawn() ==0){
+        if(e.stage == 2 && e.getRespawn() ==0 && n){
             spike.spikeplat.removeAllImages();
             spike.removeAllCollisionListeners();
-        }
+            grenadepickup g = new grenadepickup(this.e.getWorld());
+            g.setPosition(new Vec2(62,3));
+            if(spike.player.isGrenadepicked()) {
+                spike.player.getBackpack().additem(new Grenade(spike.player));
+                n =false;
+            }
 
+        }
+        if(e.getRespawn()!=0){
         if (spike.player.getPosition().y > -2 && spike.player.getPosition().y < 3 && spike.player.getPosition().x >50 && spike.player.getPosition().x < 70) {
                 if (onplatform) {
                     count++;
@@ -60,7 +69,7 @@ public class SpikeplatCollision implements CollisionListener, StepListener {
                         spike.player.setLives(spike.player.getLives() - 1);
                         count = 0;
                         healsteps--;
-                    }
+                    }}
                  /*if (count == 203 ) {
                     onplatform = false;
                     if(count == )
