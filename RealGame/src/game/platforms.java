@@ -3,7 +3,7 @@ package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
-public class platforms extends StaticBody {
+public class platforms extends StaticBody  {
 
     private static final BodyImage grounds = new BodyImage("Platformimg/woodtile.png", 1);
     private EnemybulletCol dav;

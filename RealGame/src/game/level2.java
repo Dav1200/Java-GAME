@@ -27,12 +27,14 @@ public class level2 extends Gamelevel implements StepListener {
         this.getPlayer().setPosition(new Vec2(-26,-25));
 
         //
+        //
+        /*
         getE().setPosition(new Vec2(17.5f, 0));
         EnemySteplistener t = new EnemySteplistener(v, getPlayer(), getE());
         this.getWorld().addStepListener(t);
         getE().enemywalk(t.enemyX,t.enemyY);
         t.updateStudent(getE());
-
+*/
         //might use or might make new enemy
 
     }
@@ -68,7 +70,7 @@ public class level2 extends Gamelevel implements StepListener {
 
     @Override
     public boolean isComplete() {
-        if(getPlayer().getScore() == 3){
+        if(getPlayer().getScore() == 5){
             return true;
         }
         else
