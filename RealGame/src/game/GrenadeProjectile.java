@@ -1,11 +1,9 @@
 package game;
 
 import city.cs.engine.*;
-import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,16 +16,26 @@ public class GrenadeProjectile implements ActionListener {
     protected boolean g;
     private int count;
     private Player p;
+    private CollisionListener Explosioncol;
     public GrenadeProjectile(World w,int detonationtime,Player p){
         g = false;
 
-
+        GrenadeCollision GrenadeCollision = new GrenadeCollision(this);
+        w.addStepListener(GrenadeCollision);
         Bomb = new DynamicBody(w,new CircleShape(1.5f));
 
         Bomb.addImage(grenadeimg);
         Bomb.setAngularVelocity(0);
-        Bomb.addCollisionListener(new GrenadeCollision(this));
+        Bomb.addCollisionListener(GrenadeCollision);
 
+        Explosioncol = new CollisionListener() {
+            @Override
+            public void collide(CollisionEvent collisionEvent) {
+                if(collisionEvent.getOtherBody() instanceof Destroy){
+                    collisionEvent.getOtherBody().destroy();
+                }
+            }
+        };
 
 
        // Vec2 dir = p.mousepos.sub(p.getPosition());
@@ -49,7 +57,7 @@ public class GrenadeProjectile implements ActionListener {
         if(count == 0){
             Bomb.destroy();
             explosion = new DynamicBody(Bomb.getWorld(),new CircleShape(3));
-
+            explosion.addCollisionListener(Explosioncol) ;
             explosion.addImage(grenadeximg);
             explosion.setPosition(Bomb.getPosition());
             Timer t2 = new Timer(300,this);
@@ -75,6 +83,10 @@ count ++;
 
     public void setangle(float b){
         Bomb.setAngularVelocity(b);
+    }
+
+    public Vec2 getlinearvelocity(){
+        return Bomb.getLinearVelocity();
     }
 
 }

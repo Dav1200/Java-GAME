@@ -208,7 +208,7 @@ public class Gameview extends UserView implements StepListener {
             if (e.stage == 2 && !set && player.getScore() == 1) {
                 stage1.stop();
                 setView(new Vec2(60, 0), this.getZoom());
-                e.setRespawn(2);
+                e.setRespawn(0);
                 player.setPosition(new Vec2(48, 13));
                 set = true;
 

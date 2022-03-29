@@ -26,6 +26,10 @@ public class level2 extends Gamelevel implements StepListener {
         level2p = new level2platforms(this.getWorld());
         this.getPlayer().setPosition(new Vec2(-26,-25));
 
+
+        coin = new Coin(this);
+
+        coin.setPosition(new Vec2(-5, -5));
         //
         //
         /*
