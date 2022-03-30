@@ -5,6 +5,9 @@ import city.cs.engine.StepEvent;
 import city.cs.engine.StepListener;
 import org.jbox2d.common.Vec2;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class level1 extends Gamelevel implements StepListener {
     private Player player;
     private platforms plat;
@@ -17,13 +20,13 @@ public class level1 extends Gamelevel implements StepListener {
     private PickupItems p;
     private Coin coin;
     private Coin coin2;
-
+    private Image background;
     public level1(Game game) {
         super(game);
 
 
-
-        plat = new platforms(this);
+        background = new ImageIcon("Platformimg/stage1r.png").getImage();
+        plat = new platforms(this,getPlayer());
         getE().setPosition(new Vec2(17.5f, 0));
         getPlayer().setPosition(new Vec2(-17, 2));
         a = new RegeneratePlat(this, 4f, 47f, 10f, getPlayer());
@@ -31,7 +34,7 @@ public class level1 extends Gamelevel implements StepListener {
         jumppad = new jumppad(this);
 
         a.setName("Regen");
-        Border border = new Border(this);
+        //Border border = new Border(this);
         p = new PickupItems(this);
         p.setPosition(new Vec2(-5, 0));
 
@@ -83,6 +86,11 @@ public class level1 extends Gamelevel implements StepListener {
         }
         else
             return false;
+    }
+
+    @Override
+    public Image background() {
+        return background;
     }
 
 

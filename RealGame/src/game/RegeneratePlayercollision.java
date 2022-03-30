@@ -39,13 +39,14 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
                 use--;
 
             }
+
         }
     }
 
     @Override
     public void preStep(StepEvent stepEvent) {
 
-        if (regen.player.getPosition().y > 8  && regen.player.getPosition().x > 40 && regen.player.getPosition().x < 53) {
+
             if (regen.player.getLives() < 10) {
                 if (onplatform) {
                     count++;
@@ -59,7 +60,7 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
                     if(count == )
 
                 }*/
-                }
+
             }
         }
 
@@ -70,8 +71,14 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
     public void postStep(StepEvent stepEvent) {
 
         if(teleport != 0){
+
         if(regen.player.getLives() == 10 && onplatform){
-            regen.player.setPosition(new Vec2(43,-14));
+            //regen.player.setPosition(new Vec2(43,-14));
+
+            if(regen.player.gl instanceof level2){
+                regen.player.Showplat = true;
+
+            }
             regen.player.moves = true;
             teleport--;
             onplatform = false;

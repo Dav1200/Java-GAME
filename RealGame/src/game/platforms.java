@@ -3,19 +3,25 @@ package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
-public class platforms extends StaticBody  {
+public class platforms extends StaticBody implements StepListener {
 
-    private static final BodyImage grounds = new BodyImage("Platformimg/woodtile.png", 1);
+    private static BodyImage grounds = new BodyImage("Platformimg/woodtile.png", 1);
+    private static final BodyImage metal = new BodyImage("Platformimg/Metalplat.png", 1);
     private EnemybulletCol dav;
     private World w;
+    private boolean loop2;
+private boolean loop;
+private  Button b;
 
+    private Player p;
 
-
-    public platforms(World w) {
+    public platforms(World w, Player p) {
         super(w);
-
+loop = true;
+loop2 = true;
+        this.p = p;
+        w.addStepListener(this);
         if (w instanceof level1) {
-
 
 
             // dav = new EnemybulletCol(this);
@@ -32,6 +38,13 @@ public class platforms extends StaticBody  {
             //stage2platforms(10,60,0);
             tutorialplat();
         }
+        if (w instanceof level2) {
+            grounds = metal;
+            border(60, 0.3f, -16, -16);
+
+
+        }
+
 
 
     }
@@ -57,14 +70,13 @@ public class platforms extends StaticBody  {
                 StaticBody ground = new StaticBody(this.getWorld(), new BoxShape(6, 0.3f));
                 ground.setPosition(new Vec2(15, -0.7f));
 
-               ground.addImage(grounds).setOffset(new Vec2(-1, 0));
-               ground.addImage(grounds).setOffset(new Vec2(-5, 0));
-               ground.addImage(grounds).setOffset(new Vec2(3, 0));
+                ground.addImage(grounds).setOffset(new Vec2(-1, 0));
+                ground.addImage(grounds).setOffset(new Vec2(-5, 0));
+                ground.addImage(grounds).setOffset(new Vec2(3, 0));
 
             }
             platforms(-17f + i * 4.5f, -14.7f + i * 3.5f);
         }
-
 
 
     }
@@ -74,24 +86,25 @@ public class platforms extends StaticBody  {
         ground.setPosition(new Vec2(0, -20f));
 
     }
-    public void stage2platforms(float width,float x,float y){
-        StaticBody stage2platform = new StaticBody(this.getWorld(),new BoxShape(width,0.3f));
-        stage2platform.setPosition(new Vec2(x,y));
+
+    public void stage2platforms(float width, float x, float y) {
+        StaticBody stage2platform = new StaticBody(this.getWorld(), new BoxShape(width, 0.3f));
+        stage2platform.setPosition(new Vec2(x, y));
     }
 
-    public void border(float width,float height,float x,float y){
-        StaticBody stage2platform = new StaticBody(this.getWorld(),new BoxShape(width,height));
-        stage2platform.setPosition(new Vec2(x,y));
+    public void border(float width, float height, float x, float y) {
+        StaticBody stage2platform = new StaticBody(this.getWorld(), new BoxShape(width, height));
+        stage2platform.setPosition(new Vec2(x, y));
     }
 
-    public void tutorialplat(){
-        StaticBody tutorial = new StaticBody(this.getWorld(),new BoxShape(30,0.4f));
-       // tutorial.addCollisionListener(dav);
-        tutorial.setPosition(new Vec2( -60,-15f));
-        BoxShape a = new BoxShape(0.5f,40);
+    public void tutorialplat() {
+        StaticBody tutorial = new StaticBody(this.getWorld(), new BoxShape(30, 0.4f));
+        // tutorial.addCollisionListener(dav);
+        tutorial.setPosition(new Vec2(-60, -15f));
+        BoxShape a = new BoxShape(0.5f, 40);
 
-        StaticBody wall1 = new StaticBody(this.getWorld(),new BoxShape(0.5f,40));
-        StaticBody wall2 = new StaticBody(this.getWorld(),new BoxShape(0.5f,40));
+        StaticBody wall1 = new StaticBody(this.getWorld(), new BoxShape(0.5f, 40));
+        StaticBody wall2 = new StaticBody(this.getWorld(), new BoxShape(0.5f, 40));
 
 
 
@@ -104,12 +117,40 @@ public class platforms extends StaticBody  {
 */
 
 
-        wall1.setPosition(new Vec2(-80,0));
-        wall2.setPosition(new Vec2(-40,0));
+        wall1.setPosition(new Vec2(-80, 0));
+        wall2.setPosition(new Vec2(-40, 0));
 
     }
 
 
+    @Override
+    public void preStep(StepEvent stepEvent) {
+        if (p.Showplat && loop) {
+            for(int i = 0 ; i < 3;i++){
+            platforms(18f+i*2,-9f);}
+
+            platforms(10f,0f);
+             b = new Button(this.getWorld());
+
+            platforms(0f,0f);
+            platforms(-30f,0f);
+            platforms(-27f,0f);
+            loop = false;
+
+
+        }
+
+        if(p.Showplat && loop2){
+if(b.isPressed()){
+        loop2 =false;
+        platforms(0f,10f);
+
+    }}}
+
+    @Override
+    public void postStep(StepEvent stepEvent) {
+
+    }
 }
 
 

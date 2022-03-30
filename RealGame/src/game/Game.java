@@ -43,6 +43,7 @@ public class Game {
 
 
 
+
         //
         //world.getPlayer().addCollisionListener(dav);
 
@@ -92,11 +93,13 @@ public class Game {
             world.getPlayer().setDoublegun(preplayer.doublegun);
             world.getPlayer().setGrenadepicked(preplayer.grendadeshoot);
 
-
+            view.updategamelevel(world);
             //change the view to look into new level
             view.setWorld(world);
             //view.setZoom(12);
             view.setView(new Vec2(0,9),12);
+
+
 
 
             //change the controller to control the

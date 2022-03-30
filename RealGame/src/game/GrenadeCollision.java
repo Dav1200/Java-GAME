@@ -17,6 +17,7 @@ public class GrenadeCollision implements CollisionListener, StepListener {
 
         //the bomob will destroy anything it touches unless i add a sepearte collision listener for the explosion.
         if(collisionEvent.getOtherBody() instanceof  StaticBody){
+
             incollision = true;
            // g.setLinearVelocity(new Vec2(0,0));
            // g.setangle(0.1f);

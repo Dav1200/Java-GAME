@@ -62,9 +62,10 @@ protected Vec2 mousepos;
     private int Lives2;
     protected boolean moves;
     protected boolean tutorial;
+    protected boolean Showplat;
 
 
-
+    protected Gamelevel gl;
     private boolean grenadepicked;
 
 
@@ -73,11 +74,13 @@ protected Vec2 mousepos;
     }
 
     //constructor
-    public Player(World world, enemy en, platforms plat) {
+    public Player(World world, enemy en, platforms plat, Gamelevel gl) {
         super(world, player);
         this.world = world;
+        this.gl = gl;
         this.en = en;
         this.plat = plat;
+        Showplat = false;
         grenadepicked = false;
         playerimg = addImage(Playerimg);
         tutorial = true;

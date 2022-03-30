@@ -31,8 +31,12 @@ public class GrenadeProjectile implements ActionListener {
         Explosioncol = new CollisionListener() {
             @Override
             public void collide(CollisionEvent collisionEvent) {
-                if(collisionEvent.getOtherBody() instanceof Destroy){
+                if(collisionEvent.getOtherBody()  instanceof Destroy){
+
                     collisionEvent.getOtherBody().destroy();
+                }
+                if(collisionEvent.getOtherBody() instanceof  enemy){
+                    ((enemy) collisionEvent.getOtherBody()).setSmallenemylives(((enemy) collisionEvent.getOtherBody()).getSmallenemylives()-5);
                 }
             }
         };

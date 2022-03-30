@@ -3,7 +3,7 @@ package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
-public class enemy extends Walker implements StepListener,Destroy {
+public class enemy extends Walker implements StepListener {
 
     private final static Shape enemy = new BoxShape(1, 2);
     private static final BodyImage enemyimg= new BodyImage("enemy/idle2.png", 5f);
@@ -39,13 +39,13 @@ public class enemy extends Walker implements StepListener,Destroy {
     }
 
     private int respawn;
-
+    private Gamelevel world;
 
     public platforms getPlat() {
         return plat;
     }
 
-    public enemy(World world, platforms plat) {
+    public enemy(Gamelevel world, platforms plat) {
         super(world, enemy);
         fimage = addImage(enemyimg);
         //;
@@ -88,6 +88,10 @@ if(stage ==2){
         simage.flipHorizontal();
     }
 
+}
+
+if( world instanceof level2){
+    System.out.println("si");
 }
 
     }

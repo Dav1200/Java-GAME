@@ -6,6 +6,8 @@ import city.cs.engine.StepListener;
 import city.cs.engine.World;
 import org.jbox2d.common.Vec2;
 
+import java.awt.*;
+
 public abstract class Gamelevel extends World implements StepListener {
 
     private Player player;
@@ -32,8 +34,9 @@ public abstract class Gamelevel extends World implements StepListener {
 
 
 
+
         e = new enemy(this, plat);
-        player = new Player(this, e, plat);
+        player = new Player(this.getWorld(), e, plat,this);
         player.getBackpack().additem(new Doublegun(getPlayer()));
         if(this instanceof level2) {
 
@@ -80,6 +83,8 @@ public abstract class Gamelevel extends World implements StepListener {
         return this;
     }
     public abstract boolean isComplete();
+
+    public abstract Image background();
 
     @Override
     public void preStep(StepEvent stepEvent) {

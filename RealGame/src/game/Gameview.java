@@ -11,30 +11,33 @@ import java.awt.geom.Point2D;
 import java.io.IOException;
 
 public class Gameview extends UserView implements StepListener {
-    private static SoundClip stage1,intro;
-    static{
+    private static SoundClip stage1, intro;
+
+    static {
         try {
             stage1 = new SoundClip("Sound/stage1.wav");
             intro = new SoundClip("Sound/intro.wav");
             stage1.setVolume(0.2);
             intro.setVolume(0.2);
             // Open an audio input stream
-           // stage1.loop();                              // Set it to continous playback (looping)
+            // stage1.loop();                              // Set it to continous playback (looping)
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             //code in here will deal with any errors
             //that might occur while loading/playing sound
             System.out.println(e);
         }
     }
+
     private Image background;
     private Image backgroundt;
+    private Image level2background;
     private Image Hearts;
     protected Player player;
     private Image fullh;
     private Image emptyh;
     private enemy e;
     protected Point2D.Float pxcoverted;
-    protected  Point2D.Float Enemypos;
+    protected Point2D.Float Enemypos;
     protected int pycoverted;
     protected int px;
     protected int sec = 0;
@@ -50,7 +53,7 @@ public class Gameview extends UserView implements StepListener {
     private Gamelevel gamelevel;
     private boolean level2;
 
-    public Gameview(World w, int width, int height, Player player, enemy e,Gamelevel gamelevel) {
+    public Gameview(World w, int width, int height, Player player, enemy e, Gamelevel gamelevel) {
         super(w, width, height);
         this.player = player;
         this.e = e;
@@ -64,16 +67,23 @@ public class Gameview extends UserView implements StepListener {
         Hearts = new ImageIcon("enemy/maxh.png").getImage();
         fullh = new ImageIcon("playerimages/fullh.png").getImage();
         emptyh = new ImageIcon("playerimages/emptyhh.png").getImage();
+
         level2 = false;
 
     }
 
+
+
+
     @Override
     protected void paintBackground(Graphics2D g) {
 
-        if(level2)
+        g.drawImage(gamelevel.background(), 0, 0, this);
+/*}
+        if(gamelevel instanceof  level2)
         {
-            g.scale(0.5,0.5);
+            g.drawImage(backgroundt,0,0,this);
+           // g.scale(0.5,0.5);
         }
 
         if (e.stage == 0) {
@@ -90,7 +100,7 @@ public class Gameview extends UserView implements StepListener {
 
         }
 
-
+*/
         //g.scale(0.5f,0.5f);
     }
 
@@ -114,31 +124,31 @@ public class Gameview extends UserView implements StepListener {
         }
 */
 
-            g.drawImage(emptyh, px - 70, pycoverted - 50, 100, 20, this);
-            g.drawImage(fullh, px - 69, pycoverted - 50, player.getLivess(), 20, this);
+        g.drawImage(emptyh, px - 70, pycoverted - 50, 100, 20, this);
+        g.drawImage(fullh, px - 69, pycoverted - 50, player.getLivess(), 20, this);
 
-       // if (e.stage > 0&& e.stage < 3) {
+        // if (e.stage > 0&& e.stage < 3) {
 
-            // g.scale(0.2f,0.2f);
-            //g.drawImage(Hearts,0,10,this);
-            // g.scale(2,2);
-            g.scale(1.5f, 1.5f);
-            g.setColor(Color.white);
-            g.drawString("Lives:" + player.getLives(), 10, 30);
-            g.drawString("Score:" + player.getScore(), 10, 50);
-            g.drawString("Current Weapons:" + player.getBackpack().getitem().getType(), 10, 70);
+        // g.scale(0.2f,0.2f);
+        //g.drawImage(Hearts,0,10,this);
+        // g.scale(2,2);
+        g.scale(1.5f, 1.5f);
+        g.setColor(Color.white);
+        g.drawString("Lives:" + player.getLives(), 10, 30);
+        g.drawString("Score:" + player.getScore(), 10, 50);
+        g.drawString("Current Weapons:" + player.getBackpack().getitem().getType(), 10, 70);
 
-            // System.out.println(this.EnemySteplistener.getSeconds());
-            g.drawString("enemy" + e.getRespawn(), 10, 90);
+        // System.out.println(this.EnemySteplistener.getSeconds());
+        g.drawString("enemy" + e.getRespawn(), 10, 90);
 
-            // g.drawString("Time:" + sec, 10, 70);
-       // }
-       // if (e.stage > 0 && e.stage < 3) {
-            g.setColor(Color.red);
-            g.fillRect(467, 20, 50, 10);
-            g.setColor(Color.green);
-            g.fillRect(467, 20, e.getSmallenemylivess(), 10);
-     //   }
+        // g.drawString("Time:" + sec, 10, 70);
+        // }
+        // if (e.stage > 0 && e.stage < 3) {
+        g.setColor(Color.red);
+        g.fillRect(467, 20, 50, 10);
+        g.setColor(Color.green);
+        g.fillRect(467, 20, e.getSmallenemylivess(), 10);
+        //   }
          /*
         if(e.stage  ==3){
             g.scale(3,3);
@@ -157,6 +167,8 @@ public class Gameview extends UserView implements StepListener {
 
     @Override
     public void preStep(StepEvent stepEvent) {
+
+
         //setCentre(new Vec2(player.getPosition().x,player.getPosition().y));
         pxcoverted = worldToView(new Vec2(player.getPosition()));
         pycoverted = Math.round(pxcoverted.y);
@@ -165,8 +177,8 @@ public class Gameview extends UserView implements StepListener {
 
         //follow Enemy Healthbar
         Enemypos = worldToView(new Vec2(e.getPosition()));
-        ex =  Math.round(Enemypos.x);
-        ey =  Math.round(Enemypos.y);
+        ex = Math.round(Enemypos.x);
+        ey = Math.round(Enemypos.y);
 
 
         //System.out.println(Math.round(pxcoverted.x));
@@ -174,9 +186,8 @@ public class Gameview extends UserView implements StepListener {
         if (face.equals("left")) {
             px += 35;
         }
-        if(gamelevel instanceof level2)
-        {
-            level2 =true;
+        if (gamelevel instanceof level2) {
+            level2 = true;
         }
 
     }
@@ -194,7 +205,7 @@ public class Gameview extends UserView implements StepListener {
             player.setLives(999);
         }*/
 
-        if (e.stage == 1 && !setstage1 ) {
+        if (e.stage == 1 && !setstage1) {
             intro.stop();
             setView(new Vec2(0, 0), this.getZoom());
             player.setPosition(new Vec2(-17, -14));
@@ -205,27 +216,26 @@ public class Gameview extends UserView implements StepListener {
         }
 
 
-            if (e.stage == 2 && !set && player.getScore() == 1) {
-                stage1.stop();
-                setView(new Vec2(60, 0), this.getZoom());
-                e.setRespawn(0);
-                player.setPosition(new Vec2(48, 13));
-                set = true;
-
+        if (e.stage == 2 && !set && player.getScore() == 1) {
+            stage1.stop();
+            setView(new Vec2(60, 0), this.getZoom());
+            e.setRespawn(0);
+            player.setPosition(new Vec2(48, 13));
+            set = true;
 
 
         }
 
-        if(e.stage == 2 && e.getRespawn() == 0 && player.getScore() == 2){
+        if (e.stage == 2 && e.getRespawn() == 0 && player.getScore() == 2) {
 
 
         }
 
         //if(e.stage == 3 && !setStage3  && player.getScore() == 2){
-           // setView(new Vec2(120, 0), this.getZoom());
+        // setView(new Vec2(120, 0), this.getZoom());
 
-           // setStage3 = true;
-     //   }
+        // setStage3 = true;
+        //   }
 
 
         //this.points = worldToView(new Vec2((e.getPosition().x),(e.getPosition().y-50)));
@@ -236,11 +246,16 @@ public class Gameview extends UserView implements StepListener {
 
 
     }
-    public void updateStudent(Player player){
+
+    public void updateStudent(Player player) {
         this.player = player;
     }
 
-    public void enemy(enemy e){
+    public void enemy(enemy e) {
         this.e = e;
+    }
+
+    public void updategamelevel(Gamelevel gamelevel){
+        this.gamelevel = gamelevel;
     }
 }

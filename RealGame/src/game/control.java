@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class control implements KeyListener, StepListener {
 
-    private static final float speed = 4;
+    private static final float speed = 8;
     protected Player player;
     protected EnemySteplistener t;
     boolean one = false;
@@ -81,12 +81,12 @@ public class control implements KeyListener, StepListener {
                     //player.getBackpack().getitem().function();
 
                 }
-              if(player.tutorial){
+
 
                 if(code == KeyEvent.VK_G){
-                    enemy.stage++;
+                    player.setLives(player.getLives()-1);
                     //player.tutorial = false;
-                }
+
             }
 
 

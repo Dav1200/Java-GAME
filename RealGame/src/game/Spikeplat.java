@@ -22,7 +22,7 @@ public class Spikeplat extends platforms {
 
 
     public Spikeplat(Gamelevel w, float width, float x, float y, Player player, enemy e) {
-        super(w);
+        super(w,player);
         this.w = w;
         this.e = e;
         this.player = player;

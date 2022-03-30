@@ -34,7 +34,7 @@ public class RegeneratePlat extends StaticBody {
         hearts = new StaticBody(this.getWorld());
         hearts.addImage(hp);
         GhostlyFixture heartsinvis = new GhostlyFixture(hearts,hpp);
-        hearts.setPosition(new Vec2(49,12));
+        hearts.setPosition(new Vec2(x,y+3));
 
         //addImage(hp).setOffset(new Vec2(49.5f,12));
         Dav = new StaticBody(this.getWorld(),new BoxShape(width,0.3f));

@@ -15,7 +15,6 @@ public class grenadepickup extends StaticBody {
     protected AttachedImage images;
 
     public grenadepickup(World w) {
-
         super(w,grenade);
         //setGravityScale(0);
         //this.applyForce(new Vec2(1,1));
