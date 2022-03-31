@@ -1,9 +1,6 @@
 package game;
 
-import city.cs.engine.BodyImage;
-import city.cs.engine.StepEvent;
-import city.cs.engine.StepListener;
-import city.cs.engine.World;
+import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
 import java.awt.*;
@@ -46,6 +43,8 @@ public abstract class Gamelevel extends World implements StepListener {
         player.addCollisionListener(pickup);
 
 
+        this.sound().play();
+
 
     }
 
@@ -85,6 +84,8 @@ public abstract class Gamelevel extends World implements StepListener {
     public abstract boolean isComplete();
 
     public abstract Image background();
+    public  abstract SoundClip sound();
+
 
     @Override
     public void preStep(StepEvent stepEvent) {

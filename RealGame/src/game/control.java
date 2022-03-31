@@ -19,13 +19,15 @@ public class control implements KeyListener, StepListener {
     protected int jumpcount;
     private boolean active;
     protected int count;
+    private Game g;
 
     ArrayList<Integer> Dav = new ArrayList<>();
     ArrayList<Integer> Dav2 = new ArrayList<>();
 
-    public control(Player player, EnemySteplistener t, enemy enemy) {
+    public control(Player player, EnemySteplistener t, enemy enemy,Game g) {
         this.player = player;
         this.t = t;
+        this.g = g;
         this.enemy = enemy;
         active = false;
 
@@ -83,11 +85,21 @@ public class control implements KeyListener, StepListener {
                 }
 
 
-                if(code == KeyEvent.VK_G){
-                    player.setLives(player.getLives()-1);
+                if(code == KeyEvent.VK_ESCAPE){
+                   g.move();
+
+
                     //player.tutorial = false;
 
             }
+
+                if(code == KeyEvent.VK_K){
+
+
+
+                    //player.tutorial = false;
+
+                }
 
 
                 if (Dav.contains(1) && Dav.contains(2)) {

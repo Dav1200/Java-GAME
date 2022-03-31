@@ -1,12 +1,16 @@
 package game;
 
 import city.cs.engine.BodyImage;
+import city.cs.engine.SoundClip;
 import city.cs.engine.StepEvent;
 import city.cs.engine.StepListener;
 import org.jbox2d.common.Vec2;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class level1 extends Gamelevel implements StepListener {
     private Player player;
@@ -21,6 +25,23 @@ public class level1 extends Gamelevel implements StepListener {
     private Coin coin;
     private Coin coin2;
     private Image background;
+
+    private static SoundClip stage1;
+
+    static {
+        try {
+            stage1 = new SoundClip("Sound/stage1.wav");
+
+            stage1.setVolume(0.2);
+
+            // Open an audio input stream
+            // stage1.loop();                              // Set it to continous playback (looping)
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            //code in here will deal with any errors
+            //that might occur while loading/playing sound
+            System.out.println(e);
+        }
+    }
     public level1(Game game) {
         super(game);
 
@@ -83,14 +104,22 @@ public class level1 extends Gamelevel implements StepListener {
 
         if(getPlayer().getScore() == 2){
             return true;
+
         }
         else
             return false;
+
     }
 
     @Override
     public Image background() {
         return background;
+    }
+
+    @Override
+    public SoundClip sound() {
+        return stage1;
+
     }
 
 

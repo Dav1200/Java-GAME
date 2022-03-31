@@ -56,7 +56,7 @@ private Gamelevel gamelevel;
         }
 
         if(collisionEvent.getOtherBody()  instanceof Coin && gamelevel.isComplete()){
-            System.out.println("hi");
+            gamelevel.sound().stop();
             game.goToNextLevel();
         }
 
