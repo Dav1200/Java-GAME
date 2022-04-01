@@ -26,6 +26,8 @@ public class GrenadeCollision implements CollisionListener, StepListener {
 
 
         }
+
+
 //add a timer which reduces the velocity of the bomb by 1 every 10ms
 
     }

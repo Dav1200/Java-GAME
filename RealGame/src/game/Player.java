@@ -1,18 +1,23 @@
 package game;
 
 import city.cs.engine.*;
+import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
+
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+
 import java.awt.event.ActionListener;
+
 import java.io.IOException;
+import java.util.List;
 
 
 public class Player extends Walker implements StepListener {
 
-    private static final Shape player = new PolygonShape(
+    private static Shape player = new PolygonShape(
             -2.21f, 0.59f, -1.48f, -2.05f, 0.07f, -2.08f, 1.17f, -0.32f, -0.11f, 1.45f);
 
     private static final BodyImage Playerimg = new BodyImage("PlayerImages/gif2.gif", 5f);
@@ -38,6 +43,7 @@ public class Player extends Walker implements StepListener {
         }
     }
 
+
     private int Lives;
 
 
@@ -46,7 +52,9 @@ public class Player extends Walker implements StepListener {
     private platforms plat;
     protected boolean grendadeshoot;
 
-protected Vec2 mousepos;
+
+    private boolean shield;
+    protected Vec2 mousepos;
     protected boolean coinpick;
     private String facing;
     protected boolean doublegun;
@@ -63,6 +71,12 @@ protected Vec2 mousepos;
     protected boolean moves;
     protected boolean tutorial;
     protected boolean Showplat;
+    private Vec2 offset;
+    protected int jcount;
+    protected boolean ShowShield;
+    private ShieldActionListner shieldActionListner;
+    private   ShieldBody shieldclass;
+    ;
 
 
     protected Gamelevel gl;
@@ -82,23 +96,31 @@ protected Vec2 mousepos;
         this.plat = plat;
         Showplat = false;
         grenadepicked = false;
+        jcount = 0;
         playerimg = addImage(Playerimg);
         tutorial = true;
         moves = true;
         Lives = 10;
+        ShowShield = false;
         setGravityScale(5);
         Score = 0;
         facing = "right";
-        this.setGravityScale(2);
+        this.setGravityScale(10);
         backpack = new Backpack();
         timer = 0;
         bulletcount = 2;
         delay = 0;
         doublegun = false;
         jumpcount = 0;
-        grendadeshoot =true;
+        shield = false;
+        grendadeshoot = false;
         coinpick = false;
-mousepos = new Vec2(this.getPosition());
+        setAlwaysOutline(true);
+        offset = playerimg.getOffset();
+
+
+
+        mousepos = new Vec2(this.getPosition());
     }
 
     public int getLives() {
@@ -113,19 +135,33 @@ mousepos = new Vec2(this.getPosition());
         shot.play();
     }
 
+
     public void walk(float speed) {
         super.startWalking(speed);
         if (speed < 0 && facing.equals("right")) {
-            playerimg.flipHorizontal();
 
+            List<AttachedImage> allim = this.getImages();
+            for (AttachedImage im : allim) {
+                im.flipHorizontal();
+            }
+
+            playerimg.setOffset(new Vec2(1.4f, 0));
             // this.removeAllImages();
             // this.addImage(Playerimgl);
             facing = "left";
 
             //this.startWalking(speed);
 
+
         } else if (speed > 0 && facing.equals("left")) {
-            playerimg.flipHorizontal();
+            List<AttachedImage> allim = this.getImages();
+            for (AttachedImage im : allim) {
+                im.flipHorizontal();
+            }
+
+            playerimg.setOffset(offset);
+
+
             // this.removeAllImages();
             // this.addImage(Playerimgl);
             facing = "right";
@@ -155,7 +191,7 @@ mousepos = new Vec2(this.getPosition());
 
 
             bullet.setPosition(new Vec2(this.getPosition().x - 1f, this.getPosition().y));
-            bullet.setLinearVelocity(new Vec2(-20, 2));
+            bullet.setLinearVelocity(new Vec2(-40, 2));
         } else {
             bullet.removeAllImages();
             bullet.addImage(bulletimgr);
@@ -163,7 +199,7 @@ mousepos = new Vec2(this.getPosition());
             //bulletimgrr.flipHorizontal();
             bullet.setPosition(new Vec2(this.getPosition().x + 0.5f, this.getPosition().y));
 
-            bullet.setLinearVelocity(new Vec2(20, 2));
+            bullet.setLinearVelocity(new Vec2(40, 2));
 
         }
     }
@@ -197,22 +233,22 @@ mousepos = new Vec2(this.getPosition());
                 bullet1.removeAllImages();
                 bullet1.addImage(bulletimgl);
                 bullet1.setPosition(new Vec2(this.getPosition().x - 1f, this.getPosition().y));
-                bullet1.setLinearVelocity(new Vec2(-20, 2));
+                bullet1.setLinearVelocity(new Vec2(-30, 2));
 
                 bullet2.removeAllImages();
                 bullet2.addImage(bulletimgl);
                 bullet2.setPosition(new Vec2(this.getPosition().x - 2.9f, this.getPosition().y));
-                bullet2.setLinearVelocity(new Vec2(-20, 2));
+                bullet2.setLinearVelocity(new Vec2(-30, 2));
             } else {
                 bullet1.removeAllImages();
                 bullet1.addImage(bulletimgr);
                 bullet1.setPosition(new Vec2(this.getPosition().x + 0.5f, this.getPosition().y));
-                bullet1.setLinearVelocity(new Vec2(20, 2));
+                bullet1.setLinearVelocity(new Vec2(30, 2));
 
                 bullet2.removeAllImages();
                 bullet2.addImage(bulletimgr);
                 bullet2.setPosition(new Vec2(this.getPosition().x + 2.2f, this.getPosition().y));
-                bullet2.setLinearVelocity(new Vec2(20, 2));
+                bullet2.setLinearVelocity(new Vec2(30, 2));
 
             }
 
@@ -223,9 +259,10 @@ mousepos = new Vec2(this.getPosition());
 
         }
     }
-    public void ThrowGrenade(){
 
-        GrenadeProjectile bullet = new GrenadeProjectile(this.getWorld(),5000,this);
+    public void ThrowGrenade() {
+
+        GrenadeProjectile bullet = new GrenadeProjectile(this.getWorld(), 5000, this);
 
 
         //DynamicBody bullet = new DynamicBody(this.getWorld(), new CircleShape(0.2f));
@@ -233,11 +270,29 @@ mousepos = new Vec2(this.getPosition());
         Vec2 dir = mousepos.sub(this.getPosition());
         dir.normalize();
         bullet.setPosition(this.getPosition().add(dir.mul(1f)));
-        bullet.setLinearVelocity(dir.mul(18));
+        bullet.setLinearVelocity(dir.mul(28));
+        bullet.setgraviy(1.5f);
+
+
+    }
+
+    public void putShield() {
+
+
+        if (!ShowShield) {
+
+           ShieldBody shieldclasss = new ShieldBody(this.getWorld(), new BoxShape(0.2f, 2), this);
+            this.getWorld().addStepListener(shieldclasss);
+            ShowShield = true;
+            shieldActionListner = new ShieldActionListner(shieldclasss,this);
+            Timer shieldtimer = new Timer(1800,shieldActionListner );
+            shieldtimer.start();
+            shieldtimer.setRepeats(false);
 
 
 
 
+        }
     }
 
     public void reset() {
@@ -262,6 +317,8 @@ mousepos = new Vec2(this.getPosition());
 
     @Override
     public void preStep(StepEvent stepEvent) {
+
+
         if (en.stage == 1) {
             tutorial = false;
         }
@@ -274,6 +331,7 @@ mousepos = new Vec2(this.getPosition());
 
 
     }
+
 
     @Override
     public void postStep(StepEvent stepEvent) {
@@ -321,6 +379,14 @@ mousepos = new Vec2(this.getPosition());
 
     public void setGrenadepicked(boolean grenadepicked) {
         this.grenadepicked = grenadepicked;
+    }
+
+    public boolean isShield() {
+        return shield;
+    }
+
+    public void setShield(boolean shield) {
+        this.shield = shield;
     }
 
 

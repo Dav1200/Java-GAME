@@ -1,17 +1,28 @@
 package game;
 
+import city.cs.engine.BodyImage;
+import org.jbox2d.common.Vec2;
+
+import javax.swing.*;
+
 public class Doublegun extends BackpackItem{
 
     public Doublegun(Player player) {
         super(player);
+        image = new ImageIcon("item/icon1.png").getImage();
     }
 
     @Override
     public String getType() {
-        if(player.doublegun){
+
         return "DoubleGun";}
 
-    return "Empty";
+    @Override
+    public void puton() {
+        super.puton();
+
+
+
     }
 
     @Override

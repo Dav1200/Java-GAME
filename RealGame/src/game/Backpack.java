@@ -21,9 +21,12 @@ public class Backpack {
     }
 
     public void toggle(){
+        //getitem().putoff();
         currentItem++;
         if(currentItem == items.size())
             currentItem = 0;
+
+       // getitem().puton();
 
 
 

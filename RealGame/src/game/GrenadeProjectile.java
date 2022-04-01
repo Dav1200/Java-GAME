@@ -36,7 +36,8 @@ public class GrenadeProjectile implements ActionListener {
                     collisionEvent.getOtherBody().destroy();
                 }
                 if(collisionEvent.getOtherBody() instanceof  enemy){
-                    ((enemy) collisionEvent.getOtherBody()).setSmallenemylives(((enemy) collisionEvent.getOtherBody()).getSmallenemylives()-5);
+                    collisionEvent.getOtherBody().destroy();
+                    ((enemy) collisionEvent.getOtherBody()).setRespawn(0);
                 }
             }
         };
@@ -87,6 +88,9 @@ count ++;
 
     public void setangle(float b){
         Bomb.setAngularVelocity(b);
+    }
+    public void setgraviy(float b){
+        Bomb.setGravityScale(b);
     }
 
     public Vec2 getlinearvelocity(){

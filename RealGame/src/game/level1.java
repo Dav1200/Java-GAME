@@ -26,6 +26,8 @@ public class level1 extends Gamelevel implements StepListener {
     private Coin coin2;
     private Image background;
 
+
+
     private static SoundClip stage1;
 
     static {
@@ -48,7 +50,7 @@ public class level1 extends Gamelevel implements StepListener {
 
         background = new ImageIcon("Platformimg/stage1r.png").getImage();
         plat = new platforms(this,getPlayer());
-        getE().setPosition(new Vec2(17.5f, 0));
+        getE().setPosition(new Vec2(15.5f, 1.75f));
         getPlayer().setPosition(new Vec2(-17, 2));
         a = new RegeneratePlat(this, 4f, 47f, 10f, getPlayer());
         Lava = new Spikeplat(this, 10, 60, 0, getPlayer(), getE());
@@ -60,6 +62,7 @@ public class level1 extends Gamelevel implements StepListener {
         p.setPosition(new Vec2(-5, 0));
 
         coin = new Coin(this);
+
 
         coin.setPosition(new Vec2(17, 6.5f));
         coin2 = new Coin(this);
@@ -74,6 +77,7 @@ public class level1 extends Gamelevel implements StepListener {
             getPlayer().coinpick = false;
             getE().enemydef = false;
             getE().stage++;
+
         }
 
 

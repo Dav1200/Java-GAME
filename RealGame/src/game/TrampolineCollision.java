@@ -13,7 +13,7 @@ this.j = j;
     public void collide(CollisionEvent collisionEvent) {
         if(collisionEvent.getOtherBody() instanceof  Player){
             j.play();
-            ((Player) collisionEvent.getOtherBody()).setLinearVelocity(new Vec2(0,40));
+            ((Player) collisionEvent.getOtherBody()).setLinearVelocity(new Vec2(0,50));
         }
 
 

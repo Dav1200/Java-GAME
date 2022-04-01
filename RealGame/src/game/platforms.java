@@ -7,19 +7,32 @@ public class platforms extends StaticBody implements StepListener {
 
     private static BodyImage grounds = new BodyImage("Platformimg/woodtile.png", 1);
     private static final BodyImage metal = new BodyImage("Platformimg/Metalplat.png", 1);
+    private static BodyImage wooden_building = new BodyImage("structure/building_1.png", 9);
     private EnemybulletCol dav;
     private World w;
     private boolean loop2;
-private boolean loop;
-private  Button b;
+    private boolean loop;
+
+    public Button getB() {
+        return b;
+    }
+
+    public void setB(Button b) {
+        this.b = b;
+    }
+
+    private Button b;
 
     private Player p;
 
     public platforms(World w, Player p) {
         super(w);
-loop = true;
-loop2 = true;
+        loop = true;
+        loop2 = true;
         this.p = p;
+
+
+
         w.addStepListener(this);
         if (w instanceof level1) {
 
@@ -39,14 +52,19 @@ loop2 = true;
             tutorialplat();
         }
         if (w instanceof level2) {
-            grounds = metal;
+            //grounds = metal;
             border(60, 0.3f, -16, -16);
 
 
         }
 
 
+    }
 
+    public void woodenbuild(float x, float y){
+        StaticBody woodenbuilding = new StaticBody(this.getWorld(),new BoxShape(3,3));
+        woodenbuilding.addImage(wooden_building);
+        woodenbuilding.setPosition(new Vec2(x,y));
     }
 
     //ground
@@ -54,14 +72,14 @@ loop2 = true;
         StaticBody ground = new StaticBody(this.getWorld(), new BoxShape(2, 0.3f));
         ground.setPosition(new Vec2(x, y));
         ground.addImage(grounds);
-        ground.setAlwaysOutline(true);
+        //ground.setAlwaysOutline(true);
     }
 
     public void platformss(Float x, Float y) {
         StaticBody ground = new StaticBody(this.getWorld(), new BoxShape(15, 0.5f));
         ground.setPosition(new Vec2(x, y));
         ground.addImage(grounds);
-        ground.setAlwaysOutline(true);
+        //ground.setAlwaysOutline(true);
     }
 
     public void multiplat(int t) {
@@ -126,26 +144,40 @@ loop2 = true;
     @Override
     public void preStep(StepEvent stepEvent) {
         if (p.Showplat && loop) {
-            for(int i = 0 ; i < 3;i++){
-            platforms(18f+i*2,-9f);}
+            for (int i = 0; i < 3; i++) {
+                platforms(18f + i * 2, -9f);
+            }
 
-            platforms(10f,0f);
-             b = new Button(this.getWorld());
+            platforms(10f, 0f);
 
-            platforms(0f,0f);
-            platforms(-30f,0f);
-            platforms(-27f,0f);
+            b = new Button(this.getWorld());
+            platforms(0f, 0f);
+            platforms(-30f, 0f);
+            platforms(-27f, 0f);
             loop = false;
 
 
         }
 
-        if(p.Showplat && loop2){
-if(b.isPressed()){
-        loop2 =false;
-        platforms(0f,10f);
+        if (p.Showplat && loop2) {
+            if (b.isPressed()) {
 
-    }}}
+                loop2 = false;
+                platforms(0f, 10f);
+                platforms(-4f, 10f);
+                platforms(-16f, 15f);
+                platforms(-12f, 15f);
+                platforms(-22f, 12f);
+                platforms(-26f, 12f);
+                 Coin d = new Coin(this.getWorld());
+                 d.setPosition(new Vec2(-25f,14f));
+
+
+
+
+            }
+        }
+    }
 
     @Override
     public void postStep(StepEvent stepEvent) {

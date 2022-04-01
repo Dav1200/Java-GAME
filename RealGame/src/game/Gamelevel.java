@@ -19,7 +19,7 @@ public abstract class Gamelevel extends World implements StepListener {
     private Coin coin;
     private Coin coin2;
     private Game game;
-
+    private int volume;
 
 
     public void setPlayer(Player player) {
@@ -31,19 +31,24 @@ public abstract class Gamelevel extends World implements StepListener {
 
 
 
+    getSimulationSettings().setTargetFrameRate(60);
+
 
         e = new enemy(this, plat);
         player = new Player(this.getWorld(), e, plat,this);
         player.getBackpack().additem(new Doublegun(getPlayer()));
-        if(this instanceof level2) {
+        getPlayer().getBackpack().additem(new Shield(getPlayer()));
+            player.getBackpack().additem(new Grenade(getPlayer()));
 
-            player.getBackpack().additem(new Grenade(getPlayer()));}
 
-        Collision pickup = new Collision(player, plat, e,game,this);
+
+        Collision pickup = new Collision(player, this.plat, e,game,this);
         player.addCollisionListener(pickup);
 
-
+        this.setGravity(15);
         this.sound().play();
+        this.sound().loop();
+        //this.sound().loop();
 
 
     }
@@ -85,6 +90,12 @@ public abstract class Gamelevel extends World implements StepListener {
 
     public abstract Image background();
     public  abstract SoundClip sound();
+
+    public void play(){
+        this.sound().play();
+
+
+    }
 
 
     @Override

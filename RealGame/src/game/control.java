@@ -4,13 +4,14 @@ import city.cs.engine.StepEvent;
 import city.cs.engine.StepListener;
 import org.jbox2d.common.Vec2;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class control implements KeyListener, StepListener {
 
-    private static final float speed = 8;
+    private static final float speed = 12;
     protected Player player;
     protected EnemySteplistener t;
     boolean one = false;
@@ -20,6 +21,7 @@ public class control implements KeyListener, StepListener {
     private boolean active;
     protected int count;
     private Game g;
+    private int jcount;
 
     ArrayList<Integer> Dav = new ArrayList<>();
     ArrayList<Integer> Dav2 = new ArrayList<>();
@@ -29,7 +31,7 @@ public class control implements KeyListener, StepListener {
         this.t = t;
         this.g = g;
         this.enemy = enemy;
-        active = false;
+        active = true;
 
 
 
@@ -68,17 +70,15 @@ public class control implements KeyListener, StepListener {
                     Dav.add(3);
 
 
-                if (code == KeyEvent.VK_W) {
-                    player.jump(23);
+                if (code == KeyEvent.VK_W ) {
+                    if(player.jcount <2){
 
-                    active = true;
-                    if (jumpcount > 13) {
-                        // player.removeAllImages();
-                        player.setLinearVelocity(new Vec2(0, 20));
-
-
+                        player.setLinearVelocity(new Vec2(0,30));
+                        player.jcount++;
                     }
-                    jumpcount = 0;
+
+
+
 
                     //player.getBackpack().getitem().function();
 
@@ -103,9 +103,9 @@ public class control implements KeyListener, StepListener {
 
 
                 if (Dav.contains(1) && Dav.contains(2)) {
-                    player.walk(speed * 2);
+                    player.walk(speed * 1.25f);
                 } else if (Dav.contains(1) && Dav.contains(3)) {
-                    player.walk(-speed * 2);
+                    player.walk(-speed * 1.25f);
                 }
                 if (code == KeyEvent.VK_SPACE) {
                     if (t.bulletseconds == 60) {
@@ -122,6 +122,7 @@ public class control implements KeyListener, StepListener {
 
                     player.getBackpack().getitem().function();
                 }
+
             }
 
         }
@@ -147,7 +148,7 @@ public class control implements KeyListener, StepListener {
             //player.setLinearVelocity(new Vec2(0, 0));
         } else if (code == KeyEvent.VK_W) {
 
-            active = false;
+            active = true;
 
 
             //Dav.removeAll(Dav);

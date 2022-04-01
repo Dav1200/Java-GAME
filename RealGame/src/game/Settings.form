@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="game.Settings">
+  <grid id="27dc6" binding="MainPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+    <constraints>
+      <xy x="333" y="128" width="500" height="78"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="17174" class="javax.swing.JSlider" binding="slider1" default-binding="true">
+        <constraints/>
+        <properties/>
+      </component>
+      <component id="b3c3" class="javax.swing.JButton" binding="NextStage">
+        <constraints/>
+        <properties>
+          <text value="NextStage"/>
+        </properties>
+      </component>
+      <component id="8eb4c" class="javax.swing.JButton" binding="PreviousStage">
+        <constraints/>
+        <properties>
+          <text value="PreviousStage"/>
+        </properties>
+      </component>
+      <component id="3d02d" class="javax.swing.JButton" binding="Close">
+        <constraints/>
+        <properties>
+          <text value="Close"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

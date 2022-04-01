@@ -49,18 +49,18 @@ public class level2 extends Gamelevel implements StepListener {
 
         background = new ImageIcon("Platformimg/back2.png").getImage();
         plat = new platforms(this.getWorld(),getPlayer());
-
+        plat.woodenbuild(30,2);
         level2p = new TemporaryPlat(this.getWorld(),0.3f,8,20,-10);
         new TemporaryPlat(this.getWorld(),7.5f,0.3f,27,-2);
         a = new RegeneratePlat(this.getWorld(), 4f, 26f, -13f, getPlayer());
-
-
+        getPlayer().grendadeshoot= true;
+        ShieldPickup d = new ShieldPickup(this.getWorld());
+        d.setPosition(new Vec2(30,8));
 
 
         getPlayer().setPosition(new Vec2(-18,0));
         getE().setPosition(new Vec2(16,0));
-        //coin = new Coin(this);
-        //coin.setPosition(new Vec2(-5, -5));
+
 
 
         //
@@ -85,6 +85,8 @@ public class level2 extends Gamelevel implements StepListener {
             getE().stage++;
         }
 
+
+
     }
 
     @Override
@@ -107,7 +109,7 @@ public class level2 extends Gamelevel implements StepListener {
 
     @Override
     public boolean isComplete() {
-        if(getPlayer().getScore() == 5){
+        if(getPlayer().getScore() > 5){
             return true;
         }
         else

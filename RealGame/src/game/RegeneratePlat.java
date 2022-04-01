@@ -46,6 +46,7 @@ public class RegeneratePlat extends StaticBody {
         Dav.addCollisionListener(dav);
         getWorld().addStepListener(dav);
 
+
     }
 
 

@@ -3,7 +3,7 @@ package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
-public class enemy extends Walker implements StepListener {
+public class enemy extends Walker implements StepListener{
 
     private final static Shape enemy = new BoxShape(1, 2);
     private static final BodyImage enemyimg= new BodyImage("enemy/idle2.png", 5f);

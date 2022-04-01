@@ -49,6 +49,7 @@ public class BulletCollision implements CollisionListener{
                     collisionEvent.getOtherBody().setPosition(new Vec2(60,5));
 
 
+
                 ((enemy) collisionEvent.getOtherBody()).setSmallenemylives(5);
                 ((enemy) collisionEvent.getOtherBody()).setRespawn(((enemy) collisionEvent.getOtherBody()).getRespawn() - 1);
 

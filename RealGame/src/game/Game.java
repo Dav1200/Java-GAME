@@ -1,10 +1,12 @@
 package game;
 
 import city.cs.engine.DebugViewer;
+import city.cs.engine.World;
 import org.jbox2d.common.Vec2;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Set;
 
 
 public class Game {
@@ -28,9 +30,18 @@ public class Game {
     private ImageIcon Image;
     private Image background;
 
+    public Settings getSettings() {
+        return settings;
+    }
+
+    private   Settings settings;
+
     public Game() {
+
         world = new level1(this);
+
         menu = new Menu(this);
+         settings = new Settings(this);
 
         background = new ImageIcon("Platformimg/Pauseback.png").getImage();
         if (world.getPlayer().getLives() == 9) {
@@ -47,9 +58,16 @@ public class Game {
         t = new EnemySteplistener(view, world.getPlayer(), world.getE());
 
         Image = new ImageIcon("Platformimg/Pauseback.png");
+
+        JButton play = new JButton("play");
+
+
+
         jlabel = new JLabel(Image);
         jlabel.setSize(800,600);
-
+        jlabel.add(menu.getButton1());
+        jlabel.add(menu.getQuitButton());
+        jlabel.add(menu.getSettingsButton());
         //RegeneratePlayercollision c = new RegeneratePlayercollision(world.getPlayer());
 
         dav = new Mousecontroller(view, world.getPlayer());
@@ -68,11 +86,15 @@ public class Game {
         world.addStepListener(move);
         world.addStepListener(world);
 
-
         frame = new JFrame("Dav Game");
+
+
         framee = new JFrame("Dav Game");
+
         //frame.setSize(800,600)
         //  view.setGridResolution(1);
+
+
         thispane = frame.getContentPane();
         pane = framee.getContentPane();
 
@@ -80,7 +102,7 @@ public class Game {
 
 
         view.setLayout(null);
-
+        frame.setSize(800,600);
 
         frame.getContentPane().add(view);
 
@@ -103,8 +125,9 @@ public class Game {
 
         JFrame debugView = new DebugViewer(world, 500, 500);
         debugView.setVisible(true);
-
+        StartMenu();
         world.start();
+
 
 
     }
@@ -129,7 +152,7 @@ public class Game {
             view.setWorld(world);
             //view.setZoom(12);
             view.setView(new Vec2(0, 9), 12);
-
+            System.out.println(world.isComplete());
 
             //change the controller to control the
             //student in the new world
@@ -155,9 +178,21 @@ public class Game {
 
 
         }
+    }
 
+
+    public void StartMenu(){
+        world.stop();
+
+        frame.setContentPane(pane);
+       // frame.add(startMenu);
+        frame.add(jlabel);
+
+        frame.validate();
 
     }
+
+
 
     public void move() {
         world.stop();
@@ -166,7 +201,7 @@ public class Game {
         frame.setContentPane(pane);
         frame.add(jlabel);
 
-        jlabel.add(menu.getButton1());
+
         //jlabel.add(menu.getMainPanel());
         frame.getContentPane();
         //frame.repaint();

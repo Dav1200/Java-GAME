@@ -116,6 +116,8 @@ public class Gameview extends UserView implements StepListener {
 
     @Override
     protected void paintForeground(Graphics2D g) {
+
+
         tick = e.getSmallenemylives() + 7;
 /*
         if (e.stage == 0) {
@@ -133,7 +135,8 @@ public class Gameview extends UserView implements StepListener {
 
         }
 */
-
+        //g.drawRect(165,75,60,60);
+        g.drawImage(player.getBackpack().getitem().image,165,85,30,30,this);
         g.drawImage(emptyh, px - 70, pycoverted - 50, 100, 20, this);
         g.drawImage(fullh, px - 69, pycoverted - 50, player.getLivess(), 20, this);
 
@@ -144,12 +147,15 @@ public class Gameview extends UserView implements StepListener {
         // g.scale(2,2);
         g.scale(1.5f, 1.5f);
         g.setColor(Color.white);
-        g.drawString("Lives:" + player.getLives(), 10, 30);
+        if(gamelevel instanceof level2){
+            g.setColor(Color.black);
+
+        }        g.drawString("Lives:" + player.getLives(), 10, 30);
         g.drawString("Score:" + player.getScore(), 10, 50);
-        g.drawString("Current Weapons:" + player.getBackpack().getitem().getType(), 10, 70);
+        g.drawString("Current Weapons:" , 10, 70);
 
         // System.out.println(this.EnemySteplistener.getSeconds());
-        g.drawString("enemy" + e.getRespawn(), 10, 90);
+      // g.drawString("enemy" + e.getRespawn(), 10, 90);
 
         // g.drawString("Time:" + sec, 10, 70);
         // }
@@ -194,9 +200,9 @@ public class Gameview extends UserView implements StepListener {
         //System.out.println(Math.round(pxcoverted.x));
         //System.out.println(pxcoverted);
         if (face.equals("left")) {
-            px += 35;
+            //px += 35;
             if(gamelevel instanceof  level2){
-                px-=10;
+                px+=10;
             }
         }
 

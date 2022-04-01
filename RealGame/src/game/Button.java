@@ -63,7 +63,7 @@ public class Button extends StaticBody {
         };
         if(pressed)
         {
-            System.out.println("roland");
+
         }
         addCollisionListener(buttoncollision);
 
