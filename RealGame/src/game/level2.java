@@ -33,7 +33,7 @@ public class level2 extends Gamelevel implements StepListener {
 
             intro = new SoundClip("Sound/intro.wav");
 
-            intro.setVolume(0.2);
+           // intro.setVolume(0.2);
             // Open an audio input stream
             // stage1.loop();                              // Set it to continous playback (looping)
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
@@ -109,7 +109,7 @@ public class level2 extends Gamelevel implements StepListener {
 
     @Override
     public boolean isComplete() {
-        if(getPlayer().getScore() > 5){
+        if(getPlayer().getScore() == 3){
             return true;
         }
         else

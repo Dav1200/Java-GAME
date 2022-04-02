@@ -34,7 +34,7 @@ public class level1 extends Gamelevel implements StepListener {
         try {
             stage1 = new SoundClip("Sound/stage1.wav");
 
-            stage1.setVolume(0.2);
+           // stage1.setVolume(0.2);
 
             // Open an audio input stream
             // stage1.loop();                              // Set it to continous playback (looping)

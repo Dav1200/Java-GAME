@@ -9,7 +9,19 @@
     <children>
       <component id="17174" class="javax.swing.JSlider" binding="slider1" default-binding="true">
         <constraints/>
-        <properties/>
+        <properties>
+          <majorTickSpacing value="1"/>
+          <maximum value="5"/>
+          <minimum value="1"/>
+          <paintLabels value="true"/>
+          <paintTicks value="true"/>
+          <snapToTicks value="true"/>
+          <value value="2"/>
+          <valueIsAdjusting value="false"/>
+        </properties>
+        <clientProperties>
+          <JSlider.isFilled class="java.lang.Boolean" value="true"/>
+        </clientProperties>
       </component>
       <component id="b3c3" class="javax.swing.JButton" binding="NextStage">
         <constraints/>

@@ -1,6 +1,8 @@
 package game;
 
 import city.cs.engine.DebugViewer;
+import city.cs.engine.StepEvent;
+import city.cs.engine.StepListener;
 import city.cs.engine.World;
 import org.jbox2d.common.Vec2;
 
@@ -9,7 +11,7 @@ import java.awt.*;
 import java.util.Set;
 
 
-public class Game {
+public class Game implements StepListener {
     private Gamelevel world;
 
     /**
@@ -29,19 +31,21 @@ public class Game {
     private JLabel jlabel;
     private ImageIcon Image;
     private Image background;
+    protected int volume;
+
 
     public Settings getSettings() {
         return settings;
     }
 
-    private   Settings settings;
+    private Settings settings;
 
-    public Game() {
+    public Game()  {
 
         world = new level1(this);
-
+        volume =1 ;
         menu = new Menu(this);
-         settings = new Settings(this);
+        settings = new Settings(this,world);
 
         background = new ImageIcon("Platformimg/Pauseback.png").getImage();
         if (world.getPlayer().getLives() == 9) {
@@ -62,9 +66,8 @@ public class Game {
         JButton play = new JButton("play");
 
 
-
         jlabel = new JLabel(Image);
-        jlabel.setSize(800,600);
+        jlabel.setSize(800, 600);
         jlabel.add(menu.getButton1());
         jlabel.add(menu.getQuitButton());
         jlabel.add(menu.getSettingsButton());
@@ -76,6 +79,7 @@ public class Game {
         view.addKeyListener(move);
 
 
+
         //
         //world.getPlayer().addCollisionListener(dav);
 
@@ -85,6 +89,7 @@ public class Game {
         world.addStepListener(world.getPlayer());
         world.addStepListener(move);
         world.addStepListener(world);
+        world.addStepListener(this);
 
         frame = new JFrame("Dav Game");
 
@@ -99,15 +104,13 @@ public class Game {
         pane = framee.getContentPane();
 
 
-
-
         view.setLayout(null);
-        frame.setSize(800,600);
+        frame.setSize(800, 600);
 
         frame.getContentPane().add(view);
 
 
-       // frame.setContentPane(pane);
+        // frame.setContentPane(pane);
 
         //frame.add(menu.getButton1());
 
@@ -127,7 +130,6 @@ public class Game {
         debugView.setVisible(true);
         StartMenu();
         world.start();
-
 
 
     }
@@ -168,30 +170,67 @@ public class Game {
             world.addStepListener(world.getPlayer());
             world.addStepListener(move);
             world.addStepListener(world);
+            world.addStepListener(this);
 
 
             //start the simulation in the new level
             world.start();
+
         } else if (world instanceof level2) {
+            world.stop();
+            Player preplayers = world.getPlayer();
+            world = new level3(this);
+
+            world.getPlayer().setLives(preplayers.getLives());
+            world.getPlayer().setScore(preplayers.getScore());
+            world.getPlayer().setDoublegun(preplayers.doublegun);
+            world.getPlayer().setGrenadepicked(preplayers.grendadeshoot);
+
+
+
+            view.updategamelevel(world);
+            //change the view to look into new level
+            view.setWorld(world);
+            view.setView(new Vec2(0, 9), 12);
+
+            view.updateStudent(world.getPlayer());
+            move.updateStudent(world.getPlayer());
+            dav.updateStudent(world.getPlayer());
+            view.enemy(world.getE());
+
+
+            world.addStepListener(t);
+            world.addStepListener(view);
+            world.addStepListener(world.getE());
+            world.addStepListener(world.getPlayer());
+            world.addStepListener(move);
+            world.addStepListener(world);
+            world.addStepListener(this);
+
+
+            //start the simulation in the new level
+            world.start();
+
+
+        } else if (world instanceof level3) {
             System.out.println("Well done! Game complete.");
             System.exit(0);
 
-
         }
+
     }
 
 
-    public void StartMenu(){
+    public void StartMenu() {
         world.stop();
 
         frame.setContentPane(pane);
-       // frame.add(startMenu);
+        // frame.add(startMenu);
         frame.add(jlabel);
 
         frame.validate();
 
     }
-
 
 
     public void move() {
@@ -209,12 +248,12 @@ public class Game {
 
 
     }
-    public void Pause(){
+
+    public void Pause() {
         world.start();
         world.sound().resume();
         frame.setContentPane(thispane);
     }
-
 
 
     public static void main(String[] args) {
@@ -224,10 +263,42 @@ public class Game {
         new Game();
 
 
-
         // new Game().menu();
 
 
-    }}
+    }
+
+    @Override
+    public void preStep(StepEvent stepEvent) {
+        //System.out.println(volume);
+
+        switch (volume) {
+
+            case 1:
+                //  gamelevel.sound().resume();
+                world.sound().setVolume(0.05);
+
+                break;
+            case 2:
+                world.sound().setVolume(0.1);
+                break;
+            case 3:
+                world.sound().setVolume(0.15);
+                break;
+            case 4:
+                world.sound().setVolume(0.20);
+                break;
+            case 5:
+                world.sound().setVolume(0.3);
+                break;
+
+        }
+    }
+
+    @Override
+    public void postStep(StepEvent stepEvent) {
+
+    }
+}
 
 

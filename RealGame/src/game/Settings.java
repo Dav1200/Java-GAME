@@ -17,9 +17,10 @@ public class Settings {
     private JButton NextStage;
     private JButton PreviousStage;
     private JButton Close;
+    private Gamelevel gamelevel;
 
-    public Settings(Game g){
-
+    public Settings(Game g,Gamelevel gamelevel){
+    this.gamelevel = gamelevel;
     Close.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -31,8 +32,27 @@ public class Settings {
     });
 
 
+    ChangeListener change = new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent e) {
+            //System.out.println(slider1.getValue());
+            int a = slider1.getValue();
+            g.volume = a;
+
+
+
+        }
+    };
+
+
+        slider1.addChangeListener(change);
+
 
     }
+    public void changegamelevel(Gamelevel gamelevel){
+        this.gamelevel =gamelevel;
+    }
+
 
 }
 

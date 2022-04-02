@@ -5,6 +5,10 @@ import org.jbox2d.common.Vec2;
 
 public class ShieldBody extends StaticBody implements StepListener
 {
+
+;
+
+
 private static final BodyImage shieldimg = new BodyImage("item/Shield2.png",5);
 private AttachedImage aimagel;
   private Player player;
@@ -15,8 +19,11 @@ private AttachedImage aimagel;
         setAlwaysOutline(true);
         aimagel = addImage(shieldimg);
 
-
     }
+
+
+
+
 
     @Override
     public void preStep(StepEvent stepEvent) {
@@ -37,7 +44,7 @@ private AttachedImage aimagel;
 
     @Override
     public void postStep(StepEvent stepEvent) {
-   
+
 
     }
 }

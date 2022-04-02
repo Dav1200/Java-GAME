@@ -19,7 +19,7 @@ public abstract class Gamelevel extends World implements StepListener {
     private Coin coin;
     private Coin coin2;
     private Game game;
-    private int volume;
+    protected int volume;
 
 
     public void setPlayer(Player player) {
@@ -30,24 +30,25 @@ public abstract class Gamelevel extends World implements StepListener {
         this.game = game;
 
 
-
-    getSimulationSettings().setTargetFrameRate(60);
+        getSimulationSettings().setTargetFrameRate(60);
 
 
         e = new enemy(this, plat);
-        player = new Player(this.getWorld(), e, plat,this);
+        player = new Player(this.getWorld(), e, plat, this);
         player.getBackpack().additem(new Doublegun(getPlayer()));
         getPlayer().getBackpack().additem(new Shield(getPlayer()));
-            player.getBackpack().additem(new Grenade(getPlayer()));
+        player.getBackpack().additem(new Grenade(getPlayer()));
 
 
-
-        Collision pickup = new Collision(player, this.plat, e,game,this);
+        Collision pickup = new Collision(player, this.plat, e, game, this);
         player.addCollisionListener(pickup);
 
         this.setGravity(15);
+
+        this.sound().setVolume(0.2);
         this.sound().play();
         this.sound().loop();
+        //this.sound().setVolume();
         //this.sound().loop();
 
 
@@ -67,7 +68,8 @@ public abstract class Gamelevel extends World implements StepListener {
         return e;
 
     }
-    public Gamelevel getGamelevel(){
+
+    public Gamelevel getGamelevel() {
         return this;
     }
 
@@ -83,15 +85,17 @@ public abstract class Gamelevel extends World implements StepListener {
         return p;
     }
 
-    public Gamelevel getWorld(){
+    public Gamelevel getWorld() {
         return this;
     }
+
     public abstract boolean isComplete();
 
     public abstract Image background();
-    public  abstract SoundClip sound();
 
-    public void play(){
+    public abstract SoundClip sound();
+
+    public void play() {
         this.sound().play();
 
 
@@ -100,9 +104,6 @@ public abstract class Gamelevel extends World implements StepListener {
 
     @Override
     public void preStep(StepEvent stepEvent) {
-
-
-
 
     }
 

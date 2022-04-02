@@ -147,7 +147,7 @@ public class Gameview extends UserView implements StepListener {
         // g.scale(2,2);
         g.scale(1.5f, 1.5f);
         g.setColor(Color.white);
-        if(gamelevel instanceof level2){
+        if(gamelevel instanceof level2 || gamelevel instanceof level3){
             g.setColor(Color.black);
 
         }        g.drawString("Lives:" + player.getLives(), 10, 30);
@@ -201,13 +201,13 @@ public class Gameview extends UserView implements StepListener {
         //System.out.println(pxcoverted);
         if (face.equals("left")) {
             //px += 35;
-            if(gamelevel instanceof  level2){
+            if(gamelevel instanceof  level2 || gamelevel instanceof level3){
                 px+=10;
             }
         }
 
         if (face.equals(("right"))){
-            if(gamelevel instanceof  level2){
+            if(gamelevel instanceof  level2 || gamelevel instanceof level3){
                 px +=10;
             }
         }

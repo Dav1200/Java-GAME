@@ -25,12 +25,17 @@ public class platforms extends StaticBody implements StepListener {
 
     private Player p;
 
+    public platforms(World w){
+        super(w);
+
+    }
+
     public platforms(World w, Player p) {
         super(w);
+        this.w = w;
         loop = true;
         loop2 = true;
         this.p = p;
-
 
 
         w.addStepListener(this);
@@ -58,13 +63,18 @@ public class platforms extends StaticBody implements StepListener {
 
         }
 
+        if (w instanceof level3) {
+            border(60, 0.3f, -16, -16);
+
+        }
+
 
     }
 
-    public void woodenbuild(float x, float y){
-        StaticBody woodenbuilding = new StaticBody(this.getWorld(),new BoxShape(3,3));
+    public void woodenbuild(float x, float y) {
+        StaticBody woodenbuilding = new StaticBody(this.getWorld(), new BoxShape(3, 3));
         woodenbuilding.addImage(wooden_building);
-        woodenbuilding.setPosition(new Vec2(x,y));
+        woodenbuilding.setPosition(new Vec2(x, y));
     }
 
     //ground
@@ -74,6 +84,15 @@ public class platforms extends StaticBody implements StepListener {
         ground.addImage(grounds);
         //ground.setAlwaysOutline(true);
     }
+
+    public void platforms(Float x, Float y,BodyImage img) {
+        StaticBody ground = new StaticBody(this.getWorld(), new BoxShape(2, 0.3f));
+        ground.setPosition(new Vec2(x, y));
+        ground.addImage(img);
+        //ground.setAlwaysOutline(true);
+    }
+
+
 
     public void platformss(Float x, Float y) {
         StaticBody ground = new StaticBody(this.getWorld(), new BoxShape(15, 0.5f));
@@ -143,38 +162,38 @@ public class platforms extends StaticBody implements StepListener {
 
     @Override
     public void preStep(StepEvent stepEvent) {
-        if (p.Showplat && loop) {
-            for (int i = 0; i < 3; i++) {
-                platforms(18f + i * 2, -9f);
+        if (w instanceof level2) {
+            if (p.Showplat && loop) {
+                for (int i = 0; i < 3; i++) {
+                    platforms(18f + i * 2, -9f);
+                }
+
+                platforms(10f, 0f);
+
+                b = new Button(this.getWorld());
+                platforms(0f, 0f);
+                platforms(-30f, 0f);
+                platforms(-27f, 0f);
+                loop = false;
+
+
             }
 
-            platforms(10f, 0f);
+            if (p.Showplat && loop2) {
+                if (b.isPressed()) {
 
-            b = new Button(this.getWorld());
-            platforms(0f, 0f);
-            platforms(-30f, 0f);
-            platforms(-27f, 0f);
-            loop = false;
-
-
-        }
-
-        if (p.Showplat && loop2) {
-            if (b.isPressed()) {
-
-                loop2 = false;
-                platforms(0f, 10f);
-                platforms(-4f, 10f);
-                platforms(-16f, 15f);
-                platforms(-12f, 15f);
-                platforms(-22f, 12f);
-                platforms(-26f, 12f);
-                 Coin d = new Coin(this.getWorld());
-                 d.setPosition(new Vec2(-25f,14f));
+                    loop2 = false;
+                    platforms(0f, 10f);
+                    platforms(-4f, 10f);
+                    platforms(-16f, 15f);
+                    platforms(-12f, 15f);
+                    platforms(-22f, 12f);
+                    platforms(-26f, 12f);
+                    Coin d = new Coin(this.getWorld());
+                    d.setPosition(new Vec2(-25f, 14f));
 
 
-
-
+                }
             }
         }
     }
