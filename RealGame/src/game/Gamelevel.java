@@ -95,6 +95,9 @@ public abstract class Gamelevel extends World implements StepListener {
 
     public abstract SoundClip sound();
 
+    public abstract String level();
+
+
     public void play() {
         this.sound().play();
 

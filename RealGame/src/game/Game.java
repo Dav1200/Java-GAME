@@ -75,7 +75,7 @@ public class Game implements StepListener {
 
         dav = new Mousecontroller(view, world.getPlayer());
         view.addMouseListener(dav);
-        move = new control(world.getPlayer(), t, world.getE(), this);
+        move = new control(world.getPlayer(), t, world.getE(), this,world);
         view.addKeyListener(move);
 
 

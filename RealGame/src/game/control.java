@@ -7,6 +7,7 @@ import org.jbox2d.common.Vec2;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class control implements KeyListener, StepListener {
@@ -22,14 +23,16 @@ public class control implements KeyListener, StepListener {
     protected int count;
     private Game g;
     private int jcount;
+    private Gamelevel gl;
 
     ArrayList<Integer> Dav = new ArrayList<>();
     ArrayList<Integer> Dav2 = new ArrayList<>();
 
-    public control(Player player, EnemySteplistener t, enemy enemy,Game g) {
+    public control(Player player, EnemySteplistener t, enemy enemy,Game g, Gamelevel gl) {
         this.player = player;
         this.t = t;
         this.g = g;
+        this.gl = gl;
         this.enemy = enemy;
         active = true;
 
@@ -72,7 +75,7 @@ public class control implements KeyListener, StepListener {
 
                 if (code == KeyEvent.VK_W ) {
                     if(player.jcount <2){
-
+                       // player.jump(50);
                         player.setLinearVelocity(new Vec2(0,30));
                         player.jcount++;
                     }
@@ -160,6 +163,23 @@ public class control implements KeyListener, StepListener {
             //use for double jump
             // ;
 
+        }
+
+        if(code == KeyEvent.VK_S){
+            try {
+                gamesaverloader.save(gl,"Saves/Save.txt");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        if(code == KeyEvent.VK_L){
+            try {
+                int a =gamesaverloader.load("Saves/Save.txt");
+                player.setLives(a);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

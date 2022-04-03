@@ -49,6 +49,7 @@ public class RegeneratePlayercollision implements CollisionListener, StepListene
 
             if (regen.player.getLives() < 10) {
                 if (onplatform) {
+                    regen.player.setLinearVelocity(new Vec2(0,0));
                     count++;
                     if (count % 60 == 0 && healsteps != 0) {
                         regen.player.setLives(regen.player.getLives() + 1);

@@ -127,5 +127,10 @@ public class level2 extends Gamelevel implements StepListener {
         return intro;
     }
 
+    @Override
+    public String level() {
+        return "level2";
+    }
+
 
 }

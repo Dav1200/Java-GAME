@@ -56,4 +56,9 @@ public class level3 extends Gamelevel{
     public SoundClip sound() {
         return stage3;
     }
+
+    @Override
+    public String level() {
+        return "level3";
+    }
 }
