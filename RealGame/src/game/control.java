@@ -175,8 +175,10 @@ public class control implements KeyListener, StepListener {
 
         if(code == KeyEvent.VK_L){
             try {
-                int a =gamesaverloader.load("Saves/Save.txt");
-                player.setLives(a);
+                Gamelevel a =gamesaverloader.load("Saves/Save.txt",g);
+                g.setlevel(a);
+                System.out.println(a);
+                //player.setLives(a);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -208,4 +210,8 @@ public class control implements KeyListener, StepListener {
     public void updateStudent(Player player){
         this.player = player;
     }
-}
+
+    public void gamelevelupdate(Gamelevel gl){
+        this.gl = gl;
+
+    }}

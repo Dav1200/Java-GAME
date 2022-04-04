@@ -1,5 +1,7 @@
 package game;
 
+import org.jbox2d.common.Vec2;
+
 import java.io.*;
 
 public class gamesaverloader {
@@ -14,7 +16,7 @@ public class gamesaverloader {
         FileWriter writer = null;
         try {
             writer = new FileWriter(filename, append);
-            writer.write(String.valueOf(gameworld.getPlayer().getLives()));
+            writer.write(gameworld.level());
         } finally {
             if (writer != null) {
                 writer.close();
@@ -23,10 +25,10 @@ public class gamesaverloader {
 
     }
 
-    public static int load(String filename) throws IOException {
+    public static Gamelevel load(String filename,Game game) throws IOException {
         FileReader fr = null;
         BufferedReader reader = null;
-        int name = 0;
+        String name = "";
         try {
             fr = new FileReader(filename);
             reader = new BufferedReader(fr);
@@ -34,7 +36,7 @@ public class gamesaverloader {
             while (line != null) {
                 // file is assumed to contain one name, score pair per line
                 // String[] tokens = line.split(",");
-                name = Integer.parseInt(line);
+                name = line;
                 //int score = Integer.parseInt(tokens[1]);
                 System.out.println("Name: " + name);
                 line = reader.readLine();
@@ -51,8 +53,23 @@ public class gamesaverloader {
             }
         }
 
+        if(name.equals("level1")){
+            return new level1(game);
 
-        return name;
+        }
+
+        if(name.equals("level2")){
+            return new level2(game,game.getView());
+
+        }
+
+        if(name.equals("level3")){
+            return new level3(game);
+
+        }
+
+        else
+            return null;
 
 
     }

@@ -12,7 +12,23 @@ import java.util.Set;
 
 
 public class Game implements StepListener {
+    public Gamelevel getWorld() {
+        return world;
+    }
+
+    public void setWorld(Gamelevel world) {
+        this.world = world;
+    }
+
     private Gamelevel world;
+
+    public Gameview getView() {
+        return view;
+    }
+
+    public void setView(Gameview view) {
+        this.view = view;
+    }
 
     /**
      * A graphical display of the world (a specialised JPanel).
@@ -160,8 +176,10 @@ public class Game implements StepListener {
             //student in the new world
             view.updateStudent(world.getPlayer());
             move.updateStudent(world.getPlayer());
+            move.gamelevelupdate(world);
             dav.updateStudent(world.getPlayer());
             view.enemy(world.getE());
+
 
 
             world.addStepListener(t);
@@ -192,7 +210,7 @@ public class Game implements StepListener {
             //change the view to look into new level
             view.setWorld(world);
             view.setView(new Vec2(0, 9), 12);
-
+            move.gamelevelupdate(world);
             view.updateStudent(world.getPlayer());
             move.updateStudent(world.getPlayer());
             dav.updateStudent(world.getPlayer());
@@ -218,6 +236,102 @@ public class Game implements StepListener {
 
         }
 
+    }
+
+    public void setlevel(Gamelevel g){
+
+        if(g instanceof level2){
+        world.stop();
+        world.sound().stop();
+        //world.sound().stop();
+        //create the new (appropriate) level
+        Player preplayer = world.getPlayer();
+        // EnemySteplistener pt = t;
+        //level now refers to new level
+        world = new level2(this, view);
+
+        world.getPlayer().setLives(preplayer.getLives());
+        world.getPlayer().setScore(preplayer.getScore());
+        world.getPlayer().setDoublegun(preplayer.doublegun);
+        world.getPlayer().setGrenadepicked(preplayer.grendadeshoot);
+        world.getPlayer().setScore(2);
+
+        view.updategamelevel(world);
+        //change the view to look into new level
+        view.setWorld(world);
+        //view.setZoom(12);
+        view.setView(new Vec2(0, 9), 12);
+        System.out.println(world.isComplete());
+
+        //change the controller to control the
+        //student in the new world
+        view.updateStudent(world.getPlayer());
+        move.updateStudent(world.getPlayer());
+        move.gamelevelupdate(world);
+        dav.updateStudent(world.getPlayer());
+        view.enemy(world.getE());
+
+
+
+        world.addStepListener(t);
+        world.addStepListener(view);
+        world.addStepListener(world.getE());
+        world.addStepListener(world.getPlayer());
+        world.addStepListener(move);
+        world.addStepListener(world);
+        world.addStepListener(this);
+
+
+        //start the simulation in the new level
+        world.start();
+        world.sound().play();
+
+
+
+        }
+
+        if(g instanceof level3){
+
+            world.stop();
+
+            world.sound().stop();
+            Player preplayers = world.getPlayer();
+            world = new level3(this);
+
+            world.getPlayer().setLives(preplayers.getLives());
+            world.getPlayer().setScore(preplayers.getScore());
+            world.getPlayer().setDoublegun(preplayers.doublegun);
+            world.getPlayer().setGrenadepicked(preplayers.grendadeshoot);
+            world.getPlayer().setScore(3);
+
+
+
+            view.updategamelevel(world);
+            //change the view to look into new level
+            view.setWorld(world);
+            view.setView(new Vec2(0, 9), 12);
+            move.gamelevelupdate(world);
+            view.updateStudent(world.getPlayer());
+            move.updateStudent(world.getPlayer());
+            dav.updateStudent(world.getPlayer());
+            view.enemy(world.getE());
+
+
+            world.addStepListener(t);
+            world.addStepListener(view);
+            world.addStepListener(world.getE());
+            world.addStepListener(world.getPlayer());
+            world.addStepListener(move);
+            world.addStepListener(world);
+            world.addStepListener(this);
+
+
+            //start the simulation in the new level
+            world.start();
+            world.sound().play();
+
+
+        }
     }
 
 
