@@ -1,9 +1,6 @@
 package game;
 
-import city.cs.engine.BodyImage;
-import city.cs.engine.SoundClip;
-import city.cs.engine.StepEvent;
-import city.cs.engine.StepListener;
+import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -27,7 +24,7 @@ public class level2 extends Gamelevel implements StepListener {
     private TemporaryPlat level2p;
     private Image background;
     private static SoundClip  intro;
-
+    private EnemyClass enemyClass;
     static {
         try {
 
@@ -51,15 +48,18 @@ public class level2 extends Gamelevel implements StepListener {
         plat = new platforms(this.getWorld(),getPlayer());
         plat.woodenbuild(30,2);
         level2p = new TemporaryPlat(this.getWorld(),0.3f,8,20,-10);
-        new TemporaryPlat(this.getWorld(),7.5f,0.3f,27,-2);
+        new TemporaryPlat(this.getWorld(),7.5f,0.3f,27.5f,-2);
         a = new RegeneratePlat(this.getWorld(), 4f, 26f, -13f, getPlayer());
         getPlayer().grendadeshoot= true;
         ShieldPickup d = new ShieldPickup(this.getWorld());
         d.setPosition(new Vec2(30,8));
+        enemyClass = new EnemyClass(this.getWorld(),new BoxShape(1,2),this.getPlayer(),5);
+        enemyClass.setPosition(new Vec2(10,-12));
+        this.getWorld().addStepListener(enemyClass);
 
 
         getPlayer().setPosition(new Vec2(-18,0));
-        getE().setPosition(new Vec2(16,0));
+        //getE().setPosition(new Vec2(16,0));
 
 
 

@@ -11,6 +11,7 @@ public class EnemyhitCollision implements CollisionListener {
     private Player player;
     private enemy en;
     private platforms plat;
+    private EnemyClass enemyClass;
 
 
     //private Game game;
@@ -18,6 +19,12 @@ public class EnemyhitCollision implements CollisionListener {
 
     public EnemyhitCollision(enemy en) {
         this.en = en;
+
+
+    }
+
+    public EnemyhitCollision(EnemyClass enemyClass) {
+        this.enemyClass = enemyClass;
 
 
     }

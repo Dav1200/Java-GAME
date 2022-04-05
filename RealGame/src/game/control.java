@@ -28,14 +28,13 @@ public class control implements KeyListener, StepListener {
     ArrayList<Integer> Dav = new ArrayList<>();
     ArrayList<Integer> Dav2 = new ArrayList<>();
 
-    public control(Player player, EnemySteplistener t, enemy enemy,Game g, Gamelevel gl) {
+    public control(Player player, EnemySteplistener t, enemy enemy, Game g, Gamelevel gl) {
         this.player = player;
         this.t = t;
         this.g = g;
         this.gl = gl;
         this.enemy = enemy;
         active = true;
-
 
 
     }
@@ -73,14 +72,12 @@ public class control implements KeyListener, StepListener {
                     Dav.add(3);
 
 
-                if (code == KeyEvent.VK_W ) {
-                    if(player.jcount <2){
-                       // player.jump(50);
-                        player.setLinearVelocity(new Vec2(0,30));
+                if (code == KeyEvent.VK_W) {
+                    if (player.jcount < 2) {
+                        // player.jump(50);
+                        player.setLinearVelocity(new Vec2(0, 30));
                         player.jcount++;
                     }
-
-
 
 
                     //player.getBackpack().getitem().function();
@@ -88,16 +85,15 @@ public class control implements KeyListener, StepListener {
                 }
 
 
-                if(code == KeyEvent.VK_ESCAPE){
-                   g.move();
+                if (code == KeyEvent.VK_ESCAPE) {
+                    g.move();
 
 
                     //player.tutorial = false;
 
-            }
+                }
 
-                if(code == KeyEvent.VK_K){
-
+                if (code == KeyEvent.VK_K) {
 
 
                     //player.tutorial = false;
@@ -106,9 +102,9 @@ public class control implements KeyListener, StepListener {
 
 
                 if (Dav.contains(1) && Dav.contains(2)) {
-                    player.walk(speed * 1.25f);
+                    player.walk(speed * 1.45f);
                 } else if (Dav.contains(1) && Dav.contains(3)) {
-                    player.walk(-speed * 1.25f);
+                    player.walk(-speed * 1.45f);
                 }
                 if (code == KeyEvent.VK_SPACE) {
                     if (t.bulletseconds == 60) {
@@ -131,6 +127,7 @@ public class control implements KeyListener, StepListener {
         }
 
     }
+
     @Override
     public void keyReleased(KeyEvent e) {
         Dav.removeAll(Dav);
@@ -165,17 +162,17 @@ public class control implements KeyListener, StepListener {
 
         }
 
-        if(code == KeyEvent.VK_S){
+        if (code == KeyEvent.VK_S) {
             try {
-                gamesaverloader.save(gl,"Saves/Save.txt");
+                gamesaverloader.save(gl, "Saves/Save.txt");
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
 
-        if(code == KeyEvent.VK_L){
+        if (code == KeyEvent.VK_L) {
             try {
-                Gamelevel a =gamesaverloader.load("Saves/Save.txt",g);
+                Gamelevel a = gamesaverloader.load("Saves/Save.txt", g, gl);
                 g.setlevel(a);
                 System.out.println(a);
                 //player.setLives(a);
@@ -207,11 +204,12 @@ public class control implements KeyListener, StepListener {
         //System.out.println(jumpcount);
     }
 
-    public void updateStudent(Player player){
+    public void updateStudent(Player player) {
         this.player = player;
     }
 
-    public void gamelevelupdate(Gamelevel gl){
+    public void gamelevelupdate(Gamelevel gl) {
         this.gl = gl;
 
-    }}
+    }
+}

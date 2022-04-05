@@ -43,7 +43,7 @@ public class Gameview extends UserView implements StepListener {
     protected int sec = 0;
     private boolean setstage0;
     private boolean setstage1;
-    private boolean set;
+    protected boolean set;
     protected int ex;
     protected int ey;
     private int tick;
@@ -118,7 +118,7 @@ public class Gameview extends UserView implements StepListener {
     protected void paintForeground(Graphics2D g) {
 
 
-        tick = e.getSmallenemylives() + 7;
+       // tick = e.getSmallenemylives() + 7;
 /*
         if (e.stage == 0) {
             g.scale(1.5f, 1.5f);
@@ -160,11 +160,13 @@ public class Gameview extends UserView implements StepListener {
         // g.drawString("Time:" + sec, 10, 70);
         // }
         // if (e.stage > 0 && e.stage < 3) {
-        g.setColor(Color.red);
+
+        if(gamelevel instanceof  level1){
+            g.setColor(Color.red);
         g.fillRect(467, 20, 50, 10);
         g.setColor(Color.green);
         g.fillRect(467, 20, e.getSmallenemylivess(), 10);
-        //   }
+          }
          /*
         if(e.stage  ==3){
             g.scale(3,3);
@@ -192,10 +194,11 @@ public class Gameview extends UserView implements StepListener {
         face = player.getFacing();
 
         //follow Enemy Healthbar
-        Enemypos = worldToView(new Vec2(e.getPosition()));
-        ex = Math.round(Enemypos.x);
-        ey = Math.round(Enemypos.y);
-
+        if(gamelevel instanceof level1) {
+            Enemypos = worldToView(new Vec2(e.getPosition()));
+            ex = Math.round(Enemypos.x);
+            ey = Math.round(Enemypos.y);
+        }
 
         //System.out.println(Math.round(pxcoverted.x));
         //System.out.println(pxcoverted);
@@ -222,7 +225,8 @@ public class Gameview extends UserView implements StepListener {
 
     @Override
     public void postStep(StepEvent stepEvent) {
-
+       // System.out.println(e.stage);
+       // System.out.println(set);
       /*  if (e.stage == 0 && !setstage0) {
             setView(new Vec2(-60, 0), this.getZoom());
             player.setPosition(new Vec2(-70, -13));
@@ -231,7 +235,7 @@ public class Gameview extends UserView implements StepListener {
             intro.loop();
             player.setLives(999);
         }*/
-
+        if(gamelevel instanceof  level1){
         if (e.stage == 1 && !setstage1) {
             intro.stop();
             setView(new Vec2(0, 0), this.getZoom());
@@ -255,7 +259,7 @@ public class Gameview extends UserView implements StepListener {
 
         if (e.stage == 2 && e.getRespawn() == 0 && player.getScore() == 2) {
 
-
+        }
         }
 
         //if(e.stage == 3 && !setStage3  && player.getScore() == 2){

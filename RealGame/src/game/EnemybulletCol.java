@@ -8,18 +8,20 @@ import city.cs.engine.CollisionListener;
 public class EnemybulletCol implements CollisionListener {
     private Player player;
     private enemy en;
-    private platforms plat;
+
 
 
     //private Game game;
 
 
-    public EnemybulletCol(platforms plat, enemy en) {
+    public EnemybulletCol( enemy en) {
         this.en = en;
-        this.plat = plat;
+
 
 
     }
+
+
 
     public EnemybulletCol() {
 

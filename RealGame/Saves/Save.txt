@@ -1,1 +1,3 @@
-level1
+level2
+game.Player@7094ac97[name=null],-18.055162,-13.605001
+game.ShieldPickup@152ef44d[name=null],30.0,8.0

@@ -119,7 +119,7 @@ if( world instanceof level2){
 
         //when the bullet hits platform
 
-        EnemybulletCol platcollision = new EnemybulletCol(plat,this);
+        EnemybulletCol platcollision = new EnemybulletCol(this);
         bullet.addCollisionListener(platcollision);
 
 

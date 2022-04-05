@@ -34,6 +34,15 @@ public abstract class Gamelevel extends World implements StepListener {
 
 
         e = new enemy(this, plat);
+
+        if(this instanceof level2 || this instanceof level3){
+            e.destroy();
+        }
+
+
+
+
+
         player = new Player(this.getWorld(), e, plat, this);
         player.getBackpack().additem(new Doublegun(getPlayer()));
         getPlayer().getBackpack().additem(new Shield(getPlayer()));
