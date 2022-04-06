@@ -2,6 +2,7 @@ package game;
 
 import city.cs.engine.StepEvent;
 import city.cs.engine.StepListener;
+import city.cs.engine.Walker;
 import org.jbox2d.common.Vec2;
 
 import java.awt.*;
@@ -71,13 +72,16 @@ public class control implements KeyListener, StepListener {
                 } else if (code == KeyEvent.VK_A)
                     Dav.add(3);
 
-
+                if(player.CanJump){
                 if (code == KeyEvent.VK_W) {
                     if (player.jcount < 2) {
-                        // player.jump(50);
+                         player.jump(50);
+
                         player.setLinearVelocity(new Vec2(0, 30));
                         player.jcount++;
-                    }
+
+
+                    }}
 
 
                     //player.getBackpack().getitem().function();

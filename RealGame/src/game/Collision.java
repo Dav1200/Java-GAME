@@ -36,7 +36,6 @@ public class Collision implements CollisionListener {
         */
         if (collisionEvent.getOtherBody() instanceof PickupItems) {
             collisionEvent.getOtherBody().destroy();
-
             player.doublegun = true;
 
         }
@@ -66,6 +65,14 @@ public class Collision implements CollisionListener {
         if (collisionEvent.getOtherBody() instanceof Coin && gamelevel.isComplete()) {
             gamelevel.sound().stop();
             game.goToNextLevel();
+        }
+
+        if(collisionEvent.getOtherBody() instanceof RunningCoin){
+            collisionEvent.getOtherBody().destroy();
+            ((RunningCoin) collisionEvent.getOtherBody()).play();
+            player.setRcoinCollected(true);
+            player.CanJump = true;
+
         }
 
 

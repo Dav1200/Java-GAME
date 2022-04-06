@@ -76,6 +76,17 @@ public class Player extends Walker implements StepListener {
     protected boolean ShowShield;
     private ShieldActionListner shieldActionListner;
     private   ShieldBody shieldclass;
+    protected boolean CanJump;
+
+    public boolean isRcoinCollected() {
+        return RcoinCollected;
+    }
+
+    public void setRcoinCollected(boolean rcoinCollected) {
+        RcoinCollected = rcoinCollected;
+    }
+
+    private  boolean RcoinCollected;
     ;
 
 
@@ -92,11 +103,13 @@ public class Player extends Walker implements StepListener {
         super(world, player);
         this.world = world;
         this.gl = gl;
+        RcoinCollected = false;
         this.en = en;
         this.plat = plat;
         Showplat = false;
         grenadepicked = false;
         jcount = 0;
+        CanJump = true;
         playerimg = addImage(Playerimg);
         tutorial = true;
         moves = true;
