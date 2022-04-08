@@ -80,8 +80,6 @@ public class Gameview extends UserView implements StepListener {
     }
 
 
-
-
     @Override
     protected void paintBackground(Graphics2D g) {
 
@@ -118,7 +116,7 @@ public class Gameview extends UserView implements StepListener {
     protected void paintForeground(Graphics2D g) {
 
 
-       // tick = e.getSmallenemylives() + 7;
+        // tick = e.getSmallenemylives() + 7;
 /*
         if (e.stage == 0) {
             g.scale(1.5f, 1.5f);
@@ -136,10 +134,17 @@ public class Gameview extends UserView implements StepListener {
         }
 */
         //g.drawRect(165,75,60,60);
-        g.drawImage(player.getBackpack().getitem().image,165,85,30,30,this);
+        g.drawImage(player.getBackpack().getitem().image, 165, 85, 30, 30, this);
         g.drawImage(emptyh, px - 70, pycoverted - 50, 100, 20, this);
         g.drawImage(fullh, px - 69, pycoverted - 50, player.getLivess(), 20, this);
 
+
+        if (gamelevel instanceof level1) {
+            g.setColor(Color.red);
+            g.fillRect(ex, ey - 50, 50, 10);
+            g.setColor(Color.green);
+            g.fillRect(ex, ey - 50, e.getSmallenemylivess(), 10);
+        }
         // if (e.stage > 0&& e.stage < 3) {
 
         // g.scale(0.2f,0.2f);
@@ -147,26 +152,24 @@ public class Gameview extends UserView implements StepListener {
         // g.scale(2,2);
         g.scale(1.5f, 1.5f);
         g.setColor(Color.white);
-        if(gamelevel instanceof level2 || gamelevel instanceof level3){
+        if (gamelevel instanceof game.level2 || gamelevel instanceof level3) {
             g.setColor(Color.black);
 
-        }        g.drawString("Lives:" + player.getLives(), 10, 30);
+        }
+        g.drawString("Lives:" + player.getLives(), 10, 30);
         g.drawString("Score:" + player.getScore(), 10, 50);
-        g.drawString("Current Weapons:" , 10, 70);
+        g.drawString("Current Weapons:", 10, 70);
 
         // System.out.println(this.EnemySteplistener.getSeconds());
-      // g.drawString("enemy" + e.getRespawn(), 10, 90);
+        // g.drawString("enemy" + e.getRespawn(), 10, 90);
 
         // g.drawString("Time:" + sec, 10, 70);
         // }
         // if (e.stage > 0 && e.stage < 3) {
 
-        if(gamelevel instanceof  level1){
-            g.setColor(Color.red);
-        g.fillRect(467, 20, 50, 10);
-        g.setColor(Color.green);
-        g.fillRect(467, 20, e.getSmallenemylivess(), 10);
-          }
+        if (gamelevel instanceof level1) {
+
+        }
          /*
         if(e.stage  ==3){
             g.scale(3,3);
@@ -194,39 +197,49 @@ public class Gameview extends UserView implements StepListener {
         face = player.getFacing();
 
         //follow Enemy Healthbar
-        if(gamelevel instanceof level1) {
-            Enemypos = worldToView(new Vec2(e.getPosition()));
-            ex = Math.round(Enemypos.x);
-            ey = Math.round(Enemypos.y);
-        }
+
+
+        Enemypos = worldToView(new Vec2(e.getPosition()));
+        ex = Math.round(Enemypos.x);
+        ey = Math.round(Enemypos.y);
+
 
         //System.out.println(Math.round(pxcoverted.x));
         //System.out.println(pxcoverted);
         if (face.equals("left")) {
             //px += 35;
-            if(gamelevel instanceof  level2 || gamelevel instanceof level3){
-                px+=10;
+            if (gamelevel instanceof level2 || gamelevel instanceof level3) {
+                px += 10;
             }
         }
 
-        if (face.equals(("right"))){
-            if(gamelevel instanceof  level2 || gamelevel instanceof level3){
-                px +=10;
+        if (face.equals(("right"))) {
+            if (gamelevel instanceof level2 || gamelevel instanceof level3) {
+                px += 10;
             }
         }
-
+        if(e.stage == 1) {
+            if (e.getFacing().equals("right")) {
+                ex -= 40;
+            }
+        }
         if (gamelevel instanceof level2) {
 
             level2 = true;
         }
+        if (e.stage == 2) {
+            ex += 10;
+
+        }
+
 
     }
 
 
     @Override
     public void postStep(StepEvent stepEvent) {
-       // System.out.println(e.stage);
-       // System.out.println(set);
+        // System.out.println(e.stage);
+        // System.out.println(set);
       /*  if (e.stage == 0 && !setstage0) {
             setView(new Vec2(-60, 0), this.getZoom());
             player.setPosition(new Vec2(-70, -13));
@@ -235,31 +248,33 @@ public class Gameview extends UserView implements StepListener {
             intro.loop();
             player.setLives(999);
         }*/
-        if(gamelevel instanceof  level1){
-        if (e.stage == 1 && !setstage1) {
-            intro.stop();
-            setView(new Vec2(0, 0), this.getZoom());
-            player.setPosition(new Vec2(-17, -14));
-            setstage1 = true;
-           // stage1.play();
-           // stage1.loop();
-            player.setLives(10);
-        }
+        if (gamelevel instanceof level1) {
+            if (e.stage == 1 && !setstage1) {
+                intro.stop();
+                setView(new Vec2(0, 0), this.getZoom());
+                player.setPosition(new Vec2(-17, -14));
+
+                setstage1 = true;
+                // stage1.play();
+                // stage1.loop();
+                player.setLives(10);
+            }
 
 
-        if (e.stage == 2 && !set && player.getScore() == 1) {
-            setView(new Vec2(60, 0), this.getZoom());
-            e.setRespawn(0);
-            player.setPosition(new Vec2(48, 13));
-            set = true;
+            if (e.stage == 2 && !set && player.getScore() == 1) {
+                setView(new Vec2(60, 0), this.getZoom());
+                e.setRespawn(1);
+
+                player.setPosition(new Vec2(48, 13));
+                set = true;
 
 
-        }
+            }
 
 
-        if (e.stage == 2 && e.getRespawn() == 0 && player.getScore() == 2) {
+            if (e.stage == 2 && e.getRespawn() == 0 && player.getScore() == 2) {
 
-        }
+            }
         }
 
         //if(e.stage == 3 && !setStage3  && player.getScore() == 2){
@@ -286,7 +301,7 @@ public class Gameview extends UserView implements StepListener {
         this.e = e;
     }
 
-    public void updategamelevel(Gamelevel gamelevel){
+    public void updategamelevel(Gamelevel gamelevel) {
         this.gamelevel = gamelevel;
     }
 }

@@ -59,7 +59,7 @@ public class BulletCollision implements CollisionListener{
                 if (((enemy) collisionEvent.getOtherBody()).stage == 1) {
 
 
-                    collisionEvent.getOtherBody().setPosition(new Vec2(1000,1000));
+                    collisionEvent.getOtherBody().setPosition(new Vec2(67,4));
                 }
                 if (((enemy) collisionEvent.getOtherBody()).stage == 2) {
                     collisionEvent.getOtherBody().destroy();

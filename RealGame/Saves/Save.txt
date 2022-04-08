@@ -1,2 +1,5 @@
-level3
-game.Player@1165c40e[name=null],9.611502,2.4225392
+level1
+game.Player@6bc707a0[name=null],1.8753937,1.6957598
+game.enemy@319bd071[name=null],14.211117,1.6149999
+game.Coin@5496062e[name=null],77.0,-8.5
+game.Coin@73ff11b[name=null],17.0,6.5

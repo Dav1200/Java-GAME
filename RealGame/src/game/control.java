@@ -2,10 +2,8 @@ package game;
 
 import city.cs.engine.StepEvent;
 import city.cs.engine.StepListener;
-import city.cs.engine.Walker;
 import org.jbox2d.common.Vec2;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
@@ -53,6 +51,7 @@ public class control implements KeyListener, StepListener {
 
                 if (code == KeyEvent.VK_D) {
                     jumpcount = 0;
+
 
                     player.walk(speed);
                 } else if (code == KeyEvent.VK_A) {
@@ -147,6 +146,7 @@ public class control implements KeyListener, StepListener {
 
         } else if (code == KeyEvent.VK_A) {
             player.stopWalking();
+
 
 
             //player.setLinearVelocity(new Vec2(0, 0));

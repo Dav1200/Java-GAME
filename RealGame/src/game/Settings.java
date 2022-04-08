@@ -5,6 +5,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Settings {
     private JSlider slider1;
@@ -21,12 +22,41 @@ public class Settings {
 
     public Settings(Game g,Gamelevel gamelevel){
     this.gamelevel = gamelevel;
+
     Close.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             g.frame.remove(MainPanel);
             g.frame.repaint();
             g.frame.validate();
+
+        }
+    });
+
+    NextStage.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println(gamelevel);
+            try {
+                gamesaverloader.save(g.getWorld(), "Saves/Save.txt");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    });
+
+    PreviousStage.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            try {
+                Gamelevel a = gamesaverloader.load("Saves/Save.txt", g, gamelevel);
+                g.setlevel(a);
+                System.out.println(a);
+                //player.setLives(a);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
 
         }
     });

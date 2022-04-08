@@ -1,6 +1,8 @@
 package game;
 
+import game.ShieldPickup;
 import city.cs.engine.*;
+import game.*;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -50,9 +52,10 @@ public class level2 extends Gamelevel implements StepListener {
         level2p = new TemporaryPlat(this.getWorld(),0.3f,8,20,-10);
         new TemporaryPlat(this.getWorld(),7.5f,0.3f,27.5f,-2);
         a = new RegeneratePlat(this.getWorld(), 4f, 26f, -13f, getPlayer());
-        getPlayer().grendadeshoot= true;
+        getPlayer().setGrendadeshoot(true);
         ShieldPickup d = new ShieldPickup(this.getWorld());
         d.setPosition(new Vec2(30,8));
+        getPlayer().setDoublegun(true);
         enemyClass = new EnemyClass(this.getWorld(),new BoxShape(1,2),this.getPlayer(),5);
         enemyClass.setPosition(new Vec2(10,-12));
         this.getWorld().addStepListener(enemyClass);
@@ -79,12 +82,14 @@ public class level2 extends Gamelevel implements StepListener {
 
     @Override
     public void preStep(StepEvent stepEvent) {
-        if (getPlayer().coinpick && getE().enemydef) {
-            getPlayer().coinpick = false;
-            getE().enemydef = false;
-            getE().stage++;
-        }
+        /*
+        if (getPlayer().isCoinpick() && getE().isEnemydef()) {
+            getPlayer().setCoinpick(false);
+            getE().setEnemydef(false);
+            getE().setStage(getE().getStage()+1);
 
+        }
+*/
 
 
     }

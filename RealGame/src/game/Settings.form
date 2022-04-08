@@ -26,13 +26,13 @@
       <component id="b3c3" class="javax.swing.JButton" binding="NextStage">
         <constraints/>
         <properties>
-          <text value="NextStage"/>
+          <text value="Save"/>
         </properties>
       </component>
       <component id="8eb4c" class="javax.swing.JButton" binding="PreviousStage">
         <constraints/>
         <properties>
-          <text value="PreviousStage"/>
+          <text value="Load"/>
         </properties>
       </component>
       <component id="3d02d" class="javax.swing.JButton" binding="Close">

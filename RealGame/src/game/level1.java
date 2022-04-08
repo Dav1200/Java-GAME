@@ -1,9 +1,11 @@
 package game;
 
+import game.Gamelevel;
 import city.cs.engine.BodyImage;
 import city.cs.engine.SoundClip;
 import city.cs.engine.StepEvent;
 import city.cs.engine.StepListener;
+import game.*;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -73,10 +75,10 @@ public class level1 extends Gamelevel implements StepListener {
 
     @Override
     public void preStep(StepEvent stepEvent) {
-        if (getPlayer().coinpick && getE().enemydef) {
-            getPlayer().coinpick = false;
-            getE().enemydef = false;
-            getE().stage++;
+        if (getPlayer().isCoinpick() && getE().isEnemydef()) {
+            getPlayer().setCoinpick(false);
+            getE().setEnemydef(false);
+            getE().setStage(getE().getStage()+1);
 
         }
 

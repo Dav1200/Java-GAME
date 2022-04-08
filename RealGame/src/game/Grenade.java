@@ -1,11 +1,10 @@
 package game;
 
-import city.cs.engine.BodyImage;
 import org.jbox2d.common.Vec2;
 
 import javax.swing.*;
 
-public class Grenade extends BackpackItem{
+public class Grenade extends BackpackItem {
 
     public Grenade(Player player) {
         super(player);

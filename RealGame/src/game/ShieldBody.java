@@ -1,6 +1,7 @@
 package game;
 
 import city.cs.engine.*;
+import game.Player;
 import org.jbox2d.common.Vec2;
 
 public class ShieldBody extends StaticBody implements StepListener

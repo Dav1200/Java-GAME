@@ -3,12 +3,10 @@ package game;
 import city.cs.engine.DebugViewer;
 import city.cs.engine.StepEvent;
 import city.cs.engine.StepListener;
-import city.cs.engine.World;
 import org.jbox2d.common.Vec2;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Set;
 
 
 public class Game implements StepListener {
@@ -108,7 +106,7 @@ public class Game implements StepListener {
         world.addStepListener(this);
 
         frame = new JFrame("Dav Game");
-
+        
 
         framee = new JFrame("Dav Game");
 
@@ -159,11 +157,13 @@ public class Game implements StepListener {
             // EnemySteplistener pt = t;
             //level now refers to new level
             world = new level2(this, view);
+            setWorld(world);
 
             world.getPlayer().setLives(preplayer.getLives());
             world.getPlayer().setScore(preplayer.getScore());
-            world.getPlayer().setDoublegun(preplayer.doublegun);
+            world.getPlayer().setDoublegun(true);
             world.getPlayer().setGrenadepicked(preplayer.grendadeshoot);
+
 
             view.updategamelevel(world);
             //change the view to look into new level
@@ -177,6 +177,7 @@ public class Game implements StepListener {
             view.updateStudent(world.getPlayer());
             move.updateStudent(world.getPlayer());
             move.gamelevelupdate(world);
+            settings.changegamelevel(world);
             dav.updateStudent(world.getPlayer());
             view.enemy(world.getE());
 
@@ -204,8 +205,8 @@ public class Game implements StepListener {
             world.getPlayer().setDoublegun(preplayers.doublegun);
             world.getPlayer().setGrenadepicked(preplayers.grendadeshoot);
 
-
-
+            world.getPlayer().setDoublegun(true);
+            setWorld(world);
             view.updategamelevel(world);
             //change the view to look into new level
             view.setWorld(world);
@@ -215,7 +216,7 @@ public class Game implements StepListener {
             move.updateStudent(world.getPlayer());
             dav.updateStudent(world.getPlayer());
             view.enemy(world.getE());
-
+            settings.changegamelevel(world);
 
             world.addStepListener(t);
             world.addStepListener(view);
@@ -319,7 +320,7 @@ if(g instanceof  level1){
         //view.setZoom(12);
         view.setView(new Vec2(0, 9), 12);
         System.out.println(world.isComplete());
-
+            world.getPlayer().setDoublegun(true);
         //change the controller to control the
         //student in the new world
         view.updateStudent(world.getPlayer());
@@ -361,7 +362,7 @@ if(g instanceof  level1){
             world.getPlayer().setGrenadepicked(preplayers.grendadeshoot);
             world.getPlayer().setScore(3);
 
-
+            world.getPlayer().setDoublegun(true);
 
             view.updategamelevel(world);
             //change the view to look into new level

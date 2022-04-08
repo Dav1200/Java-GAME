@@ -8,6 +8,7 @@ import city.cs.engine.CollisionListener;
 public class EnemybulletCol implements CollisionListener {
     private Player player;
     private enemy en;
+    private boolean play;
 
 
 
@@ -16,6 +17,7 @@ public class EnemybulletCol implements CollisionListener {
 
     public EnemybulletCol( enemy en) {
         this.en = en;
+        play =false;
 
 
 
@@ -24,7 +26,7 @@ public class EnemybulletCol implements CollisionListener {
 
 
     public EnemybulletCol() {
-
+        play =false;
     }
 
     @Override
@@ -35,6 +37,7 @@ public class EnemybulletCol implements CollisionListener {
             collisionEvent.getReportingBody().destroy();
         }
         if (collisionEvent.getOtherBody() instanceof  Player){
+            ((Player) collisionEvent.getOtherBody()).setHurt(true);
             ((Player) collisionEvent.getOtherBody()).setLives(((Player) collisionEvent.getOtherBody()).getLives()-1);
         }
 

@@ -1,9 +1,11 @@
 package game;
 
+import game.Gamelevel;
 import city.cs.engine.BoxShape;
 import city.cs.engine.SoundClip;
 import city.cs.engine.StepEvent;
 import city.cs.engine.StepListener;
+import game.*;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -21,6 +23,7 @@ public class level3 extends Gamelevel implements StepListener {
     private Image background;
     private EnemyClass enemyClass;
     private  int EnemySpawnCount;
+    private portal portal;
     static {
         try {
 
@@ -44,17 +47,27 @@ public class level3 extends Gamelevel implements StepListener {
         level3plat = new Level3Platforms(this.getWorld());
         getPlayer().setPosition(new Vec2(-30,-14));
         getPlayer().setShield(true);
-        getPlayer().grendadeshoot= true;
+        getPlayer().setGrendadeshoot(true);
+        getPlayer().setDoublegun(true);
+        Coin coin = new Coin(this.getWorld());
+        coin.setPosition(new Vec2(30,19.5f));
         runningCoin = new RunningCoin(this);
-        runningCoin.setPosition(new Vec2(0,-9));
+        runningCoin.setPosition(new Vec2(0,20));
+        portal = new portal(this.getWorld());
+        portal.setPosition(new Vec2(20,22));
         //enemyClass = new EnemyClass(this.getWorld(), new BoxShape(1,2),getPlayer(),5);+
         //
     }
 
     @Override
     public boolean isComplete() {
-        return false;
+        if(getPlayer().getScore() == 5){
+            return true;
+        }
+        else
+            return false;
     }
+
 
     @Override
     public Image background() {
@@ -73,8 +86,8 @@ public class level3 extends Gamelevel implements StepListener {
 
     @Override
     public void preStep(StepEvent stepEvent) {
-        if(getPlayer().CanJump && EnemySpawnCount >0){
-             enemyClass = new EnemyClass(this.getWorld(), new BoxShape(1,2),getPlayer(),5);
+        if(getPlayer().isCanJump() && EnemySpawnCount >0){
+             enemyClass = new EnemyClass(this.getWorld(), new BoxShape(1,2),getPlayer(),2);
             enemyClass.setPosition(new Vec2(0, EnemySpawnCount * 5));
             this.getWorld().addStepListener(enemyClass);
             EnemySpawnCount--;
@@ -85,6 +98,9 @@ public class level3 extends Gamelevel implements StepListener {
 
     @Override
     public void postStep(StepEvent stepEvent) {
+        if(getPlayer().isCanJump()){
+            portal.destroy();
+        }
 
     }
 }

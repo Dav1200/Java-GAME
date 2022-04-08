@@ -1,10 +1,12 @@
 package game;
 
 import city.cs.engine.BodyImage;
+import game.BackpackItem;
+import game.Player;
 
 import javax.swing.*;
 
-public class Shield extends  BackpackItem{
+public class Shield extends BackpackItem {
 
 
 

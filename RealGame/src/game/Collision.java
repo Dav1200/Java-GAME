@@ -2,9 +2,12 @@ package game;
 
 import city.cs.engine.CollisionEvent;
 import city.cs.engine.CollisionListener;
+import city.cs.engine.SoundClip;
 import org.jbox2d.common.Vec2;
 
-import java.awt.Button;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 
 public class Collision implements CollisionListener {
     private Player player;
@@ -12,6 +15,20 @@ public class Collision implements CollisionListener {
     private enemy en;
     private Gamelevel gamelevel;
     private Game game;
+
+    private static SoundClip CollectedSound;
+    static{
+        try {
+            CollectedSound = new SoundClip("Sound/collected.wav");
+
+            // Open an audio input stream
+            // stage1.loop();                              // Set it to continous playback (looping)
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            //code in here will deal with any errors
+            //that might occur while loading/playing sound
+            System.out.println(e);
+        }
+    }
 
     public Collision(Player player, platforms plat, enemy en, Game game, Gamelevel gamelevel) {
         this.player = player;
@@ -43,12 +60,12 @@ public class Collision implements CollisionListener {
             collisionEvent.getOtherBody().destroy();
             player.setScore(player.getScore() + 1);
             System.out.println(gamelevel.isComplete());
-            player.coinpick = true;
+            player.setCoinpick(true);
 
 
         }
 
-        if(collisionEvent.getOtherBody() instanceof  ShieldPickup){
+        if(collisionEvent.getOtherBody() instanceof ShieldPickup){
             collisionEvent.getOtherBody().destroy();
             player.setShield(true);
         }
@@ -61,6 +78,10 @@ public class Collision implements CollisionListener {
 
         }
 
+        if(collisionEvent.getOtherBody() instanceof grenadepickup || collisionEvent.getOtherBody() instanceof ShieldPickup || collisionEvent.getOtherBody() instanceof PickupItems){
+        CollectedSound.play();
+        }
+
 
         if (collisionEvent.getOtherBody() instanceof Coin && gamelevel.isComplete()) {
             gamelevel.sound().stop();
@@ -71,6 +92,7 @@ public class Collision implements CollisionListener {
             collisionEvent.getOtherBody().destroy();
             ((RunningCoin) collisionEvent.getOtherBody()).play();
             player.setRcoinCollected(true);
+            player.setScore(player.getScore()+1);
             player.CanJump = true;
 
         }

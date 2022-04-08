@@ -8,26 +8,36 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EnemyClass extends Walker implements StepListener {
-    private static final BodyImage enemyimg = new BodyImage("enemy/idle2.png", 5f);
+public class EnemyClass extends Walker implements StepListener,Destroy {
+    private static final BodyImage enemyimg = new BodyImage("enemy/enemy3.png", 5f);
     private int Health;
     private Player player;
     private float x;
     private boolean loop;
+    private int active;
+    private AttachedImage aimagel;
+    private String facing;
+    private boolean l;
+    private boolean r;
 
 
     public EnemyClass(World world, Shape shape, Player player, int Health) {
         super(world, shape);
-        addImage(enemyimg);
+        // addImage(enemyimg);
         this.Health = Health;
         this.player = player;
         loop = true;
+        aimagel = addImage(enemyimg);
+        active = Health-1;
+        facing= "left";
+        r = true;
+        l = true;
 
 
 
     }
 public void timeshooting(){
-    if (getHealth() < 5) {
+    if (getHealth() <= active) {
         ActionListener bulletTimer = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,31 +88,46 @@ public void timeshooting(){
         x = this.getPosition().x;
 
 
-        if (getHealth() < 5) {
+        if (getHealth() <= active) {
             if (player.getPosition().x < this.getPosition().x) {
                 startWalking(-6);
+                facing = "left";
+
             } else if (player.getPosition().x > this.getPosition().x) {
                 startWalking(6);
+                facing ="right";
             }
             if (getHealth() == 0) {
                 this.destroy();
 
             }
-            if(getHealth() == 4 && loop){
+            if(getHealth() == active && loop){
                 timeshooting();
                 loop =false;
 
             }
         }
+
+        if(facing.equals("left") && l ){
+            aimagel.flipHorizontal();
+            l = false;
+            r =true;
+        }
+        if(facing.equals("right") && r){
+            aimagel.flipHorizontal();
+            r = false;
+            l = true;
+        }
+
     }
 
 
     @Override
     public void postStep(StepEvent stepEvent) {
         float b = this.getPosition().x;
-        System.out.println(player.getPosition().x - this.getPosition().x);
+
         //weSystem.out.println(stepEvent.getStep());
-        if (getHealth() < 5) {
+        if (getHealth() <= active) {
             if (x == b) {
                 //this.stopWalking();
                 this.jump(10);

@@ -18,6 +18,25 @@ public class enemy extends Walker implements StepListener{
     private int counter;
     //protected DynamicBody bullet;
     protected platforms plat;
+
+    public String getFacing() {
+        return facing;
+    }
+
+    public void setFacing(String facing) {
+        this.facing = facing;
+    }
+
+    private String facing;
+
+    public int getStage() {
+        return stage;
+    }
+
+    public void setStage(int stage) {
+        this.stage = stage;
+    }
+
     protected int stage;
     protected boolean move;
     private AttachedImage simage;
@@ -27,7 +46,16 @@ public class enemy extends Walker implements StepListener{
     }
 
     private AttachedImage fimage ;
-    protected boolean enemydef;
+
+    public boolean isEnemydef() {
+        return enemydef;
+    }
+
+    public void setEnemydef(boolean enemydef) {
+        this.enemydef = enemydef;
+    }
+
+    private boolean enemydef;
 
 
     public int getRespawn() {
@@ -50,10 +78,11 @@ public class enemy extends Walker implements StepListener{
         fimage = addImage(enemyimg);
         //;
         this.plat = plat;
-        respawn = 0;
+        respawn = 1;
         stage = 1;
         move = false;
         enemydef =false;
+        facing = "";
 
     }
 
@@ -62,10 +91,13 @@ public class enemy extends Walker implements StepListener{
         if (stage == 1) {
             if (x < 10) {
                 this.startWalking(3);
+                facing = "right";
+
                 fimage.flipHorizontal();
             } else if (x > 17) {
                 this.startWalking(-3);
                 fimage.flipHorizontal();
+                facing = "left";
             }
         }
 
