@@ -2,11 +2,17 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="game.Settings">
   <grid id="27dc6" binding="MainPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
     <constraints>
-      <xy x="333" y="128" width="500" height="78"/>
+      <xy x="333" y="128" width="699" height="83"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
+      <component id="41" class="javax.swing.JButton" binding="resetButton" default-binding="true">
+        <constraints/>
+        <properties>
+          <text value="Reset"/>
+        </properties>
+      </component>
       <component id="17174" class="javax.swing.JSlider" binding="slider1" default-binding="true">
         <constraints/>
         <properties>

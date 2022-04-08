@@ -14,80 +14,66 @@ public class Animation {
     private int frames;
     private int index;
     private int count;
-private Vec2 s;
+    private Vec2 s;
     private BodyImage[] image;
-
-
-
     private BodyImage currentimg;
     private Player p;
     private AttachedImage aimage;
 
 
-    public Animation(int speed, Player p, BodyImage... args){
+    public Animation(int speed, Player p, BodyImage... args) {
         this.speed = speed;
         this.p = p;
         currentimg = p.Playerimg;
-    s = new Vec2(1,1);
+        s = new Vec2(1, 1);
         image = new BodyImage[args.length];
-        for(int i = 0; i<args.length;i++){
+        for (int i = 0; i < args.length; i++) {
             image[i] = args[i];
         }
         frames = args.length;
     }
 
 
-    public void runanimation(){
+    public void runanimation() {
         index++;
 
-        if(index >speed){
+        if (index > speed) {
             index = 0;
             nextframe();
         }
 
     }
 
-
-
     public void nextframe() {
         for (int i = 0; i < frames; i++) {
-            if (count == i){
+            if (count == i) {
                 currentimg = image[i];
-
 
             }
 
-
-
-                //p.reset();
+            //p.reset();
             // p.addImage(image[i]);
-
-
         }
         count++;
         if (count > frames) {
             count = 0;
 
-           // p.removeAllImages();
+            // p.removeAllImages();
         }
     }
 
-
-    public void draw()
-    {
+    public void draw() {
         p.removeAttachedImage(aimage);
         aimage = p.addImage(currentimg);
 
     }
 
-    public void flipdraw()
-    {
+    public void flipdraw() {
         p.removeAttachedImage(aimage);
         aimage = p.addImage(currentimg);
         aimage.flipHorizontal();
-        aimage.setOffset(new Vec2(1,0));
+        aimage.setOffset(new Vec2(1, 0));
     }
-
 
 
     public BodyImage getCurrentimg() {

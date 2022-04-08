@@ -134,12 +134,12 @@ public class Gameview extends UserView implements StepListener {
         }
 */
         //g.drawRect(165,75,60,60);
-        g.drawImage(player.getBackpack().getitem().image, 165, 85, 30, 30, this);
+        g.drawImage(player.getBackpack().getitem().image, 185, 85, 30, 30, this);
         g.drawImage(emptyh, px - 70, pycoverted - 50, 100, 20, this);
         g.drawImage(fullh, px - 69, pycoverted - 50, player.getLivess(), 20, this);
 
 
-        if (gamelevel instanceof level1) {
+        if (gamelevel instanceof level1 && e.stage ==1) {
             g.setColor(Color.red);
             g.fillRect(ex, ey - 50, 50, 10);
             g.setColor(Color.green);

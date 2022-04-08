@@ -61,11 +61,20 @@ public class Player extends Walker implements StepListener {
     private static final BodyImage hurtf = new BodyImage("PlayerImages/hurt/6.png", 5f);
     private static final BodyImage hurtg = new BodyImage("PlayerImages/hurt/7.png", 5f);
 
+    private static final BodyImage attacka = new BodyImage("PlayerImages/attack/1.png", 5f);
+    private static final BodyImage attackb = new BodyImage("PlayerImages/attack/2.png", 5f);
+    private static final BodyImage attackc = new BodyImage("PlayerImages/attack/3.png", 5f);
+    private static final BodyImage attackd = new BodyImage("PlayerImages/attack/4.png", 5f);
+    private static final BodyImage attacke = new BodyImage("PlayerImages/attack/5.png", 5f);
+    private static final BodyImage attackf = new BodyImage("PlayerImages/attack/6.png", 5f);
+    private static final BodyImage attackg = new BodyImage("PlayerImages/attack/7.png", 5f);
+
 
     protected Animation animation;
     private Animation JumpAnimation;
     private Animation idleAnimatiion;
     private Animation HurtAnimation;
+    private Animation ShootAnimation;
 
 
     private static SoundClip shot;
@@ -119,6 +128,7 @@ public class Player extends Walker implements StepListener {
     protected int jumpcount;
     private int Lives2;
     protected boolean moves;
+    protected boolean ShootAni;
 
     public boolean isHurt() {
         return hurt;
@@ -173,16 +183,21 @@ public class Player extends Walker implements StepListener {
     ActionListener hurtaction;
     Timer hurtt;
 
+    ActionListener shootaction;
+    Timer shoot;
+
     //constructor
     public Player(World world, enemy en, platforms plat, Gamelevel gl) {
         super(world, player);
         this.world = world;
         this.gl = gl;
         hurt = false;
-        animation = new Animation(3, this, a, b, c, d, e, f, g);
+        ShootAni = false;
+        animation = new Animation(2, this, a, b, c, d, e, f, g);
         JumpAnimation = new Animation(3, this, jumpa, jumpb, jumpc, jumpd, jumpe, jumpf, jumpg);
-        idleAnimatiion = new Animation(3, this, idlea, idleb, idlec, idled, idlee, idlef, idleg);
+        idleAnimatiion = new Animation(2, this, idlea, idleb, idlec, idled, idlee, idlef, idleg);
         HurtAnimation = new Animation(5, this, hurta, hurtb, hurtc, hurtd, hurte, hurtf, hurtg);
+        ShootAnimation = new Animation(3, this, attacka, attackb, attackc, attackd, attacke, attackf, attackg);
         RcoinCollected = false;
         this.en = en;
         this.plat = plat;
@@ -212,18 +227,17 @@ public class Player extends Walker implements StepListener {
         coinpick = false;
 
 
-
         hurtaction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 hurt = false;
+                ShootAni = false;
             }
         };
         hurtt = new Timer(500, hurtaction);
 
-        //offset = playerimg.getOffset();
-        //aplayerimg = addImage(Playerimg);
-        //  currentimg = p.Playerimg;
+        shoot = new Timer(400, hurtaction);
+
 
         mousepos = new Vec2(this.getPosition());
     }
@@ -428,9 +442,10 @@ public class Player extends Walker implements StepListener {
         JumpAnimation.runanimation();
         idleAnimatiion.runanimation();
         HurtAnimation.runanimation();
+        ShootAnimation.runanimation();
 
         //Animation when running right
-        if (speed > 0&& getLinearVelocity().y ==0) {
+        if (facing.equals("right")) {
             removeAllImages();
             animation.draw();
 
@@ -438,7 +453,7 @@ public class Player extends Walker implements StepListener {
 
 
 //animation when running left;
-        if (speed < 0 && getLinearVelocity().y ==0) {
+        if (facing.equals("left")) {
             removeAllImages();
             animation.flipdraw();
 
@@ -454,16 +469,6 @@ public class Player extends Walker implements StepListener {
             removeAllImages();
 
             JumpAnimation.flipdraw();
-        }
-
-
-     if(getLinearVelocity().x > 0 ){
-         removeAllImages();
-         animation.draw();
-     }
-        if(getLinearVelocity().x < 0) {
-            removeAllImages();
-            animation.flipdraw();
         }
 
 
@@ -500,6 +505,21 @@ public class Player extends Walker implements StepListener {
 
         }
 
+        if (ShootAni && facing.equals("right")) {
+            removeAllImages();
+            ShootAnimation.draw();
+            shoot.start();
+            shoot.setRepeats(false);
+
+        }
+
+        if (ShootAni && facing.equals("left")) {
+            removeAllImages();
+            ShootAnimation.flipdraw();
+            shoot.start();
+            shoot.setRepeats(false);
+
+        }
 
         // Playerimg = animation.getCurrentimg();
 

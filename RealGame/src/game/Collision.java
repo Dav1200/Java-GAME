@@ -78,6 +78,11 @@ public class Collision implements CollisionListener {
 
         }
 
+        if(collisionEvent.getOtherBody() instanceof EnemyClass){
+            player.setLives(player.getLives()-1);
+
+
+        }
         if(collisionEvent.getOtherBody() instanceof grenadepickup || collisionEvent.getOtherBody() instanceof ShieldPickup || collisionEvent.getOtherBody() instanceof PickupItems){
         CollectedSound.play();
         }

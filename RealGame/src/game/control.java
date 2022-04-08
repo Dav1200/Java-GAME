@@ -4,6 +4,9 @@ import city.cs.engine.StepEvent;
 import city.cs.engine.StepListener;
 import org.jbox2d.common.Vec2;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
@@ -23,6 +26,8 @@ public class control implements KeyListener, StepListener {
     private Game g;
     private int jcount;
     private Gamelevel gl;
+    private  Timer Bullettimmer;
+    private Boolean shoot;
 
     ArrayList<Integer> Dav = new ArrayList<>();
     ArrayList<Integer> Dav2 = new ArrayList<>();
@@ -34,6 +39,16 @@ public class control implements KeyListener, StepListener {
         this.gl = gl;
         this.enemy = enemy;
         active = true;
+        shoot = true;
+        ActionListener Baction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            shoot = true;
+            }
+        };
+
+        Bullettimmer = new Timer(800,Baction);
+        Bullettimmer.setRepeats(false);
 
 
     }
@@ -109,14 +124,15 @@ public class control implements KeyListener, StepListener {
                 } else if (Dav.contains(1) && Dav.contains(3)) {
                     player.walk(-speed * 1.45f);
                 }
-                if (code == KeyEvent.VK_SPACE) {
-                    if (t.bulletseconds == 60) {
+                if (code == KeyEvent.VK_SPACE && shoot) {
+
                         player.shoot();
+                        Bullettimmer.start();
+                        shoot = false;
                         // player.setLinearVelocity(new Vec2(0,20));
 
 
-                        t.bulletseconds = 0;
-                    }
+
                 }
                 if (code == KeyEvent.VK_Q) {
                     player.getBackpack().toggle();

@@ -18,10 +18,18 @@ public class Settings {
     private JButton NextStage;
     private JButton PreviousStage;
     private JButton Close;
+    private JButton resetButton;
     private Gamelevel gamelevel;
 
     public Settings(Game g,Gamelevel gamelevel){
     this.gamelevel = gamelevel;
+
+    resetButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            g.reset();
+        }
+    });
 
     Close.addActionListener(new ActionListener() {
         @Override

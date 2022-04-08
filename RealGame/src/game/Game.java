@@ -140,8 +140,7 @@ public class Game implements StepListener {
 
         frame.setVisible(true);
 
-        JFrame debugView = new DebugViewer(world, 500, 500);
-        debugView.setVisible(true);
+
         StartMenu();
         world.start();
 
@@ -239,6 +238,59 @@ public class Game implements StepListener {
 
     }
 
+    public void reset()
+    {
+
+        world.stop();
+        world.sound().stop();
+        //world.sound().stop();
+        //create the new (appropriate) level
+        Player preplayer = world.getPlayer();
+        // EnemySteplistener pt = t;
+        //level now refers to new level
+        world = new level1(this);
+
+        world.getPlayer().setLives(10);
+        world.getPlayer().setScore(preplayer.getScore());
+        world.getPlayer().setDoublegun(preplayer.doublegun);
+        world.getPlayer().setGrenadepicked(preplayer.grendadeshoot);
+        world.getPlayer().setScore(0);
+        world.getE().stage = 1;
+        EnemySteplistener t = new EnemySteplistener(view,world.getPlayer(),world.getE());
+
+        view.updategamelevel(world);
+        //change the view to look into new level
+        view.setWorld(world);
+        view.set = false;
+        //view.setZoom(12);
+        //view.setView(new Vec2(0, 9), 12);
+        System.out.println(world.isComplete());
+
+        //change the controller to control the
+        //student in the new world
+        view.updateStudent(world.getPlayer());
+        move.updateStudent(world.getPlayer());
+        move.gamelevelupdate(world);
+        dav.updateStudent(world.getPlayer());
+        view.enemy(world.getE());
+
+
+
+        world.addStepListener(t);
+        world.addStepListener(view);
+        world.addStepListener(world.getE());
+        world.addStepListener(world.getPlayer());
+        world.addStepListener(move);
+        world.addStepListener(world);
+        world.addStepListener(this);
+
+
+        //start the simulation in the new level
+        world.start();
+        world.sound().play();
+
+    }
+
     public void setlevel(Gamelevel g){
 
 if(g instanceof  level1){
@@ -253,13 +305,13 @@ if(g instanceof  level1){
         //level now refers to new level
         world = new level1(this);
 
-        world.getPlayer().setLives(preplayer.getLives());
+    world.getPlayer().setLives(10);
         world.getPlayer().setScore(preplayer.getScore());
         world.getPlayer().setDoublegun(preplayer.doublegun);
         world.getPlayer().setGrenadepicked(preplayer.grendadeshoot);
         world.getPlayer().setScore(0);
         world.getE().stage = 1;
-
+    EnemySteplistener t = new EnemySteplistener(view,world.getPlayer(),world.getE());
 
         view.updategamelevel(world);
         //change the view to look into new level
@@ -308,7 +360,7 @@ if(g instanceof  level1){
         //level now refers to new level
         world = new level2(this, view);
 
-        world.getPlayer().setLives(preplayer.getLives());
+            world.getPlayer().setLives(10);
         world.getPlayer().setScore(preplayer.getScore());
         world.getPlayer().setDoublegun(preplayer.doublegun);
         world.getPlayer().setGrenadepicked(preplayer.grendadeshoot);
@@ -355,8 +407,7 @@ if(g instanceof  level1){
             world.sound().stop();
             Player preplayers = world.getPlayer();
             world = new level3(this);
-
-            world.getPlayer().setLives(preplayers.getLives());
+            world.getPlayer().setLives(10);
             world.getPlayer().setScore(preplayers.getScore());
             world.getPlayer().setDoublegun(preplayers.doublegun);
             world.getPlayer().setGrenadepicked(preplayers.grendadeshoot);

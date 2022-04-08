@@ -106,6 +106,8 @@ if(stage ==2){
     if(move == false){
         removeAttachedImage(fimage);
         simage = addImage(enemyimgg);
+        simage.flipHorizontal();
+
 
     setRespawn(2);
     setPosition(new Vec2(60,5));
