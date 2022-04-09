@@ -127,6 +127,7 @@ public class control implements KeyListener, StepListener {
                 if (code == KeyEvent.VK_SPACE && shoot) {
 
                         player.shoot();
+                        player.ShootAni = true;
                         Bullettimmer.start();
                         shoot = false;
                         // player.setLinearVelocity(new Vec2(0,20));

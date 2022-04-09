@@ -1,10 +1,7 @@
 package game;
 
+import city.cs.engine.*;
 import game.Gamelevel;
-import city.cs.engine.BoxShape;
-import city.cs.engine.SoundClip;
-import city.cs.engine.StepEvent;
-import city.cs.engine.StepListener;
 import game.*;
 import org.jbox2d.common.Vec2;
 
@@ -23,7 +20,11 @@ public class level3 extends Gamelevel implements StepListener {
     private Image background;
     private EnemyClass enemyClass;
     private  int EnemySpawnCount;
+    private  Button b;
+    private Button b2;
     private portal portal;
+    private  StaticBody block;
+    private  StaticBody block2;
     static {
         try {
 
@@ -43,6 +44,10 @@ public class level3 extends Gamelevel implements StepListener {
         super(game);
         background = new ImageIcon("Platformimg/stage3.png").getImage();
         EnemySpawnCount = 2;
+        block = new StaticBody(this.getWorld(),new BoxShape(0.3f,3.2f));
+        block.setPosition(new Vec2(20,-12.3f));
+        block2 = new StaticBody(this.getWorld(),new BoxShape(0.3f,10.2f));
+        block2.setPosition(new Vec2(30,-12.3f));
         plat = new platforms(this.getWorld(),getPlayer());
         level3plat = new Level3Platforms(this.getWorld());
         getPlayer().setPosition(new Vec2(-30,-14));
@@ -54,7 +59,11 @@ public class level3 extends Gamelevel implements StepListener {
         runningCoin = new RunningCoin(this);
         runningCoin.setPosition(new Vec2(0,20));
         portal = new portal(this.getWorld());
-        portal.setPosition(new Vec2(20,22));
+        portal.setPosition(new Vec2(1020,1022));
+        b = new Button(this.getWorld());
+        b.setPosition(new Vec2(25,-15));
+        b2 = new Button(this.getWorld());
+        b2.setPosition(new Vec2(5,-15));
         //enemyClass = new EnemyClass(this.getWorld(), new BoxShape(1,2),getPlayer(),5);+
         //
     }
@@ -92,6 +101,15 @@ public class level3 extends Gamelevel implements StepListener {
             this.getWorld().addStepListener(enemyClass);
             EnemySpawnCount--;
         }
+        if(b.isPressed()){
+            block.destroy();
+            block2.destroy();
+        }
+        if(b2.isPressed()){
+            portal.setPosition(new Vec2(20,22));
+        }
+
+
 
         }
 

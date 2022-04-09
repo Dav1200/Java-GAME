@@ -5,6 +5,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Settings {
@@ -13,7 +14,7 @@ public class Settings {
     public JPanel getMainPanel() {
         return MainPanel;
     }
-
+private String b;
     protected JPanel MainPanel;
     private JButton NextStage;
     private JButton PreviousStage;
@@ -23,6 +24,7 @@ public class Settings {
 
     public Settings(Game g,Gamelevel gamelevel){
     this.gamelevel = gamelevel;
+    b = null;
 
     resetButton.addActionListener(new ActionListener() {
         @Override
@@ -44,9 +46,22 @@ public class Settings {
     NextStage.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(gamelevel);
+            JFileChooser jfile = new JFileChooser("saves/");
+            int select = jfile.showSaveDialog(null);
+            if(select == JFileChooser.APPROVE_OPTION){
+                b = jfile.getSelectedFile().getAbsolutePath();
+                try {
+                    FileWriter write = new FileWriter(b);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                System.out.println(b);
+            }
+            else{
+                System.out.println("cancel");
+            }
             try {
-                gamesaverloader.save(g.getWorld(), "Saves/Save.txt");
+                gamesaverloader.save(g.getWorld(), b);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -57,8 +72,18 @@ public class Settings {
         @Override
         public void actionPerformed(ActionEvent e) {
 
+            JFileChooser jfile = new JFileChooser("saves/");
+         int select = jfile.showDialog(null,"Openfile");
+         if(select == JFileChooser.APPROVE_OPTION){
+             b = jfile.getSelectedFile().getAbsolutePath();
+             System.out.println(b);
+         }
+         else{
+             System.out.println("cancel");
+         }
+
             try {
-                Gamelevel a = gamesaverloader.load("Saves/Save.txt", g, gamelevel);
+                Gamelevel a = gamesaverloader.load(b, g, gamelevel);
                 g.setlevel(a);
                 System.out.println(a);
                 //player.setLives(a);

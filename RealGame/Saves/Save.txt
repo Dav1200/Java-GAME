@@ -1,3 +1,3 @@
-level2
-game.Player@f33d4a5[name=null],-18.0,-4.2500005
-game.ShieldPickup@76a24881[name=null],30.0,8.0
+level3
+game.Player@7f8cdc33[name=null],-27.716774,-13.605001
+game.Coin@f5fdb5e[name=null],30.0,19.5

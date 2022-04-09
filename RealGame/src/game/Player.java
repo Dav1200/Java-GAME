@@ -196,7 +196,7 @@ public class Player extends Walker implements StepListener {
         animation = new Animation(2, this, a, b, c, d, e, f, g);
         JumpAnimation = new Animation(3, this, jumpa, jumpb, jumpc, jumpd, jumpe, jumpf, jumpg);
         idleAnimatiion = new Animation(2, this, idlea, idleb, idlec, idled, idlee, idlef, idleg);
-        HurtAnimation = new Animation(5, this, hurta, hurtb, hurtc, hurtd, hurte, hurtf, hurtg);
+        HurtAnimation = new Animation(2, this, hurta, hurtb, hurtc, hurtd, hurte, hurtf, hurtg);
         ShootAnimation = new Animation(3, this, attacka, attackb, attackc, attackd, attacke, attackf, attackg);
         RcoinCollected = false;
         this.en = en;
@@ -236,7 +236,7 @@ public class Player extends Walker implements StepListener {
         };
         hurtt = new Timer(500, hurtaction);
 
-        shoot = new Timer(400, hurtaction);
+        shoot = new Timer(500, hurtaction);
 
 
         mousepos = new Vec2(this.getPosition());
@@ -424,6 +424,10 @@ public class Player extends Walker implements StepListener {
         if (en.stage == 2) {
             this.setPosition(new Vec2(47, -11));
             this.setLives(this.getLives() - 1);
+        }
+
+        if(gl instanceof  level3){
+            this.setPosition(new Vec2(-5,-14));
         }
     }
 
