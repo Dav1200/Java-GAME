@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 public class EnemyClass extends Walker implements StepListener,Destroy {
     private static final BodyImage enemyimg = new BodyImage("enemy/enemy3.png", 5f);
+    private static final BodyImage bullets = new BodyImage("enemy/Bullet.png", 1f);
     private int Health;
     private Player player;
     private float x;
@@ -55,7 +56,7 @@ public void timeshooting(){
         //when bullet hits player.
 
         DynamicBody bullet = new DynamicBody(this.getWorld(), new CircleShape(0.2f));
-        //bullet.addImage(bullets);
+        bullet.addImage(bullets);
         EnemyhitCollision pickups = new EnemyhitCollision(this);
 
 

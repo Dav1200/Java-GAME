@@ -20,30 +20,30 @@ public class gamesaverloader {
 
             for (int i = 0; i < gameworld.getDynamicBodies().size(); i++) {
                 if (gameworld.getDynamicBodies().get(i) instanceof Player) {
-                    writer.write(gameworld.getDynamicBodies().get(i) + "," + gameworld.getDynamicBodies().get(i).getPosition().x + "," + gameworld.getDynamicBodies().get(i).getPosition().y + "\n");
+                    writer.write("player" + "," + gameworld.getDynamicBodies().get(i).getPosition().x + "," + gameworld.getDynamicBodies().get(i).getPosition().y + "\n");
 
                 }
 
                 if (gameworld.getDynamicBodies().get(i) instanceof enemy) {
-                    writer.write(gameworld.getDynamicBodies().get(i) + "," + gameworld.getDynamicBodies().get(i).getPosition().x + "," + gameworld.getDynamicBodies().get(i).getPosition().y + "\n");
+                    writer.write("enemy" + "," + gameworld.getDynamicBodies().get(i).getPosition().x + "," + gameworld.getDynamicBodies().get(i).getPosition().y + "\n");
 
                 }
             }
 
             for (int i = 0; i < gameworld.getStaticBodies().size(); i++) {
                 if (gameworld.getStaticBodies().get(i) instanceof Coin) {
-                    writer.write(gameworld.getStaticBodies().get(i) + "," + gameworld.getStaticBodies().get(i).getPosition().x + "," + gameworld.getStaticBodies().get(i).getPosition().y + "\n");
+                    writer.write("coin" + "," + gameworld.getStaticBodies().get(i).getPosition().x + "," + gameworld.getStaticBodies().get(i).getPosition().y + "\n");
 
                 }
 
                 if (gameworld.getStaticBodies().get(i) instanceof PickupItems) {
-                    writer.write(gameworld.getStaticBodies().get(i) + "," + gameworld.getStaticBodies().get(i).getPosition().x + "," + gameworld.getStaticBodies().get(i).getPosition().y + "\n");
+                    writer.write("pickupitem" + "," + gameworld.getStaticBodies().get(i).getPosition().x + "," + gameworld.getStaticBodies().get(i).getPosition().y + "\n");
                 }
                 if (gameworld.getStaticBodies().get(i) instanceof grenadepickup) {
-                    writer.write(gameworld.getStaticBodies().get(i) + "," + gameworld.getStaticBodies().get(i).getPosition().x + "," + gameworld.getStaticBodies().get(i).getPosition().y + "\n");
+                    writer.write("grenade" + "," + gameworld.getStaticBodies().get(i).getPosition().x + "," + gameworld.getStaticBodies().get(i).getPosition().y + "\n");
                 }
                 if (gameworld.getStaticBodies().get(i) instanceof ShieldPickup) {
-                    writer.write(gameworld.getStaticBodies().get(i) + "," + gameworld.getStaticBodies().get(i).getPosition().x + "," + gameworld.getStaticBodies().get(i).getPosition().y + "\n");
+                    writer.write("shield" + "," + gameworld.getStaticBodies().get(i).getPosition().x + "," + gameworld.getStaticBodies().get(i).getPosition().y + "\n");
                 }
 
 
@@ -83,9 +83,20 @@ public class gamesaverloader {
                     line = reader.readLine();
                 }
 
+
                 // file is assumed to contain one name, score pair per line
                 String[] tokens = line.split(",");
+
+                if(tokens[0].equals("player")){
+
+                    gameworld.getPlayer().setPosition(new Vec2(Float.parseFloat(tokens[1]),Float.parseFloat(tokens[2])));
+
+                }
+
+
                 name = tokens[0];
+
+
                 x = Float.parseFloat(tokens[1]);
                 y = Float.parseFloat(tokens[2]);
                 //int score = Integer.parseInt(tokens[1]);

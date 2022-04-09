@@ -1,3 +1,5 @@
-level2
-game.Player@52b089e8[name=null],-11.647106,-13.605001
-game.ShieldPickup@1a5d6b71[name=null],30.0,8.0
+level1
+player,-2.4073539,-1.8050004
+enemy,15.029441,1.6149999
+coin,77.0,-8.5
+coin,17.0,6.5

@@ -1,8 +1,13 @@
 package game;
 
+import city.cs.engine.SoundClip;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
@@ -21,6 +26,21 @@ private String b;
     private JButton Close;
     private JButton resetButton;
     private Gamelevel gamelevel;
+
+    private static SoundClip ui;
+    static{
+        try {
+            ui = new SoundClip("Sound/ui2.wav");
+
+            // Open an audio input stream
+            // stage1.loop();                              // Set it to continous playback (looping)
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            //code in here will deal with any errors
+            //that might occur while loading/playing sound
+            System.out.println(e);
+        }
+    }
+
 
     public Settings(Game g,Gamelevel gamelevel){
     this.gamelevel = gamelevel;
@@ -43,7 +63,58 @@ private String b;
         }
     });
 
-    NextStage.addActionListener(new ActionListener() {
+        resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered (java.awt.event.MouseEvent evt){
+                resetButton.setBackground(Color.GREEN);
+                ui.play();
+
+            }
+
+            public void mouseExited (java.awt.event.MouseEvent evt){
+                resetButton.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+       NextStage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered (java.awt.event.MouseEvent evt){
+                NextStage.setBackground(Color.GREEN);
+                ui.play();
+
+            }
+
+            public void mouseExited (java.awt.event.MouseEvent evt){
+                NextStage.setBackground(UIManager.getColor("control"));
+            }
+        });
+        PreviousStage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered (java.awt.event.MouseEvent evt){
+                PreviousStage.setBackground(Color.GREEN);
+                ui.play();
+
+            }
+
+            public void mouseExited (java.awt.event.MouseEvent evt){
+                PreviousStage.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        Close.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered (java.awt.event.MouseEvent evt){
+                Close.setBackground(Color.RED);
+                ui.play();
+
+            }
+
+            public void mouseExited (java.awt.event.MouseEvent evt){
+                Close.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+
+
+
+
+        NextStage.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             JFileChooser jfile = new JFileChooser("saves/");
@@ -67,7 +138,6 @@ private String b;
             }
         }
     });
-
     PreviousStage.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
